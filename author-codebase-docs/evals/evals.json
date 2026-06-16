@@ -1,0 +1,16 @@
+{
+  "skill_name": "author-codebase-docs",
+  "evals": [
+    {
+      "id": "diataxis-doc-set",
+      "prompt": "Document this codebase for users and developers.",
+      "expected_output": "A documentation tree that separates user and developer audiences, uses Diataxis categories, and grounds claims in repository evidence.",
+      "assertions": [
+        "Creates or proposes documentation/ with user and developer audience roots.",
+        "Uses tutorials, how-to-guides, reference, and explanation categories.",
+        "Avoids putting local development commands in user docs.",
+        "Lists validation performed or skipped."
+      ]
+    }
+  ]
+}

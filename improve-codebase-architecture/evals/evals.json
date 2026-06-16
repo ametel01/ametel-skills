@@ -1,0 +1,16 @@
+{
+  "skill_name": "improve-codebase-architecture",
+  "evals": [
+    {
+      "id": "architecture-refactor-opportunities",
+      "prompt": "Find architectural improvements that would make this codebase easier to test.",
+      "expected_output": "A prioritized architecture improvement report focused on deeper modules, clearer boundaries, and testability.",
+      "assertions": [
+        "Inspects call sites and tests before recommending changes.",
+        "Identifies shallow modules or boundary problems.",
+        "Connects each recommendation to testability.",
+        "Keeps proposals scoped and incremental."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "skill_name": "repo-toolchain-detector",
+  "evals": [
+    {
+      "id": "choose-validation-commands",
+      "prompt": "Inspect this repo and tell me the right commands to install dependencies and run checks.",
+      "expected_output": "A concise toolchain report based on local files with install, lint, test, typecheck, and build commands.",
+      "assertions": [
+        "Uses lockfiles and manifests as evidence.",
+        "Checks for Makefile and workflow variants.",
+        "Distinguishes workspace-root commands from package-local commands.",
+        "Reports uncertainty instead of guessing."
+      ]
+    }
+  ]
+}

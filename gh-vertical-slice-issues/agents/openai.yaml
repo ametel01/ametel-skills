@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH Vertical Slice Issues"
+  short_description: "Break features into reviewable GitHub issues"
+  default_prompt: "Use $gh-vertical-slice-issues to break this milestone into small vertical GitHub issues."

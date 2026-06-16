@@ -1,0 +1,16 @@
+{
+  "skill_name": "ubiquitous-language",
+  "evals": [
+    {
+      "id": "extract-glossary",
+      "prompt": "Extract a ubiquitous language glossary from this conversation and save it.",
+      "expected_output": "A UBIQUITOUS_LANGUAGE.md glossary with canonical terms, definitions, ambiguities, and proposed resolutions.",
+      "assertions": [
+        "Identifies domain terms from the conversation.",
+        "Flags ambiguous or overloaded terms.",
+        "Proposes canonical names where needed.",
+        "Writes UBIQUITOUS_LANGUAGE.md."
+      ]
+    }
+  ]
+}

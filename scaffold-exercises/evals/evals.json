@@ -1,0 +1,16 @@
+{
+  "skill_name": "scaffold-exercises",
+  "evals": [
+    {
+      "id": "course-section-scaffold",
+      "prompt": "Scaffold a new exercises section with problems, solutions, and explainers.",
+      "expected_output": "A consistent exercise directory structure with lintable stubs, solutions, and explanatory material.",
+      "assertions": [
+        "Creates the expected section/problem/solution structure.",
+        "Uses existing course naming and formatting patterns.",
+        "Includes explainers where expected.",
+        "Runs or reports lint/validation for generated files."
+      ]
+    }
+  ]
+}

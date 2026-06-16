@@ -1,0 +1,16 @@
+{
+  "skill_name": "improve",
+  "evals": [
+    {
+      "id": "read-only-codebase-survey",
+      "prompt": "Survey this codebase and propose prioritized improvement plans for other agents.",
+      "expected_output": "A read-only assessment with prioritized, self-contained implementation plans and no source edits.",
+      "assertions": [
+        "Does not modify source code.",
+        "Grounds findings in inspected files.",
+        "Prioritizes improvements by impact and risk.",
+        "Writes plans that another agent can execute."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "skill_name": "frontend-design",
+  "evals": [
+    {
+      "id": "build-distinctive-ui",
+      "prompt": "Build a polished dashboard screen for this app.",
+      "expected_output": "A functional, visually intentional interface consistent with the app domain and verified in the browser.",
+      "assertions": [
+        "Builds the actual usable screen rather than a landing page.",
+        "Uses domain-appropriate layout, density, and visual style.",
+        "Avoids generic one-note palettes and decorative filler.",
+        "Verifies responsive rendering with a browser or screenshot workflow."
+      ]
+    }
+  ]
+}

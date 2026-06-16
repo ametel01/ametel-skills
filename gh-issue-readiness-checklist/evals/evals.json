@@ -1,0 +1,16 @@
+{
+  "skill_name": "gh-issue-readiness-checklist",
+  "evals": [
+    {
+      "id": "agent-ready-issue-review",
+      "prompt": "Is this GitHub issue ready for an implementation agent?",
+      "expected_output": "A readiness assessment that checks scope, acceptance criteria, dependencies, testability, and unclear decisions.",
+      "assertions": [
+        "Evaluates whether acceptance criteria are observable.",
+        "Flags missing context or human decisions.",
+        "Identifies likely files, tests, and validation gates.",
+        "Returns a clear ready/not-ready recommendation."
+      ]
+    }
+  ]
+}

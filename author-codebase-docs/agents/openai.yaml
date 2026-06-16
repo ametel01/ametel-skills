@@ -1,0 +1,4 @@
+interface:
+  display_name: "Author Codebase Docs"
+  short_description: "Create strict Diataxis docs"
+  default_prompt: "Use $author-codebase-docs to create strict Diataxis user and developer Markdown docs for this codebase."

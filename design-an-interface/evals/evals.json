@@ -1,0 +1,16 @@
+{
+  "skill_name": "design-an-interface",
+  "evals": [
+    {
+      "id": "parallel-api-options",
+      "prompt": "Design the public interface for this module twice and compare the options.",
+      "expected_output": "Multiple materially different interface designs with tradeoffs, recommendation, and implementation implications.",
+      "assertions": [
+        "Produces at least two distinct designs.",
+        "Compares ergonomics, testability, and migration cost.",
+        "Recommends one option with reasoning.",
+        "Grounds the design in existing codebase patterns."
+      ]
+    }
+  ]
+}

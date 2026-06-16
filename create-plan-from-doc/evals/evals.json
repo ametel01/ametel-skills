@@ -1,0 +1,16 @@
+{
+  "skill_name": "create-plan-from-doc",
+  "evals": [
+    {
+      "id": "prd-to-plan",
+      "prompt": "Turn docs/PRD.md into an implementation plan in PLAN.md.",
+      "expected_output": "A detailed, ordered implementation plan derived from the source document with scope, dependencies, validation, and acceptance criteria.",
+      "assertions": [
+        "Reads the source document before planning.",
+        "Writes PLAN.md.",
+        "Breaks work into ordered, implementable steps.",
+        "Includes validation and acceptance criteria."
+      ]
+    }
+  ]
+}

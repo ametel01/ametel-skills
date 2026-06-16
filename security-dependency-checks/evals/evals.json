@@ -1,0 +1,16 @@
+{
+  "skill_name": "security-dependency-checks",
+  "evals": [
+    {
+      "id": "dependency-security-review",
+      "prompt": "Review this dependency update for security and CI implications.",
+      "expected_output": "A dependency-security review that checks lockfile changes, audit results, provenance, and CI impact.",
+      "assertions": [
+        "Inspects manifest and lockfile changes.",
+        "Runs or recommends the repo's audit/security checks.",
+        "Flags install script, provenance, or secret-handling risks.",
+        "Keeps unrelated dependency churn out of scope."
+      ]
+    }
+  ]
+}

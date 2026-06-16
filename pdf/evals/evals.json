@@ -1,0 +1,16 @@
+{
+  "skill_name": "pdf",
+  "evals": [
+    {
+      "id": "merge-and-validate-pdfs",
+      "prompt": "Merge docs/a.pdf and docs/b.pdf into one PDF and confirm the output is valid.",
+      "expected_output": "A merged PDF written to a new path, with original files preserved and page count or openability validated.",
+      "assertions": [
+        "Uses a PDF-appropriate library or CLI.",
+        "Writes to a new output path.",
+        "Preserves source PDFs.",
+        "Validates the output page count or readability."
+      ]
+    }
+  ]
+}

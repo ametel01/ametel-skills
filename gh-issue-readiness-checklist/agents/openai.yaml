@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH Issue Readiness"
+  short_description: "Check whether GitHub issues are implementation-ready"
+  default_prompt: "Use $gh-issue-readiness-checklist to decide whether this GitHub issue is ready to implement."

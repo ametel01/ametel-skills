@@ -1,0 +1,16 @@
+{
+  "skill_name": "testing-standards",
+  "evals": [
+    {
+      "id": "repo-native-test-addition",
+      "prompt": "Add tests for this behavior change in an ametel01 repo.",
+      "expected_output": "A deterministic, repo-native test addition with appropriate runner, markers, fixtures, and validation commands.",
+      "assertions": [
+        "Reads nearby tests before editing.",
+        "Chooses the repo's existing test runner.",
+        "Uses deterministic fixtures or temp state.",
+        "Runs focused and aggregate checks where appropriate."
+      ]
+    }
+  ]
+}

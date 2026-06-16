@@ -1,0 +1,16 @@
+{
+  "skill_name": "stripe-projects",
+  "evals": [
+    {
+      "id": "provision-provider-service",
+      "prompt": "Set up a Redis provider through projects.dev and give me the env variable names.",
+      "expected_output": "A non-interactive Stripe Projects workflow that verifies provider support, initializes the project, delegates to the local CLI skill, and reports env variable names only.",
+      "assertions": [
+        "Checks projects.dev/providers before running CLI commands.",
+        "Uses --json and --yes flags by default.",
+        "Does not read .projects or .env files.",
+        "Prints env variable names without secret values."
+      ]
+    }
+  ]
+}

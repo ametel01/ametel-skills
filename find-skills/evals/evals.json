@@ -1,0 +1,16 @@
+{
+  "skill_name": "find-skills",
+  "evals": [
+    {
+      "id": "discover-installable-skill",
+      "prompt": "Is there a skill that can help me review frontend accessibility?",
+      "expected_output": "A search and quality review of candidate skills, with install guidance only after source, install count, and reputation are checked.",
+      "assertions": [
+        "Searches or checks a skills directory/leaderboard.",
+        "Evaluates source reputation and install signals.",
+        "Uses pinned Skills CLI commands when showing commands.",
+        "Asks or confirms before installing or updating skills."
+      ]
+    }
+  ]
+}

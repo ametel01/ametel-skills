@@ -1,0 +1,16 @@
+{
+  "skill_name": "makefile-quality-gates",
+  "evals": [
+    {
+      "id": "make-verify-alignment",
+      "prompt": "Update the Makefile verify target and keep CI aligned.",
+      "expected_output": "A Makefile and CI update that preserves canonical quality gates and documents any changed commands.",
+      "assertions": [
+        "Reads existing Makefile targets before editing.",
+        "Keeps CI and Makefile commands aligned.",
+        "Preserves relevant lint, test, build, and security gates.",
+        "Runs the updated target or focused equivalent."
+      ]
+    }
+  ]
+}

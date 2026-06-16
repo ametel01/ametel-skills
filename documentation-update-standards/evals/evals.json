@@ -1,0 +1,16 @@
+{
+  "skill_name": "documentation-update-standards",
+  "evals": [
+    {
+      "id": "behavior-change-doc-sync",
+      "prompt": "I changed a CLI flag; update any docs that are now stale.",
+      "expected_output": "Documentation updates that align README, docs, examples, and changelog-style notes with the changed behavior.",
+      "assertions": [
+        "Finds affected documentation through repository search.",
+        "Updates only docs related to the behavior change.",
+        "Keeps commands and examples consistent with code.",
+        "Runs or reports relevant doc validation."
+      ]
+    }
+  ]
+}

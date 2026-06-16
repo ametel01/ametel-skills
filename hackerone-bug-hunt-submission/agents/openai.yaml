@@ -1,0 +1,4 @@
+interface:
+  display_name: "HackerOne Bug Hunt Submission"
+  short_description: "H1 scope, PoCs, and report fields"
+  default_prompt: "Use $hackerone-bug-hunt-submission to find a HackerOne bounty target, validate the issue, and prepare complete submission fields."

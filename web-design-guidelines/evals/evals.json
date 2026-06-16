@@ -1,0 +1,16 @@
+{
+  "skill_name": "web-design-guidelines",
+  "evals": [
+    {
+      "id": "ui-guideline-review",
+      "prompt": "Review src/components/Dashboard.tsx against the web interface guidelines.",
+      "expected_output": "A guideline-driven UI review with file:line findings after fetching the latest rules and reading the requested file.",
+      "assertions": [
+        "Fetches the latest guideline source before reviewing.",
+        "Reads the specified file or glob.",
+        "Applies all relevant UI, UX, and accessibility rules.",
+        "Outputs findings in file:line format."
+      ]
+    }
+  ]
+}

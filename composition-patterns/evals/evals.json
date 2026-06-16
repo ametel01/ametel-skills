@@ -1,0 +1,16 @@
+{
+  "skill_name": "composition-patterns",
+  "evals": [
+    {
+      "id": "boolean-prop-refactor",
+      "prompt": "Refactor this React component API that has several boolean mode props.",
+      "expected_output": "A composition-based API using explicit variants, compound components, or providers where appropriate instead of boolean prop sprawl.",
+      "assertions": [
+        "Identifies boolean prop proliferation.",
+        "Proposes or implements a composition pattern.",
+        "Keeps state ownership clear.",
+        "Explains migration impact on callers."
+      ]
+    }
+  ]
+}

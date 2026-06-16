@@ -1,0 +1,16 @@
+{
+  "skill_name": "hackerone-bug-hunt-submission",
+  "evals": [
+    {
+      "id": "prepare-hackerone-report",
+      "prompt": "Prepare a HackerOne report for this verified path traversal finding.",
+      "expected_output": "A scope-checked, paste-ready report with asset, weakness, severity, reproduction steps, impact, and attachments using dummy data.",
+      "assertions": [
+        "Verifies program scope before report drafting.",
+        "States prerequisites and impact without exaggeration.",
+        "Includes required HackerOne fields.",
+        "Avoids real secrets or third-party data in PoCs."
+      ]
+    }
+  ]
+}

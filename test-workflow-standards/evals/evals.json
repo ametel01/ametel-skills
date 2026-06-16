@@ -1,0 +1,16 @@
+{
+  "skill_name": "test-workflow-standards",
+  "evals": [
+    {
+      "id": "focused-regression-test",
+      "prompt": "Add a regression test for this CLI bug and run the right checks.",
+      "expected_output": "A focused test update that follows the repo's test runner, fixtures, markers, and validation workflow.",
+      "assertions": [
+        "Reads nearby tests before adding coverage.",
+        "Uses existing fixtures and helpers.",
+        "Tests observable behavior rather than internals.",
+        "Runs the focused test and relevant aggregate gate when feasible."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "skill_name": "ci-quality-gates",
+  "evals": [
+    {
+      "id": "ci-script-change",
+      "prompt": "Update the CI workflow after changing the repo's verify command.",
+      "expected_output": "A CI-safe update that keeps local scripts, workflow commands, and contributor documentation aligned.",
+      "assertions": [
+        "Inspects existing workflows and package or Makefile scripts.",
+        "Keeps CI and local verification commands consistent.",
+        "Runs the relevant local quality gate or explains why it cannot run.",
+        "Avoids unrelated workflow churn."
+      ]
+    }
+  ]
+}

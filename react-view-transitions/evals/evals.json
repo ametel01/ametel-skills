@@ -1,0 +1,16 @@
+{
+  "skill_name": "react-view-transitions",
+  "evals": [
+    {
+      "id": "shared-element-route-transition",
+      "prompt": "Add a shared element transition from a list item to its detail page in this React app.",
+      "expected_output": "A ViewTransition implementation that audits the transition purpose, uses React transition triggers, and applies appropriate CSS recipes.",
+      "assertions": [
+        "Audits whether the transition communicates continuity.",
+        "Uses ViewTransition rather than calling document.startViewTransition directly.",
+        "Triggers animation through startTransition, useDeferredValue, or Suspense.",
+        "Chooses shared element naming and CSS classes intentionally."
+      ]
+    }
+  ]
+}

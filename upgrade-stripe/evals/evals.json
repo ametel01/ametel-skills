@@ -1,0 +1,16 @@
+{
+  "skill_name": "upgrade-stripe",
+  "evals": [
+    {
+      "id": "stripe-api-version-upgrade",
+      "prompt": "Upgrade this Node Stripe integration to the latest API version and update webhooks.",
+      "expected_output": "A Stripe upgrade plan or patch that checks changelog impacts, pins the target API version, updates SDK usage, and validates webhook behavior.",
+      "assertions": [
+        "Identifies current and target Stripe API versions.",
+        "Reviews relevant changelog or upgrade guide changes.",
+        "Updates explicit apiVersion usage where appropriate.",
+        "Includes webhook and test validation."
+      ]
+    }
+  ]
+}

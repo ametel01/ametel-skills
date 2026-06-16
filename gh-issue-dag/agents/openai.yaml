@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH Issue DAG"
+  short_description: "Map GitHub issue dependencies and parallel work"
+  default_prompt: "Use $gh-issue-dag to turn this issue list into a dependency graph."

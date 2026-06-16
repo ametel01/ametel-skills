@@ -1,0 +1,16 @@
+{
+  "skill_name": "typescript-bun-biome",
+  "evals": [
+    {
+      "id": "bun-react-type-fix",
+      "prompt": "Fix this React TypeScript error in a Bun/Biome project.",
+      "expected_output": "A strict TypeScript fix that follows package-local Bun and Biome conventions and validates with repo scripts.",
+      "assertions": [
+        "Reads package.json, biome.json, and tsconfig.json.",
+        "Uses Bun commands.",
+        "Preserves strict typing and avoids any unless already permitted.",
+        "Runs typecheck, test, check, or build as relevant."
+      ]
+    }
+  ]
+}

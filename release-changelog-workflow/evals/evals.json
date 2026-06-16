@@ -1,0 +1,16 @@
+{
+  "skill_name": "release-changelog-workflow",
+  "evals": [
+    {
+      "id": "prepare-release-entry",
+      "prompt": "Prepare this repo for a patch release and update the changelog.",
+      "expected_output": "A release preparation workflow that follows the repo's existing changelog, versioning, validation, and tag conventions.",
+      "assertions": [
+        "Reads existing changelog and release workflows.",
+        "Preserves the repo's release format and tag style.",
+        "Runs relevant release gates or reports blockers.",
+        "Does not invent a new release system."
+      ]
+    }
+  ]
+}

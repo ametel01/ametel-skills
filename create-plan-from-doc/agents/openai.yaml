@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Plan From Docs"
+  short_description: "Draft implementation plans from source docs"
+  default_prompt: "Use $create-plan-from-doc to turn docs/feature.md and docs/design.md into PLAN.md."

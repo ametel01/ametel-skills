@@ -1,0 +1,16 @@
+{
+  "skill_name": "teach",
+  "evals": [
+    {
+      "id": "mission-driven-lesson",
+      "prompt": "Teach me enough SQL to analyze my product analytics over the next few sessions.",
+      "expected_output": "A stateful teaching workflow that clarifies the mission, records resources and learning records, and creates a focused lesson in the workspace.",
+      "assertions": [
+        "Clarifies or records the learner's mission.",
+        "Uses trusted resources rather than only memory.",
+        "Creates a focused lesson artifact.",
+        "Updates learning records or notes as appropriate."
+      ]
+    }
+  ]
+}

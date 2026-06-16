@@ -1,0 +1,16 @@
+{
+  "skill_name": "commit-all-changes-logically",
+  "evals": [
+    {
+      "id": "split-dirty-worktree",
+      "prompt": "Commit all current changes, splitting them into logical commits.",
+      "expected_output": "The agent reviews the dirty tree, groups related changes, validates where appropriate, and creates intentional commits without reverting user work.",
+      "assertions": [
+        "Inspects git status and diffs before staging.",
+        "Groups changes by logical purpose.",
+        "Does not include unrelated generated or ignored files accidentally.",
+        "Reports commit hashes and validation."
+      ]
+    }
+  ]
+}

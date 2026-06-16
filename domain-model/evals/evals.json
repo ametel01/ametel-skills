@@ -1,0 +1,16 @@
+{
+  "skill_name": "domain-model",
+  "evals": [
+    {
+      "id": "stress-test-domain-terms",
+      "prompt": "Grill this plan against the existing domain model before I implement it.",
+      "expected_output": "A one-question-at-a-time interview that checks glossary, ADRs, code evidence, and updates domain docs as decisions crystallize.",
+      "assertions": [
+        "Searches for CONTEXT.md, CONTEXT-MAP.md, and ADRs.",
+        "Challenges ambiguous or conflicting terms.",
+        "Asks one question at a time with a recommended answer.",
+        "Updates context documentation only when a term is resolved."
+      ]
+    }
+  ]
+}

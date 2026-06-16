@@ -1,0 +1,16 @@
+{
+  "skill_name": "org-toolchain-detection",
+  "evals": [
+    {
+      "id": "detect-repo-toolchain",
+      "prompt": "Figure out which install, test, lint, and build commands to use in this repo.",
+      "expected_output": "A toolchain diagnosis based on lockfiles, manifests, configs, Makefile targets, and workflows.",
+      "assertions": [
+        "Inspects lockfiles and package or project manifests.",
+        "Checks Makefile and CI workflows when present.",
+        "Identifies package-local versus workspace-root commands.",
+        "Avoids assuming npm, Bun, Go, Python, or Scarb without evidence."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "skill_name": "vercel-cli-with-tokens",
+  "evals": [
+    {
+      "id": "token-auth-preview-deploy",
+      "prompt": "Deploy this project to Vercel using the token in my environment.",
+      "expected_output": "A Vercel CLI workflow that locates token/project/team state safely, avoids exposing the token, and deploys a preview by default.",
+      "assertions": [
+        "Uses VERCEL_TOKEN from the environment instead of --token.",
+        "Checks VERCEL_ORG_ID and VERCEL_PROJECT_ID together.",
+        "Defaults to preview deployment.",
+        "Reports deployment URL and status inspection."
+      ]
+    }
+  ]
+}

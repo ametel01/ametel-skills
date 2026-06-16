@@ -1,0 +1,16 @@
+{
+  "skill_name": "react-best-practices",
+  "evals": [
+    {
+      "id": "nextjs-performance-review",
+      "prompt": "Review this Next.js page for avoidable waterfalls and bundle bloat.",
+      "expected_output": "A prioritized performance review or patch addressing data waterfalls, import costs, rendering, and validation.",
+      "assertions": [
+        "Checks for serial awaits that can be parallelized.",
+        "Identifies barrel imports or heavy client bundles where present.",
+        "Keeps server/client component boundaries correct.",
+        "Runs relevant tests, typecheck, or build when editing."
+      ]
+    }
+  ]
+}

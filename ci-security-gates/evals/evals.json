@@ -1,0 +1,16 @@
+{
+  "skill_name": "ci-security-gates",
+  "evals": [
+    {
+      "id": "dependency-security-change",
+      "prompt": "Add a dependency audit step to this repository's CI.",
+      "expected_output": "A security-conscious CI change that uses the repo's toolchain, avoids secret exposure, and validates the new gate.",
+      "assertions": [
+        "Reads existing CI and dependency manifests before editing.",
+        "Chooses a repo-appropriate audit or vulnerability command.",
+        "Avoids exposing tokens or secrets in logs.",
+        "Runs or documents validation for the changed workflow."
+      ]
+    }
+  ]
+}

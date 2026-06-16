@@ -1,0 +1,16 @@
+{
+  "skill_name": "request-refactor-plan",
+  "evals": [
+    {
+      "id": "interview-to-refactor-issue",
+      "prompt": "Help me plan a safe refactor and turn it into a GitHub issue.",
+      "expected_output": "A user-interview-driven refactor plan with tiny commits, risk controls, validation, and a GitHub issue body.",
+      "assertions": [
+        "Asks clarifying questions before finalizing the plan.",
+        "Breaks the refactor into tiny reviewable commits.",
+        "Includes validation and rollback considerations.",
+        "Produces an issue-ready plan."
+      ]
+    }
+  ]
+}

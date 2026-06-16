@@ -1,0 +1,16 @@
+{
+  "skill_name": "deploy-to-vercel",
+  "evals": [
+    {
+      "id": "preview-deploy-linked-project",
+      "prompt": "Deploy this app to a Vercel preview.",
+      "expected_output": "The agent checks project state, prefers preview deployment, avoids production unless requested, and reports the deployment URL.",
+      "assertions": [
+        "Checks git remote, .vercel config, CLI auth, and team state before choosing a path.",
+        "Uses preview deployment by default.",
+        "Asks before git push if that path is chosen.",
+        "Reports preview URL or the exact blocker."
+      ]
+    }
+  ]
+}

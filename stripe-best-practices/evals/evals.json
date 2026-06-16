@@ -1,0 +1,16 @@
+{
+  "skill_name": "stripe-best-practices",
+  "evals": [
+    {
+      "id": "choose-stripe-integration-surface",
+      "prompt": "Help me decide whether this payment flow should use Checkout Sessions or PaymentIntents.",
+      "expected_output": "A Stripe integration recommendation that maps requirements to the appropriate API surface and calls out Connect, billing, and webhook implications.",
+      "assertions": [
+        "Compares Checkout Sessions and PaymentIntents against the user's requirements.",
+        "Calls out webhook and idempotency needs.",
+        "Flags Connect or subscription implications when relevant.",
+        "Avoids inventing unsupported Stripe behavior."
+      ]
+    }
+  ]
+}

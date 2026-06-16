@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH AFK Human Classifier"
+  short_description: "Classify issues for agent or human handling"
+  default_prompt: "Use $gh-afk-human-classifier to classify these GitHub issues as AFK-safe or human-needed."

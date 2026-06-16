@@ -1,0 +1,16 @@
+{
+  "skill_name": "gh-vertical-slice-issues",
+  "evals": [
+    {
+      "id": "break-feature-into-issues",
+      "prompt": "Break this vague feature into small vertical GitHub issues.",
+      "expected_output": "A set of reviewable issues where each slice delivers user-visible or system-visible behavior with tests and acceptance criteria.",
+      "assertions": [
+        "Avoids horizontal task-only slices.",
+        "Keeps each issue independently reviewable.",
+        "Includes acceptance criteria and validation.",
+        "Identifies dependencies and recommended order."
+      ]
+    }
+  ]
+}

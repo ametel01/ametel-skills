@@ -1,0 +1,16 @@
+{
+  "skill_name": "gh-issue-dag",
+  "evals": [
+    {
+      "id": "milestone-dependency-graph",
+      "prompt": "Build a dependency graph for the issues in this milestone.",
+      "expected_output": "A DAG of issue dependencies with blockers, parallelizable groups, and sequencing risks.",
+      "assertions": [
+        "Inspects issue content before ordering.",
+        "Identifies hard blockers versus soft sequencing preferences.",
+        "Detects cycles or ambiguous dependencies.",
+        "Outputs an actionable implementation order."
+      ]
+    }
+  ]
+}

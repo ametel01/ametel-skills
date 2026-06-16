@@ -1,0 +1,16 @@
+{
+  "skill_name": "bun-typescript-quality",
+  "evals": [
+    {
+      "id": "bun-biome-typecheck-change",
+      "prompt": "Fix a TypeScript bug in a Bun workspace that uses Biome and strict tsconfig settings.",
+      "expected_output": "The agent detects package-local tooling, preserves strict TypeScript settings, follows Bun scripts, and runs focused checks.",
+      "assertions": [
+        "Reads package.json, tsconfig, and Biome or formatter config.",
+        "Uses Bun rather than npm or pnpm.",
+        "Does not weaken strict TypeScript options.",
+        "Runs relevant check, typecheck, test, or build scripts."
+      ]
+    }
+  ]
+}

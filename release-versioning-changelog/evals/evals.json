@@ -1,0 +1,16 @@
+{
+  "skill_name": "release-versioning-changelog",
+  "evals": [
+    {
+      "id": "version-bump-and-notes",
+      "prompt": "Bump this project to v1.2.3 and prepare release notes.",
+      "expected_output": "A repo-specific version bump and changelog update with extracted release notes and matching validation gates.",
+      "assertions": [
+        "Detects the version source before editing.",
+        "Keeps Keep a Changelog and SemVer conventions intact.",
+        "Uses release helper scripts with explicit flags when applicable.",
+        "Validates version, tag, and changelog consistency."
+      ]
+    }
+  ]
+}

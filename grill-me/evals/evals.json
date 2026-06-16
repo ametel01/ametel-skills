@@ -1,0 +1,16 @@
+{
+  "skill_name": "grill-me",
+  "evals": [
+    {
+      "id": "one-question-plan-grilling",
+      "prompt": "Grill me on this redesign plan before I start building.",
+      "expected_output": "A structured interview that asks one question at a time, gives a recommended answer, checks codebase evidence where possible, and continues until the plan is clear.",
+      "assertions": [
+        "Summarizes the plan before questioning.",
+        "Asks one question at a time.",
+        "Provides a recommended answer for each question.",
+        "Inspects the codebase instead of asking when evidence is local."
+      ]
+    }
+  ]
+}

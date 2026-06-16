@@ -1,0 +1,16 @@
+{
+  "skill_name": "caveman",
+  "evals": [
+    {
+      "id": "compressed-accurate-response",
+      "prompt": "Use caveman mode and explain why my test is flaky.",
+      "expected_output": "A much shorter response that preserves technical accuracy and concrete next steps without filler.",
+      "assertions": [
+        "Uses compressed wording.",
+        "Keeps the causal explanation technically correct.",
+        "Includes actionable debugging steps.",
+        "Avoids dropping essential caveats."
+      ]
+    }
+  ]
+}

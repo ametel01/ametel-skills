@@ -1,0 +1,16 @@
+{
+  "skill_name": "gh-afk-human-classifier",
+  "evals": [
+    {
+      "id": "classify-afk-issue-batch",
+      "prompt": "Classify these GitHub issues as safe for unattended agents or needing human review.",
+      "expected_output": "A classification table with rationale, risk level, blockers, and suggested human decision points.",
+      "assertions": [
+        "Separates safe unattended work from human-decision work.",
+        "Flags missing requirements or risky external dependencies.",
+        "Provides concise rationale for each classification.",
+        "Identifies batching or ordering implications."
+      ]
+    }
+  ]
+}

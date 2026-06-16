@@ -1,0 +1,16 @@
+{
+  "skill_name": "agent-coding-workflow",
+  "evals": [
+    {
+      "id": "dirty-tree-read-before-edit",
+      "prompt": "Make a small fix in this repo, but there are unrelated modified files already present.",
+      "expected_output": "The agent inspects git status, reads the target file and a related caller/test before editing, preserves unrelated changes, runs relevant validation, and reports the result.",
+      "assertions": [
+        "Mentions existing dirty worktree state before editing.",
+        "Reads target and related files before applying changes.",
+        "Does not revert unrelated user changes.",
+        "Runs or explicitly justifies skipped validation."
+      ]
+    }
+  ]
+}

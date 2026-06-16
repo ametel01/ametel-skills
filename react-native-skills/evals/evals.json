@@ -1,0 +1,16 @@
+{
+  "skill_name": "react-native-skills",
+  "evals": [
+    {
+      "id": "react-native-list-performance",
+      "prompt": "Optimize this React Native screen with a slow scrolling list and image-heavy rows.",
+      "expected_output": "A React Native performance fix using list virtualization, stable row props, image optimization, and platform-appropriate validation.",
+      "assertions": [
+        "Considers FlashList or equivalent virtualization for large lists.",
+        "Stabilizes callbacks, item components, and inline objects.",
+        "Uses appropriate image handling.",
+        "Notes React Native or Expo validation commands."
+      ]
+    }
+  ]
+}
