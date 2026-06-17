@@ -1,0 +1,27 @@
+{
+  "skill_name": "to-prd",
+  "evals": [
+    {
+      "id": "synthesize-without-new-interview",
+      "prompt": "Turn everything we've discussed about recurring invoices into a PRD for the project tracker.",
+      "expected_output": "The agent synthesizes existing conversation and codebase context into the PRD template without starting a new interview, while checking test seams with the user.",
+      "assertions": [
+        "Does not interview for new requirements beyond checking testing seams.",
+        "Explores the repo if current codebase state is not already known.",
+        "Uses project domain glossary vocabulary and respects relevant ADRs.",
+        "Prefers the highest existing seam for tests and checks that seam with the user."
+      ]
+    },
+    {
+      "id": "publish-ready-prd",
+      "prompt": "Publish the PRD once it's ready. We already agreed on the feature scope.",
+      "expected_output": "The agent previews the PRD body, destination tracker, and ready-for-agent label unless already approved, then publishes a complete PRD with user stories and testing decisions.",
+      "assertions": [
+        "Includes Problem Statement, Solution, extensive User Stories, Implementation Decisions, Testing Decisions, Out of Scope, and Further Notes.",
+        "Avoids stale file paths and code snippets except concise prototype-derived decisions.",
+        "Applies the ready-for-agent triage label.",
+        "Includes what makes a good test and which modules or seams will be tested."
+      ]
+    }
+  ]
+}

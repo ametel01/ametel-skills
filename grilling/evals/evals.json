@@ -1,0 +1,27 @@
+{
+  "skill_name": "grilling",
+  "evals": [
+    {
+      "id": "one-question-at-a-time",
+      "prompt": "Grill me on this plan: move checkout into a background job and show users a pending state.",
+      "expected_output": "The agent starts a structured interview, asks exactly one load-bearing question at a time, includes its recommended answer, and tracks settled versus unresolved decisions.",
+      "assertions": [
+        "Identifies the plan or the smallest missing context needed to start.",
+        "Asks one question, not a list of questions.",
+        "Includes a recommended answer with the question.",
+        "Tracks settled decisions and unresolved branches as the interview proceeds."
+      ]
+    },
+    {
+      "id": "inspect-before-asking",
+      "prompt": "Grill my plan to replace our auth middleware. The repo is available locally.",
+      "expected_output": "The agent checks discoverable codebase facts before asking questions whose answers are in the repo, then uses that evidence in the grilling interview.",
+      "assertions": [
+        "Explores relevant local files before asking about discoverable facts.",
+        "Does not ask the user to restate information available in the codebase.",
+        "Asks one evidence-informed question at a time.",
+        "Stops only when load-bearing branches are settled, open, or assigned a follow-up artifact."
+      ]
+    }
+  ]
+}

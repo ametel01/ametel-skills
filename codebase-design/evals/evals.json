@@ -1,0 +1,27 @@
+{
+  "skill_name": "codebase-design",
+  "evals": [
+    {
+      "id": "evaluate-shallow-module",
+      "prompt": "Review this proposed refactor: extract a UserService with methods matching every current helper function so tests can mock each helper independently. Is that a good design?",
+      "expected_output": "The agent evaluates the design using deep-module vocabulary, rejects a shallow pass-through interface, and recommends a smaller interface tested through the seam.",
+      "assertions": [
+        "Uses the terms module, interface, depth, seam, adapter, leverage, and locality consistently.",
+        "Applies the deletion test to identify pass-through or shallow design.",
+        "Explains that the interface is the test surface.",
+        "Avoids substituting component, service, API, or boundary as the core vocabulary."
+      ]
+    },
+    {
+      "id": "decide-real-seam",
+      "prompt": "Should I add an interface around this database repository even though there is only one Postgres implementation and no fake yet?",
+      "expected_output": "The agent distinguishes a hypothetical seam from a real seam and recommends introducing the seam only when variation or tests make it earn its cost.",
+      "assertions": [
+        "Uses the rule that one adapter means a hypothetical seam and two adapters means a real one.",
+        "Separates seam placement from implementation internals.",
+        "Discusses testability through a public interface rather than private internals.",
+        "Frames the tradeoff in terms of leverage and locality."
+      ]
+    }
+  ]
+}

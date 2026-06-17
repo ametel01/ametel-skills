@@ -1,0 +1,27 @@
+{
+  "skill_name": "domain-modeling",
+  "evals": [
+    {
+      "id": "sharpen-overloaded-term",
+      "prompt": "In this repo, I keep saying account. Sometimes I mean the billing customer and sometimes I mean the login user. Help me clean that up and record the decision.",
+      "expected_output": "The agent challenges the overloaded term, proposes canonical domain language, and updates the appropriate CONTEXT.md glossary once the term is resolved.",
+      "assertions": [
+        "Identifies the ambiguity between billing customer and login user.",
+        "Asks or proposes a canonical term before writing.",
+        "Creates or updates CONTEXT.md using glossary-only content.",
+        "Avoids putting implementation decisions into CONTEXT.md."
+      ]
+    },
+    {
+      "id": "adr-only-for-real-decision",
+      "prompt": "We decided refunds are immutable ledger entries instead of editable order fields because auditability beats convenience. Should we record that?",
+      "expected_output": "The agent evaluates the ADR threshold and offers or writes an ADR only because the decision is hard to reverse, surprising without context, and based on a real tradeoff.",
+      "assertions": [
+        "Checks the three ADR criteria before creating one.",
+        "Names the tradeoff behind the decision.",
+        "Uses docs/adr or the context-specific ADR directory when appropriate.",
+        "Keeps domain glossary updates separate from architectural decisions."
+      ]
+    }
+  ]
+}

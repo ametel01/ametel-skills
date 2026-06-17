@@ -1,0 +1,29 @@
+{
+  "skill_name": "prototype",
+  "evals": [
+    {
+      "id": "logic-prototype-branch",
+      "prompt": "I can't tell if this subscription state machine handles retries and cancellations correctly. Build a prototype to explore it.",
+      "expected_output": "The agent chooses the logic prototype branch, builds a tiny interactive terminal prototype close to the relevant module, and surfaces full state after each action.",
+      "assertions": [
+        "Identifies the question the prototype must answer.",
+        "Chooses the logic/state branch rather than a UI route.",
+        "Creates clearly marked throwaway code close to the relevant production context.",
+        "Provides one command to run the prototype.",
+        "Prints the relevant state after each action."
+      ]
+    },
+    {
+      "id": "ui-variations-branch",
+      "prompt": "We need to see three very different directions for the new onboarding screen before deciding. Make a throwaway prototype.",
+      "expected_output": "The agent chooses the UI prototype branch, creates switchable route variations using existing routing conventions, and records the question and cleanup path.",
+      "assertions": [
+        "Chooses the UI variation branch.",
+        "Provides several radically different switchable variations.",
+        "Uses a URL search parameter and floating bottom bar when the project routing supports it.",
+        "Marks the code as throwaway and avoids production polish.",
+        "Captures the answer or writes NOTES.md with cleanup needed when done."
+      ]
+    }
+  ]
+}

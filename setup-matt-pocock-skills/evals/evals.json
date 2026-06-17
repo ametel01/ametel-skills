@@ -1,0 +1,27 @@
+{
+  "skill_name": "setup-matt-pocock-skills",
+  "evals": [
+    {
+      "id": "explore-and-ask-sequentially",
+      "prompt": "Set up this repo so the Matt Pocock engineering skills know our issue tracker, labels, and domain docs.",
+      "expected_output": "The agent explores the repo, summarizes what exists, then walks the user through issue tracker, triage labels, and domain docs one decision at a time before editing.",
+      "assertions": [
+        "Checks git remote, existing agent docs, context docs, ADRs, docs/agents, and .scratch before proposing setup.",
+        "Explains each setup section in plain language.",
+        "Asks for issue tracker, label vocabulary, and domain docs decisions one at a time.",
+        "Does not write files before showing a draft and receiving confirmation."
+      ]
+    },
+    {
+      "id": "respect-existing-agent-file",
+      "prompt": "Configure the skill docs in a repo that already has CLAUDE.md and AGENTS.md.",
+      "expected_output": "The agent updates the existing CLAUDE.md Agent skills block in place and writes docs/agents files from the relevant templates without creating duplicate agent docs.",
+      "assertions": [
+        "Chooses CLAUDE.md when both CLAUDE.md and AGENTS.md exist.",
+        "Updates an existing Agent skills block in place if present.",
+        "Writes issue-tracker, triage-labels, and domain docs under docs/agents.",
+        "Uses the matching issue-tracker template for GitHub, GitLab, or local markdown."
+      ]
+    }
+  ]
+}

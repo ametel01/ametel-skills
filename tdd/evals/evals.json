@@ -1,0 +1,28 @@
+{
+  "skill_name": "tdd",
+  "evals": [
+    {
+      "id": "one-red-green-cycle",
+      "prompt": "Build this checkout discount feature test-first. I want red-green-refactor.",
+      "expected_output": "The agent confirms the public interface and highest-value behaviors, then writes one failing behavior test, implements only enough code to pass it, and repeats vertically.",
+      "assertions": [
+        "Confirms the public interface and priority behaviors before writing code.",
+        "Names behaviors rather than implementation steps.",
+        "Writes one test at a time and verifies it fails before implementation.",
+        "Implements only enough code to pass the current test.",
+        "Does not refactor while the suite is red."
+      ]
+    },
+    {
+      "id": "reject-implementation-coupled-tests",
+      "prompt": "Add tests for this parser by mocking every private helper so we can refactor safely.",
+      "expected_output": "The agent pushes back on implementation-coupled tests and redirects toward behavior tests through the parser's public interface.",
+      "assertions": [
+        "Rejects testing private helpers or internal collaborators as the main strategy.",
+        "Explains that tests should survive internal refactors.",
+        "Uses the public interface as the test surface.",
+        "Mentions integration-style behavior tests where appropriate."
+      ]
+    }
+  ]
+}

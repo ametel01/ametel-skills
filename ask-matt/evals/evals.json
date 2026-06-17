@@ -1,0 +1,27 @@
+{
+  "skill_name": "ask-matt",
+  "evals": [
+    {
+      "id": "route-idea-to-implementation",
+      "prompt": "I have a rough product idea and a repo, but I don't know whether to grill it, write a PRD, make issues, or just implement. What Matt Pocock flow should I use?",
+      "expected_output": "The agent routes the user through the idea-to-ship flow, starting with grilling in the existing codebase and only moving to PRD/issues when the work is multi-session.",
+      "assertions": [
+        "Names the main idea-to-ship route in order.",
+        "Starts with the codebase-aware grilling path for an idea in a repo.",
+        "Distinguishes same-session implementation from multi-session PRD and issue creation.",
+        "Mentions context hygiene or fresh sessions for implementation issues."
+      ]
+    },
+    {
+      "id": "choose-standalone-or-on-ramp",
+      "prompt": "I have a pile of incoming GitHub bugs and one separate design idea that has no repo yet. Which skill should handle each?",
+      "expected_output": "The agent separates raw incoming tracker work from stateless design sharpening, recommending triage for the bugs and grill-me for the no-repo idea.",
+      "assertions": [
+        "Routes raw bugs or requests to triage.",
+        "Routes the no-codebase design idea to grill-me.",
+        "Does not send issues created by to-issues back through triage.",
+        "Explains why the two starting points differ."
+      ]
+    }
+  ]
+}

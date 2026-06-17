@@ -1,0 +1,28 @@
+{
+  "skill_name": "to-issues",
+  "evals": [
+    {
+      "id": "vertical-slice-breakdown",
+      "prompt": "Turn this PRD for adding saved payment methods into issues agents can pick up independently.",
+      "expected_output": "The agent breaks the PRD into tracer-bullet vertical slices, presents dependencies and covered user stories, and asks for approval before publishing.",
+      "assertions": [
+        "Creates thin vertical slices that cross integration layers end to end.",
+        "Avoids horizontal layer-only issues.",
+        "Shows title, blocked-by relationships, and user stories covered for each slice.",
+        "Asks whether granularity and dependencies are correct before publishing."
+      ]
+    },
+    {
+      "id": "publish-in-dependency-order",
+      "prompt": "Use the approved breakdown and publish the issues to our tracker.",
+      "expected_output": "The agent previews final issue titles, bodies, labels, destination, and dependency order, then publishes blockers first and does not close or modify the parent issue.",
+      "assertions": [
+        "Previews final issue metadata before publishing unless confirmation was already granted.",
+        "Publishes blockers before dependent issues.",
+        "Applies the ready-for-agent triage label unless instructed otherwise.",
+        "References real blocking issue identifiers after creation.",
+        "Does not close or modify the parent issue."
+      ]
+    }
+  ]
+}

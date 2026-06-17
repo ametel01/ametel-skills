@@ -1,0 +1,27 @@
+{
+  "skill_name": "handoff",
+  "evals": [
+    {
+      "id": "write-temp-handoff",
+      "prompt": "Create a handoff for a fresh session to continue the checkout refactor. We have a PRD, two changed files, and one unresolved testing question.",
+      "expected_output": "The agent writes a concise markdown handoff to the OS temp directory and reports its absolute path with enough context for a fresh agent to continue.",
+      "assertions": [
+        "Resolves the OS temp directory instead of writing into the workspace.",
+        "Includes current goal, key context, completed work, remaining work, important files, suggested skills, and risks or open questions.",
+        "References durable artifacts by path or URL instead of duplicating large content.",
+        "Reports the absolute handoff path to the user."
+      ]
+    },
+    {
+      "id": "redact-sensitive-context",
+      "prompt": "Make a handoff of this debugging thread. It includes an API token, a private staging URL, and a customer email address in the notes.",
+      "expected_output": "The agent preserves useful debugging context while redacting secrets, private URLs, and personally identifiable information from the handoff document.",
+      "assertions": [
+        "Redacts API keys, passwords, and tokens.",
+        "Redacts private URLs and personally identifiable information.",
+        "Keeps the document useful to a fresh agent despite redaction.",
+        "Does not duplicate unrelated transcript content."
+      ]
+    }
+  ]
+}

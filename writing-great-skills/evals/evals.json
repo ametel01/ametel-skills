@@ -1,0 +1,27 @@
+{
+  "skill_name": "writing-great-skills",
+  "evals": [
+    {
+      "id": "prune-description-triggers",
+      "prompt": "Review this skill description: 'Use this when doing TDD, test-first development, red-green-refactor, writing tests before code, and building features with tests.' Make it better.",
+      "expected_output": "The agent collapses duplicate trigger branches into concise model-facing trigger language and preserves only distinct invocation reasons.",
+      "assertions": [
+        "Identifies duplicated trigger branches.",
+        "Keeps model-invoked descriptions trigger-oriented.",
+        "Front-loads a strong leading word when useful.",
+        "Avoids restating body identity in the description."
+      ]
+    },
+    {
+      "id": "progressive-disclosure-refactor",
+      "prompt": "This SKILL.md has three pages of examples used only by one branch. Should I keep them inline?",
+      "expected_output": "The agent recommends moving branch-specific examples into a linked reference file with a clear context pointer while keeping core steps inline.",
+      "assertions": [
+        "Uses the information hierarchy to decide what stays in SKILL.md.",
+        "Applies progressive disclosure for branch-specific reference material.",
+        "Keeps related concept definitions and caveats co-located.",
+        "Preserves the skill's intent while reducing sprawl."
+      ]
+    }
+  ]
+}

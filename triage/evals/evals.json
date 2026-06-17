@@ -1,0 +1,28 @@
+{
+  "skill_name": "triage",
+  "evals": [
+    {
+      "id": "show-attention-buckets",
+      "prompt": "Show me issue tracker items that need my triage attention.",
+      "expected_output": "The agent queries the tracker and presents unlabeled, needs-triage, and needs-info-with-reporter-activity buckets oldest first with counts and one-line summaries.",
+      "assertions": [
+        "Separates unlabeled, needs-triage, and needs-info with reporter activity.",
+        "Sorts each bucket oldest first.",
+        "Shows counts and concise issue summaries.",
+        "Lets the maintainer pick the next issue."
+      ]
+    },
+    {
+      "id": "triage-specific-bug",
+      "prompt": "Triage issue #42. It reports checkout failing after the latest release.",
+      "expected_output": "The agent reads the issue and prior notes, checks code and out-of-scope knowledge, recommends category and state, attempts reproduction for the bug, and posts only comments with the required AI triage disclaimer.",
+      "assertions": [
+        "Reads full issue body, comments, labels, reporter, dates, and prior triage notes.",
+        "Explores relevant code using project domain vocabulary and ADRs.",
+        "Attempts reproduction before grilling because this is a bug.",
+        "Applies exactly one category role and one state role or flags conflicts first.",
+        "Starts every tracker comment with the required AI triage disclaimer."
+      ]
+    }
+  ]
+}
