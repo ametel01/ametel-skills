@@ -2,14 +2,26 @@
   "skill_name": "teach",
   "evals": [
     {
-      "id": "mission-driven-lesson",
-      "prompt": "Teach me enough SQL to analyze my product analytics over the next few sessions.",
-      "expected_output": "A stateful teaching workflow that clarifies the mission, records resources and learning records, and creates a focused lesson in the workspace.",
+      "id": "initialize-learning-workspace",
+      "prompt": "Teach me database indexing over several sessions in this folder.",
+      "expected_output": "The agent treats the current directory as a teaching workspace, establishes the learner's mission before lessons, gathers trusted resources, and creates state files using the skill formats.",
       "assertions": [
-        "Clarifies or records the learner's mission.",
-        "Uses trusted resources rather than only memory.",
-        "Creates a focused lesson artifact.",
-        "Updates learning records or notes as appropriate."
+        "Inspects MISSION.md, RESOURCES.md, learning-records, reference, lessons, and NOTES.md.",
+        "Interviews for the mission before creating a lesson when MISSION.md is missing or empty.",
+        "Records the mission using MISSION-FORMAT.md.",
+        "Populates RESOURCES.md with high-trust resources before teaching from memory."
+      ]
+    },
+    {
+      "id": "create-small-cited-lesson",
+      "prompt": "Continue my learning workspace and make the next lesson. I struggle to remember when to use B-tree indexes.",
+      "expected_output": "The agent chooses a small lesson target from the mission and records, writes one short cited HTML lesson with retrieval practice, and adds durable learning records or references as needed.",
+      "assertions": [
+        "Uses learning records to estimate the zone of proximal development.",
+        "Creates exactly one tightly scoped lesson HTML file under lessons.",
+        "Includes retrieval practice or another tight feedback loop.",
+        "Links to a primary trusted source.",
+        "Adds a learning record when there is a durable insight, mission change, or evidence about the learner."
       ]
     }
   ]

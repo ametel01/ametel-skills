@@ -1,9 +1,6 @@
 ---
 name: teach
-description: Use this skill when the user asks to learn a new skill or concept over multiple sessions in the current workspace, including lesson creation, learning records, resources, and mission-driven teaching.
-metadata:
-  disable-model-invocation: "true"
-  argument-hint: "What would you like to learn about?"
+description: Use this skill when the user wants to learn a concept over multiple sessions in the current workspace, build lessons, maintain learning records, or create a stateful teaching workspace.
 ---
 
 The user has asked you to teach them something. This is a stateful request - they intend to learn the topic over multiple sessions.
@@ -21,13 +18,13 @@ Treat the current directory as a teaching workspace. The state of their learning
 
 ## Philosophy
 
-To learn at a deep level, the learner needs three things:
+To learn at a deep level, the user needs three things:
 
 - **Knowledge**, captured from high-quality, high-trust resources
 - **Skills**, acquired through highly-relevant interactive lessons devised by you, based on the knowledge
 - **Wisdom**, which comes from interacting with other learners and practitioners
 
-Before the `RESOURCES.md` is well-populated, your focus should be to find high-quality resources which will support the learner's knowledge acquisition. Never trust your parametric knowledge.
+Before the `RESOURCES.md` is well-populated, your focus should be to find high-quality resources for the learner's topic and mission. Never trust your parametric knowledge.
 
 Some topics may require more skills than knowledge. Learning more about theoretical physics might be more knowledge-based. For yoga, more skills-based.
 
@@ -130,3 +127,13 @@ Glossaries, in particular, are an essential reference. Once one is created, it s
 ## `NOTES.md`
 
 The user will sometimes express preferences of how they want to be taught, or things you should keep in mind. This is the place to record those preferences, so you can refer back to them when designing lessons or working with the user.
+
+## Session Workflow
+
+1. Inspect the workspace state: `MISSION.md`, `RESOURCES.md`, `learning-records/`, `reference/`, `lessons/`, and `NOTES.md`.
+2. If `MISSION.md` is missing or empty, interview the user about why they want to learn the topic before writing a lesson. Save the mission using [MISSION-FORMAT.md](./MISSION-FORMAT.md).
+3. If `RESOURCES.md` is thin for the topic, gather high-trust resources first and record them using [RESOURCES-FORMAT.md](./RESOURCES-FORMAT.md). Do not build lessons from memory alone when current or authoritative sources matter.
+4. Choose one lesson target from the mission and the latest learning records. It should be small enough to complete quickly and hard enough to build storage strength.
+5. Create one lesson HTML file under `./lessons/` and, when useful, one reference HTML file under `./reference/`.
+6. Add a learning record for durable insights, changed mission, or evidence about the user's zone of proximal development using [LEARNING-RECORD-FORMAT.md](./LEARNING-RECORD-FORMAT.md).
+7. Open the lesson if the local environment supports it, then tell the user which files changed and what to do next.
