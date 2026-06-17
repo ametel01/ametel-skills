@@ -2,14 +2,26 @@
   "skill_name": "improve-codebase-architecture",
   "evals": [
     {
-      "id": "architecture-refactor-opportunities",
-      "prompt": "Find architectural improvements that would make this codebase easier to test.",
-      "expected_output": "A prioritized architecture improvement report focused on deeper modules, clearer boundaries, and testability.",
+      "id": "architecture-html-report",
+      "prompt": "Review this repo's architecture and surface deepening opportunities. I want a visual report, not implementation yet.",
+      "expected_output": "The agent explores the domain model and codebase, writes a self-contained HTML architecture report to the OS temp directory, and asks which candidate to explore without proposing interfaces yet.",
       "assertions": [
-        "Inspects call sites and tests before recommending changes.",
-        "Identifies shallow modules or boundary problems.",
-        "Connects each recommendation to testability.",
-        "Keeps proposals scoped and incremental."
+        "Reads CONTEXT.md and relevant ADRs before evaluating candidates when present.",
+        "Uses codebase-design vocabulary such as module, interface, depth, seam, adapter, leverage, and locality.",
+        "Writes the report to the OS temp directory with a timestamped architecture-review HTML filename.",
+        "Includes files, problem, solution, benefits, before/after visuals, recommendation strength, and a top recommendation.",
+        "Asks which candidate to explore and does not propose detailed interfaces in the report phase."
+      ]
+    },
+    {
+      "id": "handle-adr-conflict",
+      "prompt": "Run the architecture review, but one promising refactor may contradict ADR-0007. Show me whether it's worth reopening.",
+      "expected_output": "The agent surfaces only real ADR conflicts worth revisiting, marks them clearly in the candidate card, and avoids listing theoretical refactors forbidden by ADRs.",
+      "assertions": [
+        "Checks ADRs in the relevant area.",
+        "Flags a contradiction only when the friction is real enough to warrant reopening.",
+        "Explains the conflict in the candidate card.",
+        "Does not re-litigate settled ADRs without a concrete architectural friction."
       ]
     }
   ]
