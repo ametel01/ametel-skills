@@ -24,14 +24,16 @@ Accept one or more source document paths from the user's prompt as the main argu
 
 3. Define quality gates before any implementation step.
    - Identify the exact commands for format, lint, tests, typecheck, build, or equivalent repo-specific checks.
-   - If any required gate is missing or unclear, add a "Quality Gates Setup" step immediately after `Step 0: Progress Tracking Setup` that adds or documents the missing gate before feature implementation begins.
+   - If any required gate is missing or unclear, add a "Quality Gates Setup" step immediately after `Step 0: Progress and Changelog Tracking Setup` that adds or documents the missing gate before feature implementation begins.
    - Include a baseline gate run before implementation when practical, so later failures can be distinguished from pre-existing failures.
 
 4. Write `PLAN.md`.
    - Create or replace `PLAN.md` in the project root unless the user explicitly requests another location.
    - The plan must be detailed enough that another agent can execute it without re-reading the source docs for intent.
-   - Make `PROGRESS.md` setup the first prerequisite step in the plan, before quality-gate setup or implementation work.
+   - Make `PROGRESS.md` and `CHANGELOG.md` setup the first prerequisite step in the plan, before quality-gate setup or implementation work.
    - Require `PROGRESS.md` to be updated after each completed step so the user can inspect execution status while the plan is being worked on.
+   - Require `CHANGELOG.md` to be created before implementation starts and updated after each completed step, after validation, and before that step is committed.
+   - Require `CHANGELOG.md` to follow Keep a Changelog 1.0.0 conventions: use `# Changelog`, include the standard preamble, maintain an `## [Unreleased]` section at the top, group entries under `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security` as applicable, keep newest entries first, use ISO `YYYY-MM-DD` dates for release sections, and write human-readable notable changes instead of dumping commit logs.
    - Use clear, incremental steps. Each step must leave the repository in a working state.
    - Keep implementation steps small enough for a focused commit.
 
@@ -75,21 +77,35 @@ Accept one or more source document paths from the user's prompt as the main argu
 - Requirement: Create `PROGRESS.md` before any quality-gate setup or implementation work begins.
 - Update rule: After each step is completed, update `PROGRESS.md` with the completed step, validation results, commit reference if available, current status, and next step.
 
+## Changelog Tracking
+- File: `CHANGELOG.md`
+- Standard: Keep a Changelog 1.0.0, <https://keepachangelog.com/en/1.0.0/>
+- Requirement: Create `CHANGELOG.md` before any quality-gate setup or implementation work begins.
+- Initial content: Include `# Changelog`, the standard preamble, and an `## [Unreleased]` section.
+- Update rule: After each step is completed and validated, update `CHANGELOG.md` with human-readable notable changes under the appropriate `Unreleased` change-type headings before creating that step's commit.
+
 ## Incremental Steps
 
-### Step 0: Progress Tracking Setup
-Goal: Create a durable progress log the user can consult while the plan is being executed.
+### Step 0: Progress and Changelog Tracking Setup
+Goal: Create durable progress and changelog files the user can consult while the plan is being executed.
 
 Changes:
 - Create `PROGRESS.md` in the project root.
 - Add the plan title/sources, a step checklist, current status, and a short update log.
 - Document that the file must be updated after every completed step.
+- Create `CHANGELOG.md` in the project root before any quality-gate setup or implementation work begins.
+- Add Keep a Changelog 1.0.0 structure: `# Changelog`, the standard preamble, and `## [Unreleased]`.
+- Document that `CHANGELOG.md` must be updated after each step is completed and validated, before that step is committed.
 
 Validation:
 - Confirm `PROGRESS.md` exists and contains the step checklist.
+- Confirm `CHANGELOG.md` exists and follows the required Keep a Changelog 1.0.0 structure.
 
 Progress:
 - Mark Step 0 complete in `PROGRESS.md`, record validation results, set the current status, and identify the next step.
+
+Changelog:
+- Add an `Added` entry under `## [Unreleased]` for establishing progress and changelog tracking.
 
 Commit:
 - `<suggested commit message>`
@@ -111,6 +127,9 @@ Validation:
 
 Progress:
 - Update `PROGRESS.md` with completion notes, validation results, commit reference if available, current status, and next step.
+
+Changelog:
+- Update `CHANGELOG.md` under `## [Unreleased]` with notable quality-gate setup changes after validation and before committing.
 
 Commit:
 - `<suggested commit message>`
@@ -136,11 +155,14 @@ Validation:
 Progress:
 - Update `PROGRESS.md` with completion notes, validation results, commit reference if available, current status, and next step.
 
+Changelog:
+- Update `CHANGELOG.md` under `## [Unreleased]` with notable implementation changes after validation and before committing.
+
 Commit:
 - `<suggested commit message>`
 ```
 
-Always include `Step 0: Progress Tracking Setup`. Omit the quality-gates setup step only when quality gates are already clearly configured and the plan includes the exact commands in `## Quality Gates`.
+Always include `Step 0: Progress and Changelog Tracking Setup`. Omit the quality-gates setup step only when quality gates are already clearly configured and the plan includes the exact commands in `## Quality Gates`.
 
 ## Step Detail Standard
 
@@ -152,6 +174,7 @@ For each incremental implementation step:
 - Include acceptance criteria for the step.
 - Include the full quality-gate command list to run after completing the step.
 - Include an explicit `PROGRESS.md` update action after validation and before moving to the next step.
+- Include an explicit `CHANGELOG.md` update action after validation and before committing the step.
 - Include a suggested commit message.
 - Make the step small enough that it can be reviewed independently.
 
@@ -160,7 +183,8 @@ Every implementation step must end with:
 1. Run all quality gates: format, lint, tests, and any project-specific checks.
 2. Fix any failures before proceeding.
 3. Update `PROGRESS.md` with the completed step, validation results, commit reference if available, current status, and next step.
-4. Create a commit for that completed step.
+4. Update `CHANGELOG.md` with notable completed work under `## [Unreleased]`, using the appropriate Keep a Changelog change-type heading.
+5. Create a commit for that completed step.
 
 ## Planning Guidance
 

@@ -9,7 +9,10 @@
         "Reads the source document before planning.",
         "Writes PLAN.md.",
         "Breaks work into ordered, implementable steps.",
-        "Includes validation and acceptance criteria."
+        "Includes validation and acceptance criteria.",
+        "Requires CHANGELOG.md creation before implementation starts.",
+        "Requires CHANGELOG.md updates after each completed step and before each step commit.",
+        "Requires CHANGELOG.md to follow Keep a Changelog 1.0.0."
       ]
     }
   ]
