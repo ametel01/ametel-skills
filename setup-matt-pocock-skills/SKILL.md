@@ -1,6 +1,7 @@
 ---
 name: setup-matt-pocock-skills
-description: Use this skill when configuring a repository for the Matt Pocock engineering skills, including issue tracker docs, triage labels, domain docs, AGENTS.md or CLAUDE.md setup, or first-run skill setup.
+description: Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.
+disable-model-invocation: true
 ---
 
 # Setup Matt Pocock's Skills
@@ -42,6 +43,12 @@ Default posture: these skills were designed for GitHub. If a `git remote` points
 - **GitLab** — issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI)
 - **Local markdown** — issues live as files under `.scratch/<feature>/` in this repo (good for solo projects or repos without a remote)
 - **Other** (Jira, Linear, etc.) — ask the user to describe the workflow in one paragraph; the skill will record it as freeform prose
+
+If — and only if — the user picked **GitHub** or **GitLab**, ask one follow-up:
+
+> Explainer: Open-source repos often receive feature requests as pull requests, not just issues — a PR is an issue with attached code. If you turn this on, `/triage` pulls *external* PRs into the same queue and runs them through the same labels and states as issues (collaborators' in-flight PRs are left alone). Leave it off if PRs aren't a request surface for you.
+
+- **PRs as a request surface** — yes / no (default: no). Record the answer in `docs/agents/issue-tracker.md`. For local-markdown and other trackers, skip this question — there are no PRs.
 
 **Section B — Triage label vocabulary.**
 
@@ -94,7 +101,7 @@ The block:
 
 ### Issue tracker
 
-[one-line summary of where issues are tracked]. See `docs/agents/issue-tracker.md`.
+[one-line summary of where issues are tracked, plus whether external PRs are a triage surface]. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
