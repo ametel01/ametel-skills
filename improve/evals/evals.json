@@ -2,14 +2,23 @@
   "skill_name": "improve",
   "evals": [
     {
-      "id": "read-only-codebase-survey",
-      "prompt": "Survey this codebase and propose prioritized improvement plans for other agents.",
-      "expected_output": "A read-only assessment with prioritized, self-contained implementation plans and no source edits.",
+      "id": "read-only-advice-first",
+      "prompt": "Audit a repository for quality and architecture gaps, then return prioritized plans only.",
+      "expected_output": "The agent produces a prioritized findings table with evidence references and asks for implementation authorization, without changing source files.",
       "assertions": [
-        "Does not modify source code.",
-        "Grounds findings in inspected files.",
-        "Prioritizes improvements by impact and risk.",
-        "Writes plans that another agent can execute."
+        "Performs read-only audit behavior and does not propose direct edits.",
+        "Produces phased findings with evidence and priority ordering.",
+        "Uses implementation-plan framing for follow-up actions."
+      ]
+    },
+    {
+      "id": "implementation-boundary",
+      "prompt": "The user asks for a direct fix. How does this skill respond?",
+      "expected_output": "The agent declines direct implementation and recommends `execute <plan>` or a plan-only handoff.",
+      "assertions": [
+        "References its hard rule to avoid modifying source code.",
+        "Offers plan handoff format instead of patching files.",
+        "Keeps findings traceability visible in the response."
       ]
     }
   ]
