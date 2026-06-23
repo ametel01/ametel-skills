@@ -1,0 +1,25 @@
+{
+  "skill_name": "agentreceipt",
+  "evals": [
+    {
+      "id": "focus-replay-loop",
+      "prompt": "Start a focus/replay workflow for this coding session and summarize what to inspect before continuing work.",
+      "expected_output": "The agent uses `agentreceipt focus` for a machine-readable contract and inspects key fields before running any code changes.",
+      "assertions": [
+        "Captures focus output with an explicit session context.",
+        "Mentions at least one focus field before proceeding.",
+        "States a concrete next command based on the focus verdict."
+      ]
+    },
+    {
+      "id": "nonzero-focus-handling",
+      "prompt": "Run `agentreceipt focus` returns status 10 with process issues. How should the agent continue?",
+      "expected_output": "The agent preserves focus JSON, reads `focus.json`, and treats status 10 as review-required rather than a pass/fail stop.",
+      "assertions": [
+        "Does not discard `focus.json` output when command exits non-zero.",
+        "Uses `verdict` and `reviewable_files` to guide next actions.",
+        "Does not propose irreversible changes before resolving the review items."
+      ]
+    }
+  ]
+}

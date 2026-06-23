@@ -1,0 +1,4 @@
+interface:
+  display_name: "Startup Idea Lab"
+  short_description: "Generate startup ideas with Proven Better New"
+  default_prompt: "Use $startup-idea-lab to generate and rank startup ideas for a market or rough concept using Proven Better New."

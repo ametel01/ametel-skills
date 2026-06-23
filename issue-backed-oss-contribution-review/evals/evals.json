@@ -1,0 +1,25 @@
+{
+  "skill_name": "issue-backed-oss-contribution-review",
+  "evals": [
+    {
+      "id": "issue-contract-check",
+      "prompt": "Review this branch against issue X and the current PR context. Confirm scope matches maintainer requirements.",
+      "expected_output": "The agent first states issue contract details, checks contribution/readme rules, and compares branch diffs to the contract before proposing fixes.",
+      "assertions": [
+        "Collects issue or PR context before judging code.",
+        "Builds a checklist from issue requirements.",
+        "Flags scope and test gaps before giving a ready-to-merge claim."
+      ]
+    },
+    {
+      "id": "pr-readiness",
+      "prompt": "Generate a contribution-ready review summary for a candidate branch touching docs and tests.",
+      "expected_output": "The agent maps changes to the checklist, notes missing validations, and outputs a final readiness statement that includes blocker items.",
+      "assertions": [
+        "References touched files and required checks.",
+        "Calls out unresolved maintainer constraints or missing checklist items.",
+        "Avoids claiming ready status when requirements are incomplete."
+      ]
+    }
+  ]
+}

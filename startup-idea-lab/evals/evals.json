@@ -1,0 +1,25 @@
+{
+  "skill_name": "startup-idea-lab",
+  "evals": [
+    {
+      "id": "idea-rank-brief",
+      "prompt": "Generate and rank five startup ideas for solo AI tools in education that can be validated in one week.",
+      "expected_output": "The agent returns a ranked set with instinct, proven base, better claim, hook, distribution, retention, and cheap validation test for each idea.",
+      "assertions": [
+        "Provides all Proven Better New columns in the output.",
+        "Ranks ideas with a clear rationale.",
+        "Includes a one-week cheap validation test per idea."
+      ]
+    },
+    {
+      "id": "idea-pressure-test",
+      "prompt": "Pressure test this rough concept: 'AI travel coordinator that rebooks disrupted itineraries'.",
+      "expected_output": "The agent preserves the concept, separates proven assumptions from hope, and returns continue/kill criteria plus a first validation test.",
+      "assertions": [
+        "Clearly labels evidence-backed claims versus hypotheses.",
+        "Returns a kill/continue decision framework.",
+        "Offers one concrete cheap experiment before full build."
+      ]
+    }
+  ]
+}

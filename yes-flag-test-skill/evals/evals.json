@@ -1,0 +1,25 @@
+{
+  "skill_name": "yes-flag-test-skill",
+  "evals": [
+    {
+      "id": "non-interactive-dry-run",
+      "prompt": "Run a dependency install flow in assume-yes mode and show what to validate before marking it complete.",
+      "expected_output": "The agent explains non-interactive flags, runs or prescribes `--dry-run` when available, captures return code and changed artifacts, and explicitly notes if a prompt still appeared.",
+      "assertions": [
+        "Calls out command flags used for non-interactive mode.",
+        "Includes a dry-run or equivalent preflight step.",
+        "Checks for unexpected interactive prompts."
+      ]
+    },
+    {
+      "id": "safety-and-rollback",
+      "prompt": "Validate a potentially destructive `-y` command and propose safe retry behavior.",
+      "expected_output": "The agent identifies risky operations, confirms idempotency expectations, and gives a bounded retry/rollback plan instead of blind reruns.",
+      "assertions": [
+        "Flags risky destructive operations before execution.",
+        "Mentions rollback/safety constraints.",
+        "Does not suggest unlimited blind retries."
+      ]
+    }
+  ]
+}
