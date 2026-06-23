@@ -2,26 +2,33 @@
   "skill_name": "teach",
   "evals": [
     {
-      "id": "initialize-learning-workspace",
-      "prompt": "Teach me database indexing over several sessions in this folder.",
-      "expected_output": "The agent treats the current directory as a teaching workspace, establishes the learner's mission before lessons, gathers trusted resources, and creates state files using the skill formats.",
+      "id": "mission-first-plan",
+      "prompt": "Teach me a beginner topic in this workspace and set up the first lesson. Ask clarifying questions only if the mission is missing.",
+      "expected_output": "The agent checks `MISSION.md`, aligns to a concrete first lesson, and proposes one immediate practice action instead of generating one-shot lecture text.",
       "assertions": [
-        "Inspects MISSION.md, RESOURCES.md, learning-records, reference, lessons, and NOTES.md.",
-        "Interviews for the mission before creating a lesson when MISSION.md is missing or empty.",
-        "Records the mission using MISSION-FORMAT.md.",
-        "Populates RESOURCES.md with high-trust resources before teaching from memory."
+        "Reads or checks `MISSION.md` before planning lesson scope.",
+        "Identifies a single next lesson objective tied to mission.",
+        "Includes a concrete practice loop in the next action plan."
       ]
     },
     {
-      "id": "create-small-cited-lesson",
-      "prompt": "Continue my learning workspace and make the next lesson. I struggle to remember when to use B-tree indexes.",
-      "expected_output": "The agent chooses a small lesson target from the mission and records, writes one short cited HTML lesson with retrieval practice, and adds durable learning records or references as needed.",
+      "id": "zone-of-proximal-development",
+      "prompt": "We already have a prior teaching record. Continue from `learning-records/0001-basics.md` and propose the next lesson in the same workspace.",
+      "expected_output": "The agent reads the latest learning record, identifies one gap, and writes a follow-up lesson scope with measurable learning checks.",
       "assertions": [
-        "Uses learning records to estimate the zone of proximal development.",
-        "Creates exactly one tightly scoped lesson HTML file under lessons.",
-        "Includes retrieval practice or another tight feedback loop.",
-        "Links to a primary trusted source.",
-        "Adds a learning record when there is a durable insight, mission change, or evidence about the learner."
+        "References learning records before lesson design.",
+        "Selects one narrow follow-up concept.",
+        "Defines at least one explicit success check for the user."
+      ]
+    },
+    {
+      "id": "stateful-session-handoff",
+      "prompt": "Create a follow-up lesson idea for the next session and make sure session state is updated in the workspace.",
+      "expected_output": "The agent writes output that includes mission alignment, a recommended next lesson, and a suggestion for what to record in `learning-records`.",
+      "assertions": [
+        "Includes mission alignment statement.",
+        "Mentions lesson recordkeeping or next-session continuity.",
+        "Avoids producing a single large monolithic teaching block."
       ]
     }
   ]
