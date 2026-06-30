@@ -1,0 +1,4 @@
+interface:
+  display_name: "Process Retrospective Agent"
+  short_description: "Review agent-team process lessons."
+  default_prompt: "Use $process-retrospective-agent to analyze a completed or blocked agent-team work item and record durable process lessons without editing code or weakening gates."
