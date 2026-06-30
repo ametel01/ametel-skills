@@ -1,12 +1,13 @@
 ---
 name: create-plan-from-doc
-description: Create a detailed implementation plan from one or more supplied source document paths, writing the result to PLAN.md. Use when the user asks Codex to turn PRDs, specifications, design docs, issue briefs, RFCs, markdown files, text files, or other local docs into one incremental implementation plan with quality gates and per-step commits.
+description: Create a /goal-ready implementation plan from one or more supplied source document paths, writing the result to PLAN.md. Use when the user asks Codex to turn PRDs, specifications, design docs, issue briefs, RFCs, markdown files, text files, or other local docs into one bounded incremental implementation plan with a definition of done, quality gates, and per-step commits.
 ---
 
 # Create Plan From Docs
 
 Use this skill to produce an implementation plan, not to implement the feature.
 Accept one or more source document paths from the user's prompt as the main argument.
+The output must be `/goal` ready: bounded in scope, explicit about the implementation approach, and clear enough about the definition of done that an agent can execute it autonomously from `PLAN.md`.
 
 ## Workflow
 
@@ -30,6 +31,9 @@ Accept one or more source document paths from the user's prompt as the main argu
 4. Write `PLAN.md`.
    - Create or replace `PLAN.md` in the project root unless the user explicitly requests another location.
    - The plan must be detailed enough that another agent can execute it without re-reading the source docs for intent.
+   - Include a clear definition of done that describes the complete finished state, including required behavior, validation, documentation, migration, release, or operational outcomes.
+   - Bound the scope explicitly with goals, non-goals, assumptions, open questions, and any work intentionally deferred.
+   - Make the implementation approach explicit enough that an agent can operate from the plan without needing to check in for routine decisions.
    - Make `PROGRESS.md` and `CHANGELOG.md` setup the first prerequisite step in the plan, before quality-gate setup or implementation work.
    - Require `PROGRESS.md` to be updated after each completed step so the user can inspect execution status while the plan is being worked on.
    - Require `CHANGELOG.md` to be created before implementation starts and updated after each completed step, after validation, and before that step is committed.
@@ -37,8 +41,10 @@ Accept one or more source document paths from the user's prompt as the main argu
    - Use clear, incremental steps. Each step must leave the repository in a working state.
    - Keep implementation steps small enough for a focused commit.
 
-5. Do not start implementation.
+5. Offer a `/goal` handoff, but do not start implementation by default.
    - Stop after writing `PLAN.md` unless the user explicitly asks to begin executing the plan.
+   - In the final response, offer to start a `/goal` using `PLAN.md` as the goal payload so the user can walk away or switch to another agent.
+   - If the user accepts, start the `/goal` from `PLAN.md` without asking them to restate the plan.
 
 ## PLAN.md Requirements
 
@@ -61,8 +67,14 @@ Accept one or more source document paths from the user's prompt as the main argu
 ## Non-Goals
 - <explicitly excluded work>
 
+## Definition of Done
+- <complete picture of the finished state, including behavior, validation, documentation, migration, release, or operational requirements>
+
 ## Assumptions and Open Questions
 - <assumption or question, with impact if unresolved>
+
+## Implementation Approach
+- <architecture, sequencing, data flow, compatibility, migration, feature flag, or rollout approach an agent should follow>
 
 ## Quality Gates
 - Setup status: <existing gates found, or setup required before implementation>
@@ -83,6 +95,11 @@ Accept one or more source document paths from the user's prompt as the main argu
 - Requirement: Create `CHANGELOG.md` before any quality-gate setup or implementation work begins.
 - Initial content: Include `# Changelog`, the standard preamble, and an `## [Unreleased]` section.
 - Update rule: After each step is completed and validated, update `CHANGELOG.md` with human-readable notable changes under the appropriate `Unreleased` change-type headings before creating that step's commit.
+
+## Goal Handoff
+- Readiness: This plan is ready to be used as a `/goal` payload.
+- Scope: The `/goal` should execute only the work described in this plan unless the user explicitly expands it.
+- Done: The `/goal` is complete only when every item in `## Definition of Done` is satisfied, all incremental steps are complete, required quality gates pass or documented pre-existing failures are handled, `PROGRESS.md` and `CHANGELOG.md` are current, and the final state is summarized for the user.
 
 ## Incremental Steps
 
@@ -172,6 +189,7 @@ For each incremental implementation step:
 - List concrete files, modules, APIs, schemas, tests, and docs likely to change.
 - Identify dependencies on earlier steps.
 - Include acceptance criteria for the step.
+- State how the step advances the top-level `## Definition of Done`.
 - Include the full quality-gate command list to run after completing the step.
 - Include an explicit `PROGRESS.md` update action after validation and before moving to the next step.
 - Include an explicit `CHANGELOG.md` update action after validation and before committing the step.
