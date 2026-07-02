@@ -1,15 +1,13 @@
 ---
 name: clerk-webhooks
-description: Clerk webhooks for real-time events and data syncing. Verify with verifyWebhook
-  from the framework-specific package. Handle user, session, organization, billing, and
-  payment events. Build event-driven features like database sync, notifications, and
-  integrations.
-allowed-tools: WebFetch
+description: Use this skill when implementing Clerk webhooks for database sync,
+  notifications, integrations, or user, session, organization, billing, and payment
+  lifecycle events that must verify signatures with verifyWebhook.
 license: MIT
 metadata:
   author: clerk
   version: 1.2.0
-compatibility: Requires CLERK_WEBHOOK_SIGNING_SECRET (svix signing secret from Clerk dashboard)
+compatibility: Requires CLERK_WEBHOOK_SIGNING_SECRET (svix signing secret from Clerk dashboard). Use web access for official Clerk webhook docs when API behavior is uncertain.
 ---
 
 # Webhooks
@@ -78,6 +76,7 @@ export async function POST(req: NextRequest) {
 
   if (evt.type === 'user.deleted') {
     const { id } = evt.data
+    // Confirm hard-delete policy first; production apps often soft-delete or tombstone.
     await db.users.delete({ where: { clerkId: id } })
   }
 

@@ -1,13 +1,13 @@
 ---
 name: clerk-testing
-description: E2E testing for Clerk apps. Use with Playwright or Cypress for auth flow
-  tests.
-allowed-tools: WebFetch
+description: Use this skill when writing E2E tests for Clerk authentication flows
+  with Playwright or Cypress, including test tokens, session state, login helpers,
+  protected routes, or auth cleanup.
 license: MIT
 metadata:
   author: clerk
   version: 1.2.0
-compatibility: Requires CLERK_TESTING_TOKEN from Clerk dashboard
+compatibility: Requires CLERK_TESTING_TOKEN from Clerk dashboard. Use web access for official Clerk testing docs when framework instructions are uncertain.
 ---
 
 # Testing

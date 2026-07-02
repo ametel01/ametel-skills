@@ -1,0 +1,16 @@
+{
+  "skill_name": "clerk-custom-ui",
+  "evals": [
+    {
+      "id": "custom-sign-in-flow",
+      "prompt": "Build a branded Clerk sign-in page with custom fields and existing shadcn styling.",
+      "expected_output": "Chooses the correct Clerk custom-flow reference for the installed SDK version, preserves ClerkProvider setup, and implements branded UI without breaking auth state transitions.",
+      "assertions": [
+        "Checks the Clerk SDK version before choosing Core 2 or current custom-flow APIs.",
+        "Uses useSignIn/useSignUp guidance only in the appropriate custom-flow context.",
+        "Keeps prebuilt component appearance customization separate from fully custom auth flows.",
+        "Does not store secrets or sensitive auth data in client-writable state."
+      ]
+    }
+  ]
+}

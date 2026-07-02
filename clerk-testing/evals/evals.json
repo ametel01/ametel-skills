@@ -1,0 +1,16 @@
+{
+  "skill_name": "clerk-testing",
+  "evals": [
+    {
+      "id": "playwright-auth-e2e",
+      "prompt": "Add Playwright tests for a Clerk-protected dashboard and sign-in flow.",
+      "expected_output": "Uses Clerk testing utilities and CLERK_TESTING_TOKEN, isolates session state, protects the dashboard assertion, and keeps tests deterministic.",
+      "assertions": [
+        "Initializes Clerk's test environment before auth-dependent tests.",
+        "Uses storage state or login helpers intentionally rather than relying on shared browser state.",
+        "Covers both unauthenticated redirect and authenticated dashboard access.",
+        "Documents any missing CLERK_TESTING_TOKEN as a blocked test prerequisite."
+      ]
+    }
+  ]
+}

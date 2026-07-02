@@ -1,0 +1,16 @@
+{
+  "skill_name": "clerk-cli",
+  "evals": [
+    {
+      "id": "safe-cli-operation",
+      "prompt": "List Clerk users and then update one user's public metadata from an agent terminal.",
+      "expected_output": "Verifies the Clerk CLI, runs doctor JSON first, discovers the endpoint, previews or scopes the write, and uses pinned package-runner forms when a runner is needed.",
+      "assertions": [
+        "Runs or requests `clerk doctor --json` before trusting CLI state.",
+        "Treats sandbox host-state warnings as non-authoritative until rerun on the host.",
+        "Uses `clerk api` discovery instead of guessing endpoints.",
+        "Avoids unpinned package-runner commands."
+      ]
+    }
+  ]
+}

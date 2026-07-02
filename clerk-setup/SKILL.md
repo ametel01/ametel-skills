@@ -1,10 +1,10 @@
 ---
 name: clerk-setup
-description: Add Clerk authentication to any project by following the official quickstart
-  guides.
+description: Use this skill when adding Clerk authentication to a project,
+  choosing the right framework quickstart, provisioning Clerk apps or env vars,
+  or migrating an existing auth provider to Clerk.
 license: MIT
-allowed-tools: WebFetch
-compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY (or framework-specific equivalents like VITE_CLERK_PUBLISHABLE_KEY for Vite-based apps). Keys can be auto-generated via Keyless on first SDK initialization, or pulled from the Clerk Dashboard. Requires Node.js 20.9.0 or higher.
+compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY (or framework-specific equivalents like VITE_CLERK_PUBLISHABLE_KEY for Vite-based apps). Keys can be auto-generated via Keyless on first SDK initialization, or pulled from the Clerk Dashboard. Requires Node.js 20.9.0 or higher. Use web access for official Clerk quickstarts when framework instructions are uncertain.
 metadata:
   author: clerk
   version: 2.3.0
@@ -57,6 +57,8 @@ clerk doctor --json                   # framework integration health check
 ### Rotate the secret key (replaces Dashboard rotation)
 
 PLAPI exposes secret-key rotation directly. Use raw `clerk api` until the friendly wrapper ships:
+
+Safety gate: before rotating any key, run `clerk doctor --json`, confirm the target app and instance, choose a grace period, and get explicit user confirmation. Never rotate production secrets from an ambiguous linked project.
 
 ```bash
 clerk api --platform POST /v1/platform/applications/<app_id>/rotate_secret_keys \

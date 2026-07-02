@@ -1,11 +1,10 @@
 ---
 name: clerk-react-router-patterns
-description: 'React Router v7 patterns with Clerk — rootAuthLoader, getAuth in loaders,
-  clerkMiddleware, protected routes, SSR user data, org switching. Triggers on: react-router
-  auth, rootAuthLoader, getAuth loader, react-router protected route, loader authentication,
-  SSR auth react-router.'
+description: Use this skill when adding Clerk auth to React Router v7 apps,
+  including rootAuthLoader, getAuth in loaders/actions, clerkMiddleware, protected
+  routes, SSR user data, or org switching.
 license: MIT
-allowed-tools: WebFetch
+compatibility: Use web access for official Clerk React Router docs when API behavior is uncertain.
 metadata:
   author: clerk
   version: 1.0.0

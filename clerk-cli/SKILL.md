@@ -15,7 +15,7 @@ license: MIT
 
 The `clerk` binary is a pre-authenticated gateway to Clerk's Backend API and Platform API, plus project-level tooling (auth, linking, env pulls, instance config). When the user asks anything that touches a Clerk resource, reach for `clerk` first instead of hand-rolling `curl`.
 
-> This skill targets clerk `latest`. If `clerk --version` disagrees with the latest available CLI, refresh it with `clerk skill install` or a package runner such as `bunx clerk@latest`. The binary is always the source of truth, so run `clerk <command> --help` to verify anything this skill claims.
+> This skill targets clerk `1.5.0`. If `clerk --version` disagrees with the pinned CLI, refresh the installed skill bundle or use one of the pinned package-runner commands below. The binary is always the source of truth, so run `clerk <command> --help` to verify anything this skill claims.
 
 ## Execution environment (prefer the host, understand the sandbox warning)
 
@@ -71,18 +71,18 @@ command -v clerk >/dev/null 2>&1 && clerk --version
 
 If that prints `latest` or any version you trust, use bare `clerk` for the rest of the session.
 
-Otherwise fall back to a package runner, in this order (matches the CLI's own `preferredRunner` logic, which prefers the runner that matches the project's lockfile):
+Otherwise fall back to a package runner for the pinned `clerk` npm package version `1.5.0`. Choose the runner that matches the project's lockfile, following the CLI's own `preferredRunner` order:
 
-| Project package manager   | Invocation                       |
-| ------------------------- | -------------------------------- |
-| bun (`bun.lock*`)         | `bunx clerk@latest`     |
-| npm (`package-lock.json`) | `npx -y clerk@latest`   |
-| pnpm (`pnpm-lock.yaml`)   | `pnpm dlx clerk@latest` |
-| yarn >= 2 (`yarn.lock`)   | `yarn dlx clerk@latest` |
+| Project package manager   | Runner priority |
+| ------------------------- | --------------- |
+| bun (`bun.lock*`)         | bun package runner |
+| npm (`package-lock.json`) | npm package runner |
+| pnpm (`pnpm-lock.yaml`)   | pnpm package runner |
+| yarn >= 2 (`yarn.lock`)   | yarn package runner |
 
 Yarn Classic (v1) has no `dlx`; treat those projects as "no preferred runner" and fall back to the first runner from the list above that's on PATH.
 
-The published npm package is **`clerk`**, not `@clerk/cli`. Never teach `npm install -g clerk` as the primary path. If the global CLI is stale or behaves differently from this skill, either upgrade the global install or fall back to the `latest` runner form above.
+The published npm package is **`clerk`**, not `@clerk/cli`. Never teach `npm install -g clerk` as the primary path. If the global CLI is stale or behaves differently from this skill, either upgrade the global install or fall back to the pinned runner form above.
 
 ## Prerequisites (run at session start)
 

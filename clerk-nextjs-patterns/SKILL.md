@@ -1,10 +1,10 @@
 ---
 name: clerk-nextjs-patterns
-description: Advanced Next.js patterns - middleware, Server Actions, caching with
-  Clerk.
+description: Use this skill when implementing advanced Clerk patterns in Next.js,
+  including middleware, Server Actions, API route auth, server/client auth boundaries,
+  user-scoped caching, or standalone JWT verification.
 license: MIT
-allowed-tools: WebFetch
-compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY. For manual JWT verification (standalone API servers without Clerk middleware), additionally requires CLERK_JWT_KEY or CLERK_PEM_PUBLIC_KEY.
+compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY. For manual JWT verification (standalone API servers without Clerk middleware), additionally requires CLERK_JWT_KEY or CLERK_PEM_PUBLIC_KEY. Use web access for official Clerk Next.js docs when API behavior is uncertain.
 metadata:
   author: clerk
   version: 2.2.0

@@ -1,10 +1,10 @@
 ---
 name: clerk-custom-ui
-description: Custom authentication flows and component appearance - hooks (useSignIn,
-  useSignUp), themes, colors, fonts, CSS. Use for custom sign-in/sign-up flows, appearance
-  styling, visual customization, branding.
-allowed-tools: WebFetch
+description: Use this skill when building Clerk custom sign-in/sign-up flows,
+  customizing Clerk component appearance, applying themes, colors, fonts, CSS,
+  or implementing branded authentication UI with useSignIn and useSignUp.
 license: MIT
+compatibility: Use web access for official Clerk docs when version-specific custom-flow APIs are uncertain.
 metadata:
   author: clerk
   version: 2.3.0

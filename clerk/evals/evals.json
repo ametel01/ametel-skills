@@ -1,0 +1,16 @@
+{
+  "skill_name": "clerk",
+  "evals": [
+    {
+      "id": "route-clerk-request",
+      "prompt": "I need Clerk org billing with webhooks and a custom sign-in page. Which skills should be used?",
+      "expected_output": "Routes the user to the specific Clerk skills for organizations, billing, webhooks, and custom UI while preserving version detection and safety checks.",
+      "assertions": [
+        "Starts with Clerk SDK version detection when implementation details matter.",
+        "Chooses task-specific Clerk skills instead of duplicating their full guidance.",
+        "Requires target app/instance confirmation before deploy, secret rotation, deletion, or production config changes.",
+        "Mentions current SDK as the default when the version is unclear."
+      ]
+    }
+  ]
+}

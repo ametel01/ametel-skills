@@ -1,13 +1,11 @@
 ---
 name: clerk-billing
-description: Clerk Billing for subscription management - render Clerk's PricingTable
-  and in-app checkout drawer, configure subscription plans, seat-limit plans for
-  B2B, feature entitlements with has(), and billing webhooks. Use for SaaS
-  monetization, plan gating, checkout flows, trials, invoicing, and subscription
-  lifecycle management.
-allowed-tools: WebFetch
+description: Use this skill when implementing Clerk Billing for SaaS monetization,
+  plan gating, checkout flows, trials, invoicing, subscription lifecycle management,
+  PricingTable, in-app checkout, B2B seat-limit plans, or feature entitlements
+  with has().
 license: MIT
-compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, and CLERK_WEBHOOK_SIGNING_SECRET. Billing must be enabled in Clerk Dashboard → Billing. Development instances can use the shared Clerk development gateway; production instances require a Stripe account for payment processing.
+compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, and CLERK_WEBHOOK_SIGNING_SECRET. Billing must be enabled in Clerk Dashboard → Billing. Development instances can use the shared Clerk development gateway; production instances require a Stripe account for payment processing. Use web access for official Clerk Billing docs when API behavior is uncertain.
 metadata:
   author: clerk
   version: 1.0.0

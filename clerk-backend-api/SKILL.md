@@ -1,9 +1,8 @@
 ---
 name: clerk-backend-api
 description: "Clerk Backend REST API explorer and executor. Browse tags, inspect endpoint schemas, and execute authenticated requests. Use when listing users, managing organizations, or calling any Clerk API endpoint."
-allowed-tools: Bash, Read, Grep, Skill, WebFetch
 license: MIT
-compatibility: Requires CLERK_SECRET_KEY (sk_*) for Backend API calls.
+compatibility: Requires CLERK_SECRET_KEY (sk_*) for Backend API calls. Uses shell/file-read access for bundled scripts; use web access only when refreshing Clerk OpenAPI docs.
 ---
 
 ## Options context
@@ -355,7 +354,7 @@ curl -s https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${versio
 ```
 Otherwise, use the **TAGS** already in [API specs context](#api-specs-context).
 
-Share tags in a table and prompt the user to select a query.
+If no tag or query was supplied, print the tags table, show example follow-up commands with explicit tag/query arguments, and stop. Do not ask for an interactive selection.
 
 ---
 

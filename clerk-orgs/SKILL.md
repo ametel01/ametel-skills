@@ -1,11 +1,10 @@
 ---
 name: clerk-orgs
-description: Clerk Organizations for B2B SaaS - create multi-tenant apps with org
-  switching, role-based access, verified domains, and enterprise SSO. Use for team
-  workspaces, RBAC, org-based routing, member management.
-allowed-tools: WebFetch
+description: Use this skill when adding Clerk Organizations to B2B SaaS apps,
+  including team workspaces, org switching, RBAC, org-based routing, member
+  management, verified domains, enterprise SSO, or B2C plus B2B coexistence.
 license: MIT
-compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY. Organizations must be enabled in Clerk Dashboard → Organizations. Membership mode (required vs optional) must match the B2B vs B2C + B2B coexistence story of your app.
+compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY. Organizations must be enabled in Clerk Dashboard → Organizations. Membership mode (required vs optional) must match the B2B vs B2C + B2B coexistence story of your app. Use web access for official Clerk Organizations docs when API behavior is uncertain.
 metadata:
   author: clerk
   version: 3.0.0
@@ -54,7 +53,7 @@ metadata:
 
 ## Agent-first: Programmatic org management
 
-Org settings (enable toggle, membership cap, admin delete, domains) are patchable via PLAPI Instance Config. Org CRUD + memberships + invitations live in BAPI. Useful for agents seeding orgs, replicating settings across instances, or version-controlling org structure.
+Org settings (enable toggle, membership cap, admin delete, domains) are patchable via PLAPI Instance Config only after a safety gate: run the GET/list form or `clerk api --dry-run`, show the target app, instance, org IDs, and payload, then get explicit user confirmation for deletes, role changes, membership-mode changes, or production updates. Org CRUD + memberships + invitations live in BAPI. Useful for agents seeding orgs, replicating settings across instances, or version-controlling org structure.
 
 Pre-req: project linked (`clerk auth login` + `clerk link`, see `clerk-setup`).
 
@@ -64,7 +63,7 @@ Pre-req: project linked (`clerk auth login` + `clerk link`, see `clerk-setup`).
 clerk enable orgs
 ```
 
-For additional settings (membership cap, verified domains, admin delete), patch the instance config:
+For additional settings (membership cap, verified domains, admin delete), dry-run and confirm the instance-config patch first:
 
 ```bash
 clerk api --platform PATCH /v1/platform/applications/<app_id>/instances/<ins_id>/config \
@@ -72,6 +71,8 @@ clerk api --platform PATCH /v1/platform/applications/<app_id>/instances/<ins_id>
 ```
 
 ### Create / list / delete orgs (BAPI)
+
+Run `clerk api --dry-run` with the exact payload and get explicit confirmation before any create, update, delete, membership, or invitation mutation.
 
 ```bash
 # Create:

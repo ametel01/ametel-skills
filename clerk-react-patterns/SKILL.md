@@ -1,11 +1,10 @@
 ---
 name: clerk-react-patterns
-description: 'React SPA auth patterns with @clerk/react for Vite/CRA - ClerkProvider
-  setup, useAuth/useUser/useClerk hooks, React Router protected routes, custom sign-in
-  flows. Triggers on: Vite Clerk setup, React Router auth, useAuth hook, protected
-  route, custom sign-in form React.'
+description: Use this skill when adding Clerk auth patterns to React SPAs with
+  @clerk/react, including Vite/CRA setup, ClerkProvider, useAuth/useUser/useClerk,
+  React Router protected routes, or custom React sign-in flows.
 license: MIT
-allowed-tools: WebFetch
+compatibility: Use web access for official Clerk React docs when API behavior is uncertain.
 metadata:
   author: clerk
   version: 1.0.0
