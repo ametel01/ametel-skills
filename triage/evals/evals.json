@@ -1,0 +1,16 @@
+{
+  "skill_name": "triage",
+  "evals": [
+    {
+      "id": "issue-triage-brief",
+      "prompt": "Triage issue #42, decide whether it is ready for an agent, and leave the right tracker update.",
+      "expected_output": "Reads the issue, comments, labels, and relevant code context, verifies the claim, recommends a category/state, and posts either questions, a brief, or a wontfix explanation with the AI triage disclaimer.",
+      "assertions": [
+        "Starts tracker comments with the required AI triage disclaimer.",
+        "Applies exactly one category role and one state role or flags conflicts.",
+        "Checks redundancy and prior rejection before recommending ready-for-agent.",
+        "Writes specific reporter questions instead of vague requests for more information."
+      ]
+    }
+  ]
+}

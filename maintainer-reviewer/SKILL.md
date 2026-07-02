@@ -30,9 +30,10 @@ Check:
 - Are non-goals respected?
 - Are edge cases, error states, concurrency, compatibility, migrations, and rollback handled?
 - Are tests meaningful and able to fail without the implementation?
-- Did the change weaken or delete existing safety checks?
+- Did the change weaken existing safety checks? Treat this as blocking unless the PR includes explicit maintainer approval plus replacement validation or rollback evidence.
 - Are auth, permissions, secrets, injection, dependency, CI, or sandbox/tool risks introduced?
 - Does the design fit the existing codebase without unnecessary broadening?
+
 
 ## Findings
 

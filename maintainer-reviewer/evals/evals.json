@@ -1,0 +1,16 @@
+{
+  "skill_name": "maintainer-reviewer",
+  "evals": [
+    {
+      "id": "maintainer-review-decision",
+      "prompt": "Review a PR against the completion contract after checker has reported passing tests.",
+      "expected_output": "Performs an independent maintainer review, writes concrete findings by severity, and approves, comments, or requests changes based on evidence.",
+      "assertions": [
+        "Reviews acceptance criteria, non-goals, diff, tests, and checker evidence.",
+        "Flags weakened safety checks unless approval and replacement validation are present.",
+        "Routes findings through the coordinator rather than implementing fixes.",
+        "Does not approve solely because tests passed."
+      ]
+    }
+  ]
+}

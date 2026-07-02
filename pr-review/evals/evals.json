@@ -1,0 +1,16 @@
+{
+  "skill_name": "pr-review",
+  "evals": [
+    {
+      "id": "independent-pr-review",
+      "prompt": "Review this local branch diff before merge and tell me whether it is safe.",
+      "expected_output": "Inspects the diff and surrounding code, runs relevant checks, leads with actionable findings, and states any skipped gate or residual risk.",
+      "assertions": [
+        "Prioritizes bugs, regressions, security risks, and missing tests over summaries.",
+        "Uses file/line references for findings.",
+        "Requires dry-run, validation, rollback notes, or owner confirmation for migration, release, deploy, install-script, or CI changes.",
+        "Says clearly when no issues are found."
+      ]
+    }
+  ]
+}

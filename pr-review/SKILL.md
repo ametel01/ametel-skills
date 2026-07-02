@@ -52,14 +52,14 @@ Regression risk:
 
 - What existing behavior could this break?
 - Are call sites, feature flags, config defaults, and rollout paths consistent?
-- Are removed branches, deleted tests, or simplified conditions justified?
+- Are removed branches, removed tests, or simplified conditions justified?
 
 Tests:
 
 - Are there tests for the changed behavior, not just snapshots or happy paths?
 - Do tests fail without the implementation?
 - Are security, permission, migration, concurrency, and error-path cases covered where relevant?
-- Flag deleted, weakened, skipped, over-mocked, or non-deterministic tests.
+- Flag removed, weakened, skipped, over-mocked, or non-deterministic tests.
 
 Security:
 
@@ -98,7 +98,7 @@ Add security/quality gates when touched areas justify them:
 - Static/security checks available in the repo.
 - Migration dry-run or schema validation when database changes appear.
 - Bundle/build inspection when client/server boundaries or secrets may be affected.
-- CI workflow validation when `.github/workflows`, release, deploy, or install scripts change.
+- CI workflow validation when `.github/workflows` or automation scripts change; require dry-run output, schema/workflow validation, rollback notes, or explicit owner confirmation before treating those changes as merge-ready.
 
 If a gate cannot be run, say exactly why and what risk remains. Do not treat an unrun gate as passing.
 

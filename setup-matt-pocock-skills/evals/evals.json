@@ -1,0 +1,38 @@
+{
+  "skill_name": "setup-matt-pocock-skills",
+  "evals": [
+    {
+      "id": "explicit-setup-first-run",
+      "prompt": "Run setup-matt-pocock-skills in this repo before I start using the engineering skills.",
+      "expected_output": "The agent explores the repo for remotes, CLAUDE.md or AGENTS.md, context files, ADRs, docs/agents, and .scratch, then summarizes what exists and asks only the Section A issue-tracker decision before writing anything.",
+      "assertions": [
+        "Uses the skill only because the user explicitly named or requested setup.",
+        "Checks the existing repo state instead of assuming GitHub, local markdown, or a docs layout.",
+        "Asks the issue-tracker decision first and waits for the answer before moving to triage labels.",
+        "Does not create or edit setup files before showing the draft and receiving confirmation."
+      ]
+    },
+    {
+      "id": "existing-agent-block-update",
+      "prompt": "I already have a CLAUDE.md with an Agent skills section. Re-run the Matt Pocock skills setup and switch this repo to local markdown issues.",
+      "expected_output": "The agent inspects the existing CLAUDE.md block, walks the user through the required setup decisions, previews the replacement block and docs/agents files, then updates the existing block in place and writes local-markdown issue tracker guidance only after confirmation.",
+      "assertions": [
+        "Edits CLAUDE.md rather than creating AGENTS.md when CLAUDE.md already exists.",
+        "Updates an existing Agent skills block in place without appending a duplicate.",
+        "Uses the local issue-tracker template for docs/agents/issue-tracker.md.",
+        "Preserves unrelated surrounding content in CLAUDE.md."
+      ]
+    },
+    {
+      "id": "no-agent-instructions-file-edge-case",
+      "prompt": "Set up the engineering skills in a fresh repo that has no CLAUDE.md or AGENTS.md yet, and use GitLab issues.",
+      "expected_output": "The agent explores the repo, proposes GitLab when the remote supports it, asks the PR-request-surface follow-up only because GitLab was selected, and asks the user whether to create CLAUDE.md or AGENTS.md because neither file exists.",
+      "assertions": [
+        "Does not choose CLAUDE.md or AGENTS.md on the user's behalf when neither exists.",
+        "Asks the external-PR request-surface follow-up for GitLab.",
+        "Records the selected issue tracker, triage labels, and domain-doc layout in docs/agents/*.md after confirmation.",
+        "Reports which downstream engineering skills will read the generated docs."
+      ]
+    }
+  ]
+}

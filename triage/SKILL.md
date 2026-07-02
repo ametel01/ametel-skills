@@ -1,7 +1,8 @@
 ---
 name: triage
-description: Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.
-disable-model-invocation: true
+description: Use this skill when triaging issues or external PRs into maintained
+  state roles, verifying claims, asking reporter questions, applying labels,
+  writing agent-ready briefs, or closing wontfix items with durable context.
 ---
 
 # Triage
