@@ -1,0 +1,16 @@
+{
+  "skill_name": "checker-agent",
+  "evals": [
+    {
+      "id": "quality-gate-report",
+      "prompt": "You are the checker. A builder says the fix is ready. Validate it and report the result to the coordinator.",
+      "expected_output": "Inspects the contract, diff, scripts, and CI conventions, runs targeted then broader quality gates, and reports pass/fail evidence without editing code.",
+      "assertions": [
+        "Never edits implementation files.",
+        "Runs existing repo-defined commands before inventing new ones.",
+        "Reports exact failing commands and next owner when checks fail.",
+        "Records any skipped gate and residual risk."
+      ]
+    }
+  ]
+}

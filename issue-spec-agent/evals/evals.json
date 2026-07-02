@@ -1,0 +1,16 @@
+{
+  "skill_name": "issue-spec-agent",
+  "evals": [
+    {
+      "id": "completion-contract",
+      "prompt": "Turn a vague GitHub bug report with comments into a builder-ready completion contract.",
+      "expected_output": "Reads issue and repo context, classifies readiness, asks for missing decisions when needed, and writes acceptance criteria, non-goals, risks, and required evidence.",
+      "assertions": [
+        "Does not mark the issue ready without checkable acceptance criteria.",
+        "Separates outcome, non-goals, touched areas, and validation requirements.",
+        "Identifies blockers, dependencies, and migration/security risks.",
+        "Hands off to builder/checker/reviewer without implementing code."
+      ]
+    }
+  ]
+}

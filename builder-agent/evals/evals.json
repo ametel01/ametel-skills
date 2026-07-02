@@ -1,0 +1,16 @@
+{
+  "skill_name": "builder-agent",
+  "evals": [
+    {
+      "id": "scoped-implementation-handoff",
+      "prompt": "You are the builder in a multi-agent loop. STATUS.md contains a completion contract for issue #42. Implement the fix and prepare it for checker.",
+      "expected_output": "Reads the contract and target files, makes a scoped code/test change in the assigned worktree, runs the narrow relevant check, and updates STATUS.md for checker.",
+      "assertions": [
+        "Stops if no completion contract exists.",
+        "Confirms assigned branch/worktree before editing.",
+        "Preserves unrelated changes and avoids broad refactors.",
+        "Does not approve or verify its own work as final."
+      ]
+    }
+  ]
+}

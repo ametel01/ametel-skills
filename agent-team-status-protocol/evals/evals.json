@@ -1,0 +1,16 @@
+{
+  "skill_name": "agent-team-status-protocol",
+  "evals": [
+    {
+      "id": "status-handoff-contract",
+      "prompt": "Coordinate three Codex terminals working on one GitHub issue. Define the shared status file and handoff expectations.",
+      "expected_output": "Establishes STATUS.md as durable team memory with active work, completion contract, handoffs, gates, review threads, and decision history.",
+      "assertions": [
+        "Requires each role to read STATUS.md before acting and update it after meaningful state changes.",
+        "Defines ownership, branch/worktree, phase, cycle count, and current blocker fields.",
+        "Keeps logs concise and links or summarizes evidence instead of pasting full output.",
+        "Preserves maker/checker/reviewer separation."
+      ]
+    }
+  ]
+}

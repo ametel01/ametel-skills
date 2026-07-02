@@ -1,0 +1,16 @@
+{
+  "skill_name": "team-coordinator",
+  "evals": [
+    {
+      "id": "coordinate-agent-team",
+      "prompt": "Lead a multi-terminal Codex team from issue selection to PR approval.",
+      "expected_output": "Maintains STATUS.md, selects ready issues, assigns spec/build/check/review roles, manages Treehouse worktrees, watches cycles, and escalates blockers.",
+      "assertions": [
+        "Requires a completion contract before implementation starts.",
+        "Keeps builder, checker, and reviewer ownership separate.",
+        "Tracks worktree, branch, PR, phase, cycle count, and next action.",
+        "Stops or escalates when repeated failures or unresolved maintainer questions appear."
+      ]
+    }
+  ]
+}
