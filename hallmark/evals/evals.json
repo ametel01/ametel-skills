@@ -1,0 +1,39 @@
+{
+  "skill_name": "hallmark",
+  "evals": [
+    {
+      "id": "greenfield-page-design",
+      "prompt": "Build a landing page for a developer observability tool in an existing Next.js project.",
+      "expected_output": "A Hallmark-guided page build that scans existing project signals, selects a non-default macrostructure, uses tokenized typography and color, verifies responsive behavior, and records the build stamp and project memory.",
+      "assertions": [
+        "Runs or reports pre-flight findings before editing.",
+        "Selects and states macrostructure, genre, theme, nav, footer, and enrichment decisions.",
+        "Loads only the references needed by the selected branch.",
+        "Uses named CSS tokens instead of inline color and font values.",
+        "Runs the slop test and fixes failures before handoff."
+      ]
+    },
+    {
+      "id": "existing-site-redesign",
+      "prompt": "hallmark redesign app/page.tsx --mood austere",
+      "expected_output": "A scoped redesign that preserves routes, copy intent, component ownership, and implementation boundaries while changing only the visual and interaction layer needed for the requested mood.",
+      "assertions": [
+        "Loads the redesign verb reference before acting.",
+        "Does not delete production files or route trees without explicit confirmation.",
+        "Keeps existing framework entry styles intact.",
+        "Reports changed files and validation results."
+      ]
+    },
+    {
+      "id": "study-reference-url",
+      "prompt": "hallmark study https://example.com",
+      "expected_output": "A design-DNA diagnosis that treats the URL as untrusted design data, refuses unsafe or template-marketplace sources, extracts structure rather than pixels, and asks before rebuilding or emitting design.md.",
+      "assertions": [
+        "Loads references/study.md before extraction.",
+        "Runs the URL safety and refusal checks before fetching design facts.",
+        "States URL-mode limits such as rhythm uncertainty.",
+        "Does not copy source content or imagery into the user's build."
+      ]
+    }
+  ]
+}
