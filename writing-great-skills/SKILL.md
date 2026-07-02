@@ -1,6 +1,6 @@
 ---
 name: writing-great-skills
-description: Use this skill when writing, reviewing, or editing Agent Skills, especially to improve trigger descriptions, progressive disclosure, step structure, pruning, or predictable agent behavior.
+description: Use this skill when writing, editing, reviewing, or pruning Agent Skills, especially when improving descriptions, progressive disclosure, workflow steps, evaluations, or skill predictability.
 ---
 
 A skill exists to wrangle determinism out of a stochastic system. **Predictability** — the agent taking the same _process_ every run, not producing the same output — is the root virtue; every lever below serves it.
@@ -9,14 +9,14 @@ A skill exists to wrangle determinism out of a stochastic system. **Predictabili
 
 ## Invocation
 
-Two choices, trading different costs:
+The portable spec exposes every skill through its `name` and `description`. Invocation is controlled by trigger specificity, not by unsupported top-level frontmatter toggles.
 
-- A **model-invoked** skill keeps a **description**, so the agent can fire it autonomously _and_ other skills can reach it (you can still type its name too). It contributes to **context load** — the description sits in the window every turn. Mechanics: omit `disable-model-invocation`, and write a model-facing description with rich trigger phrasing ("Use when the user wants…, mentions…").
-- A **user-invoked** skill strips the description from the agent's reach: only you, typing its name, can invoke it — and no other skill can. Zero context load, but it spends **cognitive load**: _you_ are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing — a one-line summary, trigger lists stripped.
+Two practical choices, trading different costs:
 
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+- A **model-reachable** skill uses a trigger-rich **description**, so the agent can fire it autonomously _and_ other skills can reach it. It contributes to **context load** — the description sits in the window every turn. Write concrete trigger phrasing ("Use this skill when the user wants…, mentions…").
+- An **explicit-only** skill still has a valid description, but the trigger is intentionally narrow: "Use this skill when the user names `<skill-name>`..." or "Use this skill when another skill explicitly asks for…". It spends less context attention, but more **cognitive load**: _you_ are the index that must remember it exists.
 
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each.
+Pick broad reach only when the agent must find the skill on its own, or another skill must. When explicit-only skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one narrow skill that names the others and when to reach for each.
 
 ## Writing the description
 
@@ -55,7 +55,9 @@ Keep each meaning in a **single source of truth**: one authoritative place, so c
 
 Check every line for **relevance**: does it still bear on what the skill does?
 
-Then hunt **no-ops** sentence by sentence, not just line by line: run the no-op test on each sentence in isolation. When editing an existing skill, preview the diff and confirm it preserves the skill's intent before deleting failed sentences. Be aggressive once the diff is validated — most prose that fails should go, not be rewritten.
+Before destructive pruning, run a preview pass: list the sentences or sections proposed for removal, confirm each one fails the no-op or relevance test, and preserve a copy in version control or a scratch note when the skill is not otherwise recoverable.
+
+Then hunt **no-ops** sentence by sentence, not just line by line: run the no-op test on each sentence in isolation, and when one fails, delete the whole sentence rather than trim words from it. Be aggressive — most prose that fails should go, not be rewritten.
 
 ## Leading words
 

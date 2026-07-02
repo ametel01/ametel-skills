@@ -2,25 +2,25 @@
   "skill_name": "writing-great-skills",
   "evals": [
     {
-      "id": "prune-description-triggers",
-      "prompt": "Review this skill description: 'Use this when doing TDD, test-first development, red-green-refactor, writing tests before code, and building features with tests.' Make it better.",
-      "expected_output": "The agent collapses duplicate trigger branches into concise model-facing trigger language and preserves only distinct invocation reasons.",
+      "id": "tighten-agent-skill",
+      "prompt": "Review this Agent Skill draft and make it more predictable without changing its intent.",
+      "expected_output": "A revised skill with a trigger-oriented description, concise workflow or reference structure, removed duplication, and explicit validation guidance.",
       "assertions": [
-        "Identifies duplicated trigger branches.",
-        "Keeps model-invoked descriptions trigger-oriented.",
-        "Front-loads a strong leading word when useful.",
-        "Avoids restating body identity in the description."
+        "Uses a valid kebab-case skill name and supported frontmatter fields only.",
+        "Improves the description with concrete activation triggers.",
+        "Separates core instructions from optional reference material when the body is too long.",
+        "Explains any destructive pruning with a preview or recoverability step."
       ]
     },
     {
-      "id": "progressive-disclosure-refactor",
-      "prompt": "This SKILL.md has three pages of examples used only by one branch. Should I keep them inline?",
-      "expected_output": "The agent recommends moving branch-specific examples into a linked reference file with a clear context pointer while keeping core steps inline.",
+      "id": "progressive-disclosure-review",
+      "prompt": "This SKILL.md is over 700 lines and mixes workflow, glossary, examples, and scripts. Help me restructure it.",
+      "expected_output": "A progressive-disclosure plan that keeps mandatory workflow in SKILL.md and moves branch-specific examples, glossary entries, and helpers into named files loaded on demand.",
       "assertions": [
-        "Uses the information hierarchy to decide what stays in SKILL.md.",
-        "Applies progressive disclosure for branch-specific reference material.",
-        "Keeps related concept definitions and caveats co-located.",
-        "Preserves the skill's intent while reducing sprawl."
+        "Identifies which material must remain in SKILL.md.",
+        "Names specific reference or asset files for material that should move.",
+        "Defines clear load triggers for each moved file.",
+        "Keeps the original skill intent intact."
       ]
     }
   ]
