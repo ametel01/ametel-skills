@@ -1,6 +1,6 @@
 ---
 name: release-changelog-workflow
-description: Use this skill when preparing releases, version bumps, changelog entries, GitHub tag workflows, GoReleaser changes, generated release notes, or release-gate summaries in ametel01 repos. It detects manual changelog versus tag-driven release variants.
+description: Use this skill when preparing releases, version bumps, changelog entries, GitHub tag workflows, GoReleaser changes, generated release notes, or release validation summaries in ametel01 repos. It detects manual changelog versus tag-driven release variants.
 ---
 
 # Release Changelog Workflow
@@ -18,7 +18,7 @@ Use when editing `CHANGELOG.md`, version fields, release workflows, installer sc
 Strength: Moderate.
 
 - `agents-toolbelt`: `CHANGELOG.md` follows Keep a Changelog and SemVer; `.github/workflows/release.yml` runs GoReleaser on `v*` tags with checksums, cosign, and provenance.
-- `vitals-db`: `CHANGELOG.md` documents SemVer releases with release-gate commands and release links.
+- `vitals-db`: `CHANGELOG.md` documents SemVer releases with release links.
 - `agent-vitals`: `CHANGELOG.md` uses version sections and user-facing change categories.
 - `horizon-starknet`: `.github/workflows/release.yml` creates GitHub releases from `v*` tags with generated notes and prerelease detection.
 
@@ -26,8 +26,8 @@ Strength: Moderate.
 
 1. Detect the repo's release variant from `CHANGELOG.md`, version fields, and `.github/workflows/release.yml`.
 2. Update changelogs only when the repo already keeps one or the user asks.
-3. Keep release notes user-facing: Added, Changed, Fixed, Removed, security, release gate, and migration notes where relevant.
-4. Include validation commands actually run for the release candidate when the repo's changelog uses release gates.
+3. Keep release notes functional: include only shipped behavior, API/CLI/UI changes, migrations that affect users/operators, bug fixes, security fixes, and other observable product changes.
+4. Report validation commands actually run for the release candidate separately from the changelog.
 5. For tag-driven workflows, do not create tags or releases unless the user explicitly asks.
 
 ## Variant table
@@ -45,6 +45,8 @@ Strength: Moderate.
 - Keep tag pattern `v*` workflows intact unless deliberately changing release behavior.
 - If touching GoReleaser or install scripts, run or explain release-specific validation.
 - Link changelog entries to actual changed behavior, not internal implementation churn.
+- Omit entries for chores, progress tracking, implementation plans, docs-only updates, tests or coverage, CI or validation runs, framework migration housekeeping, and other non-functional work.
+- Omit empty Keep a Changelog category headings; keep only headings with qualifying entries.
 
 ## Common pitfalls
 

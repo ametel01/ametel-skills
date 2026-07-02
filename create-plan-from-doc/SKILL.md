@@ -36,8 +36,11 @@ The output must be `/goal` ready: bounded in scope, explicit about the implement
    - Make the implementation approach explicit enough that an agent can operate from the plan without needing to check in for routine decisions.
    - Make `PROGRESS.md` and `CHANGELOG.md` setup the first prerequisite step in the plan, before quality-gate setup or implementation work.
    - Require `PROGRESS.md` to be updated after each completed step so the user can inspect execution status while the plan is being worked on.
-   - Require `CHANGELOG.md` to be created before implementation starts and updated after each completed step, after validation, and before that step is committed.
-   - Require `CHANGELOG.md` to follow Keep a Changelog 1.0.0 conventions: use `# Changelog`, include the standard preamble, maintain an `## [Unreleased]` section at the top, group entries under `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security` as applicable, keep newest entries first, use ISO `YYYY-MM-DD` dates for release sections, and write human-readable notable changes instead of dumping commit logs.
+   - Require `CHANGELOG.md` to be created before implementation starts and updated after a completed step only when that step ships a functional change.
+   - Require `CHANGELOG.md` to follow Keep a Changelog 1.0.0 conventions: use `# Changelog`, include the standard preamble, maintain an `## [Unreleased]` section at the top, group entries under `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security` as applicable, keep newest entries first, use ISO `YYYY-MM-DD` dates for release sections, and write human-readable notable functional changes instead of dumping commit logs.
+   - Require changelog entries to describe only shipped behavior, API/CLI/UI changes, migrations that affect users/operators, bug fixes, security fixes, and other observable product changes.
+   - Do not add changelog entries for chores, progress tracking, implementation plans, docs-only updates, tests or coverage, CI or validation runs, framework migration housekeeping, or other non-functional work.
+   - Do not include empty Keep a Changelog category headings; keep only headings with qualifying entries.
    - Use clear, incremental steps. Each step must leave the repository in a working state.
    - Keep implementation steps small enough for a focused commit.
 
@@ -94,7 +97,7 @@ The output must be `/goal` ready: bounded in scope, explicit about the implement
 - Standard: Keep a Changelog 1.0.0, <https://keepachangelog.com/en/1.0.0/>
 - Requirement: Create `CHANGELOG.md` before any quality-gate setup or implementation work begins.
 - Initial content: Include `# Changelog`, the standard preamble, and an `## [Unreleased]` section.
-- Update rule: After each step is completed and validated, update `CHANGELOG.md` with human-readable notable changes under the appropriate `Unreleased` change-type headings before creating that step's commit.
+- Update rule: After each step is completed and validated, update `CHANGELOG.md` before creating that step's commit only if the step shipped a functional change. Omit entries for chores, progress tracking, implementation plans, docs-only updates, tests or coverage, CI or validation runs, framework migration housekeeping, and empty category headings.
 
 ## Goal Handoff
 - Readiness: This plan is ready to be used as a `/goal` payload.
@@ -112,7 +115,7 @@ Changes:
 - Document that the file must be updated after every completed step.
 - Create `CHANGELOG.md` in the project root before any quality-gate setup or implementation work begins.
 - Add Keep a Changelog 1.0.0 structure: `# Changelog`, the standard preamble, and `## [Unreleased]`.
-- Document that `CHANGELOG.md` must be updated after each step is completed and validated, before that step is committed.
+- Document that `CHANGELOG.md` must be updated after each step is completed and validated, before that step is committed, only when the step ships a functional change.
 
 Validation:
 - Confirm `PROGRESS.md` exists and contains the step checklist.
@@ -122,7 +125,7 @@ Progress:
 - Mark Step 0 complete in `PROGRESS.md`, record validation results, set the current status, and identify the next step.
 
 Changelog:
-- Add an `Added` entry under `## [Unreleased]` for establishing progress and changelog tracking.
+- Do not add a changelog entry for progress and changelog tracking setup because it is not a functional change.
 
 Commit:
 - `<suggested commit message>`
@@ -146,7 +149,7 @@ Progress:
 - Update `PROGRESS.md` with completion notes, validation results, commit reference if available, current status, and next step.
 
 Changelog:
-- Update `CHANGELOG.md` under `## [Unreleased]` with notable quality-gate setup changes after validation and before committing.
+- Do not add a changelog entry for quality-gate setup unless it ships an observable functional change.
 
 Commit:
 - `<suggested commit message>`
@@ -173,7 +176,7 @@ Progress:
 - Update `PROGRESS.md` with completion notes, validation results, commit reference if available, current status, and next step.
 
 Changelog:
-- Update `CHANGELOG.md` under `## [Unreleased]` with notable implementation changes after validation and before committing.
+- Update `CHANGELOG.md` under `## [Unreleased]` after validation and before committing only if the step ships a functional change.
 
 Commit:
 - `<suggested commit message>`
@@ -192,7 +195,7 @@ For each incremental implementation step:
 - State how the step advances the top-level `## Definition of Done`.
 - Include the full quality-gate command list to run after completing the step.
 - Include an explicit `PROGRESS.md` update action after validation and before moving to the next step.
-- Include an explicit `CHANGELOG.md` update action after validation and before committing the step.
+- Include an explicit `CHANGELOG.md` decision after validation and before committing the step: update it only for functional changes, otherwise record that no changelog entry is needed.
 - Include a suggested commit message.
 - Make the step small enough that it can be reviewed independently.
 
@@ -201,7 +204,7 @@ Every implementation step must end with:
 1. Run all quality gates: format, lint, tests, and any project-specific checks.
 2. Fix any failures before proceeding.
 3. Update `PROGRESS.md` with the completed step, validation results, commit reference if available, current status, and next step.
-4. Update `CHANGELOG.md` with notable completed work under `## [Unreleased]`, using the appropriate Keep a Changelog change-type heading.
+4. Update `CHANGELOG.md` under `## [Unreleased]` only if the step shipped a functional change, using the appropriate Keep a Changelog change-type heading and omitting empty headings.
 5. Create a commit for that completed step.
 
 ## Planning Guidance

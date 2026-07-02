@@ -8,6 +8,7 @@
       "assertions": [
         "Reads existing changelog and release workflows.",
         "Preserves the repo's release format and tag style.",
+        "Includes only functional changelog entries and omits chores, docs-only updates, validation runs, and empty category headings.",
         "Runs relevant release gates or reports blockers.",
         "Does not invent a new release system."
       ]

@@ -8,6 +8,7 @@
       "assertions": [
         "Finds affected documentation through repository search.",
         "Updates only docs related to the behavior change.",
+        "Avoids changelog entries for docs-only updates and other non-functional work.",
         "Keeps commands and examples consistent with code.",
         "Runs or reports relevant doc validation."
       ]

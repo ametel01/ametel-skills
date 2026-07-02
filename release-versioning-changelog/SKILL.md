@@ -19,7 +19,7 @@ Strength: Moderate.
 
 - `weld-cli`: `CHANGELOG.md` follows Keep a Changelog and SemVer; `pyproject.toml` holds version; release workflow validates tag/input version, asserts `Unreleased` is empty, extracts release notes, builds with `uv build`, publishes to PyPI, and creates a GitHub Release.
 - `agents-toolbelt`: `CHANGELOG.md` follows Keep a Changelog and SemVer; release workflow triggers on `v*` tags, uses GoReleaser, cosign, checksums, and provenance attestation.
-- `vitals-db`: `CHANGELOG.md` follows Keep a Changelog/SemVer and release entries include release gates and GitHub tag links.
+- `vitals-db`: `CHANGELOG.md` follows Keep a Changelog/SemVer and release entries include GitHub tag links.
 - `horizon-starknet`: release workflow creates GitHub releases for `v*` tags with generated notes and prerelease detection.
 - `claw-training-dashboard` and `orgs-ai-harness`: no strong release evidence in sampled files.
 
@@ -53,7 +53,7 @@ make verify
 # horizon-starknet release is workflow-driven from v* tags
 git tag vX.Y.Z
 
-# vitals-db release gates are documented per changelog entry
+# vitals-db release gates should be reported separately from changelog entries
 bun run check:ci
 bun run typecheck
 bun run test
@@ -63,7 +63,9 @@ bun run build
 ## Required checks
 
 - Version in code/config must match the intended tag when the repo has an explicit version file.
-- Changelog entry must describe user-visible or functional changes, not just implementation churn.
+- Changelog entries must describe functional changes only: shipped behavior, API/CLI/UI changes, migrations that affect users/operators, bug fixes, security fixes, and other observable product changes.
+- Omit entries for chores, progress tracking, implementation plans, docs-only updates, tests or coverage, CI or validation runs, framework migration housekeeping, and other non-functional work.
+- Omit empty Keep a Changelog category headings; keep only headings with qualifying entries.
 - Release notes should come from the version's changelog section when scripts support that.
 - Release workflows must preserve artifact, publishing, and provenance steps.
 
@@ -78,7 +80,7 @@ bun run build
 
 - `weld-cli` can be released manually through workflow dispatch, but the input version must match `pyproject.toml`.
 - `horizon-starknet` generated release notes are workflow-driven; do not invent a manual changelog requirement there.
-- `vitals-db` changelog entries include explicit release gates; preserve that habit when adding entries.
+- `vitals-db` release validation is still important, but report validation runs outside changelog entries.
 
 ## Exceptions
 

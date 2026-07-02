@@ -8,6 +8,7 @@
       "assertions": [
         "Detects the version source before editing.",
         "Keeps Keep a Changelog and SemVer conventions intact.",
+        "Includes only functional changelog entries and omits chores, docs-only updates, validation runs, and empty category headings.",
         "Uses release helper scripts with explicit flags when applicable.",
         "Validates version, tag, and changelog consistency."
       ]

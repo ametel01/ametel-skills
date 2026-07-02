@@ -27,7 +27,7 @@ Strength: Strong.
 1. Identify whether the change is user-facing, developer-facing, API-facing, or release-facing.
 2. Update the nearest authoritative doc, not every doc.
 3. Keep command examples executable and aligned with manifests/workflows.
-4. Update changelogs when the repo already uses them and the change is functional or visible.
+4. Update changelogs when the repo already uses them and the change is functional; do not add changelog entries for docs-only updates.
 5. Preserve domain-specific contract docs such as API DTOs, event docs, deployment notes, and integration specs.
 
 ## Required checks
@@ -42,6 +42,7 @@ Strength: Strong.
 - Do not add generic docs that duplicate the code without helping users.
 - Do not leave stale command examples after renaming scripts or Make targets.
 - Do not create a changelog in repos without one unless asked.
+- Do not add changelog entries for chores, progress tracking, implementation plans, docs-only updates, tests or coverage, CI or validation runs, framework migration housekeeping, or empty category headings.
 - Do not treat planning documents as canonical if a README or API contract already owns the current behavior.
 
 ## Exceptions
