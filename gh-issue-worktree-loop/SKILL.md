@@ -1,13 +1,19 @@
 ---
-name: gh-issue-treehouse-loop
-description: Use when an agent should autonomously pick up an unassigned GitHub issue, claim it, lease a Treehouse worktree, implement the fix, run required quality/security gates, commit, push, open a pull request, monitor reviews and comments, address requested changes, reply to reviewers, resolve conversations, and continue until approval or a clear blocker.
+name: gh-issue-worktree-loop
+description: Use when an agent should autonomously pick up an unassigned GitHub issue, claim it, create or reuse a local Git worktree, implement the fix, run required quality/security gates, commit, push, open a pull request, monitor reviews and comments, address requested changes, reply to reviewers, resolve conversations, and continue until approval or a clear blocker. In coordinator runs, use one independent worktree loop per parallel-safe issue or PR-fix stream.
 ---
 
-# GitHub Issue Treehouse Loop
+# GitHub Issue Worktree Loop
 
 Run this workflow as an issue-owning coding agent. You are responsible for the full issue-to-approved-PR loop, not just a patch. Keep the loop bounded, evidence-driven, and recoverable.
 
-Use `treehouse` for worktree lifecycle. Prefer non-interactive leases so the workflow survives outside an interactive subshell.
+Use default Git commands for worktree lifecycle. One implementation stream gets one branch and one local worktree.
+
+## Parallel Streams
+
+When coordinating several issues, run this loop concurrently for every independent ready issue or PR-fix stream that can proceed without dependency, branch, or shared-file conflict. Do not leave an independent ready issue idle while local resources can support another worktree and agent. Shared files are a coordination risk, not a dependency by themselves; serialize only when simultaneous edits would create real conflict.
+
+Also check local resource conflicts before assuming streams are parallel-safe: fixed ports, Docker Compose project names, database names, emulator state, cache directories, generated files, or long-running local services can collide across worktrees. Prefer per-worktree isolation with environment overrides such as `COMPOSE_PROJECT_NAME`, per-stream ports, per-stream database names, and per-worktree temp/cache directories. If isolation is not available, record the resource as the throughput blocker and serialize only the streams that share it.
 
 ## Stop Rules
 
@@ -15,19 +21,21 @@ Stop and report a blocker instead of spinning when:
 
 - The issue is already assigned, claimed in comments, closed, or has unresolved maintainer questions.
 - `gh auth status` fails or the upstream remote cannot be identified.
-- Treehouse cannot lease a worktree.
+- Git cannot create or reuse a clean, isolated worktree for the stream.
 - Five implementation/review cycles have run without approval.
 - The same test, CI, or review failure repeats twice without new evidence.
 - A previously passing required gate starts failing after a feedback fix.
 - A requested fix conflicts with the issue contract, maintainer comments, or existing behavior.
 - Required quality gates cannot run and CI cannot substitute for them.
 - The PR is approved, merged, or the user tells you to stop.
+- Another agent is about to edit the same branch, worktree, or conflicting files.
+- Another active stream owns a required fixed local resource that cannot be isolated safely.
 
-Never delete, reset, or return a dirty worktree with `--force` unless the work has been safely pushed or the user explicitly approves discarding it.
+Never delete, reset, remove, or force-clean a dirty worktree unless the work has been safely pushed or the user explicitly approves discarding it.
 
 ## Local Run State
 
-Keep a short local state note for any run that may span multiple turns, CI waits, or review cycles. Prefer an untracked file such as `.treehouse-issue-status.md` in the leased worktree unless the repo has an established agent status file.
+Keep a short local state note for any run that may span multiple turns, CI waits, or review cycles. Prefer `STATUS.md` when the repo has an agent-team status convention; otherwise use an untracked file such as `.git-worktree-issue-status.md` in the worktree.
 
 The note should contain only durable signal:
 
@@ -62,25 +70,34 @@ Read this note before each new cycle and update it after each major phase. Do no
 
 If the repository discourages self-assignment or claim comments, follow its contribution docs instead.
 
-## 2. Lease A Treehouse Worktree
+## 2. Create Or Reuse A Git Worktree
 
-From the backing repository, acquire a durable worktree lease:
+From the backing repository, create a durable local worktree:
 
 ```bash
-treehouse status
-worktree_path="$(treehouse get --lease --lease-holder "issue-<number>")"
-printf '%s\n' "$worktree_path"
+git fetch --all --prune
+git worktree list --porcelain
+branch="fix/issue-<number>-short-topic"
+worktree_path="../<repo-name>-issue-<number>"
+git worktree add "$worktree_path" -b "$branch" <base-ref>
 cd "$worktree_path"
 ```
 
-After entering the leased worktree:
+If the branch already exists and is not checked out elsewhere, reuse it:
+
+```bash
+git worktree add "$worktree_path" "$branch"
+cd "$worktree_path"
+```
+
+After entering the worktree:
 
 1. Verify it is the expected repository with `git remote -v` and `git status --short --branch`.
 2. Fetch the upstream default branch.
-3. Create or switch to a branch named for the issue, such as `fix/issue-<number>-short-topic`.
-4. Ensure the branch starts from the latest upstream default branch unless the issue requires another base.
+3. Ensure the branch starts from the latest upstream default branch unless the issue requires another base.
+4. Record the absolute worktree path, branch, issue, PR, phase, and owner in the local run state or `STATUS.md`.
 
-Use `treehouse return "$worktree_path"` only after the work is pushed and there is no local state that must be preserved. Use `treehouse status` to confirm leases.
+Use `git worktree remove "$worktree_path"` only after the work is pushed, the PR/commit is recorded, and there is no local state that must be preserved. Keep the worktree if follow-up review or CI work is likely.
 
 ## 3. Prepare The Work
 
@@ -199,22 +216,22 @@ Repeat until the PR is approved, all required checks pass, or a stop rule trigge
 
 After each review cycle, summarize the lesson in the local run state in under 120 words: what failed, what worked, what to avoid, and what to try next. Only turn reviewer feedback into a reusable project rule when the same pattern appears across multiple comments or reviews; one comment can be noise.
 
-## 8. Return Or Preserve The Worktree
+## 8. Remove Or Preserve The Worktree
 
 When the PR is approved or the workflow is otherwise complete:
 
 1. Confirm all commits are pushed: `git status --short --branch`.
-2. If the worktree is clean and no local-only state is needed, release it:
-   - `treehouse return "$worktree_path"`
-3. If the worktree must remain available for follow-up, keep the lease and report the path, branch, PR URL, and reason.
-4. Use `treehouse prune` only as a dry-run cleanup check unless the user explicitly asks to delete candidates.
+2. If the worktree is clean and no local-only state is needed, remove it:
+   - `git worktree remove "$worktree_path"`
+3. If the worktree must remain available for follow-up, preserve it and report the path, branch, PR URL, and reason.
+4. Use `git worktree prune --dry-run` as a cleanup check. Run pruning without `--dry-run` only when stale administrative entries are understood and no active agent work is affected.
 
 ## Final Report
 
 Report:
 
 - Issue number and PR URL.
-- Worktree path and whether it was returned or remains leased.
+- Worktree path and whether it was removed or preserved.
 - Branch and commit hashes pushed.
 - Acceptance checklist status.
 - Quality/security gates run and results.

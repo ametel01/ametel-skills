@@ -4,11 +4,14 @@
     {
       "id": "coordinate-agent-team",
       "prompt": "Lead a multi-terminal Codex team from issue selection to PR approval.",
-      "expected_output": "Maintains STATUS.md, selects ready issues, assigns spec/build/check/review roles, manages Treehouse worktrees, watches cycles, and escalates blockers.",
+      "expected_output": "Maintains STATUS.md, selects ready issues, assigns spec/build/check/review roles, manages local Git worktrees, keeps every parallel-safe issue stream active, tracks local resource conflicts, watches cycles, compacts completed status, and escalates blockers.",
       "assertions": [
         "Requires a completion contract before implementation starts.",
         "Keeps builder, checker, and reviewer ownership separate.",
         "Tracks worktree, branch, PR, phase, cycle count, and next action.",
+        "Starts all independent ready streams concurrently when local resources allow.",
+        "Records fixed ports, Docker Compose projects, databases, caches, or local services as throughput blockers when they cannot be isolated.",
+        "Runs closure checks before reporting the overall run complete.",
         "Stops or escalates when repeated failures or unresolved maintainer questions appear."
       ]
     }

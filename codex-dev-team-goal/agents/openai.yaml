@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Dev Team Goal"
+  short_description: "Coordinate parallel issue-to-PR agent teams"
+  default_prompt: "Use $codex-dev-team-goal to solve all open agent-actionable GitHub issues with parallel Git worktree streams."

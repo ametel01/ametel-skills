@@ -34,8 +34,9 @@ Answer only the questions that apply:
 - Did CI catch something local verification should have caught?
 - Did coordinator route work too late, too early, to the wrong role, or with insufficient evidence?
 - Did `STATUS.md` contain enough durable state for the next role to act without rediscovery?
-- Did Treehouse branch/worktree ownership or parallel streams create avoidable conflict?
+- Did Git branch/worktree ownership or parallel streams create avoidable conflict?
 - Did the same failure or confusion repeat across cycles, PRs, checks, or reviews?
+- Did previous retrospective recommendations remain untracked, unresolved, or repeatedly rediscovered?
 
 ## Recommendation Policy
 
@@ -72,13 +73,15 @@ Lessons:
 
 Recommendations:
 - classification: no-action | status-lesson-only | create-process-issue | assign-builder
+  disposition: lesson-only | issue-created | assigned | declined | pending-coordinator
   target: workflow-doc | skill | prompt | test | ci | issue-template | status-contract
   rationale:
   smallest-change:
+  tracker:
   owner:
 ```
 
-If recommending `create-process-issue` or `assign-builder`, include the smallest acceptance criteria needed for a builder, checker, and maintainer reviewer to process the improvement like any other PR.
+If recommending `create-process-issue` or `assign-builder`, include the smallest acceptance criteria needed for a builder, checker, and maintainer reviewer to process the improvement like any other PR. The recommendation must also have a disposition: record the issue URL, assigned stream, completed PR, or a specific reason it is pending or declined. Do not leave repeated process work as an untracked suggestion.
 
 ## Handoff
 

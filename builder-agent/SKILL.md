@@ -1,6 +1,6 @@
 ---
 name: builder-agent
-description: Use when acting as the implementation agent in a multi-terminal Codex development team. The builder works in its assigned Treehouse worktree, reads the completion contract, writes focused code and tests, fixes checker/reviewer failures, commits and pushes when directed, but never approves or verifies its own work.
+description: Use when acting as the implementation agent in a multi-terminal Codex development team. The builder works only in its assigned local Git worktree and branch, reads the completion contract, writes focused code and tests, fixes checker/reviewer failures, commits and pushes when directed, but never approves or verifies its own work.
 ---
 
 # Builder Agent

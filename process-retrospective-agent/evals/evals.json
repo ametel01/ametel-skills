@@ -4,11 +4,13 @@
     {
       "id": "bounded-retrospective",
       "prompt": "A PR needed three checker cycles and one reviewer rejection before merge. Run a process retrospective.",
-      "expected_output": "Analyzes STATUS.md, PR/checker/reviewer evidence, identifies repeated process failures, records durable lessons, and proposes bounded follow-up tasks without editing code.",
+      "expected_output": "Analyzes STATUS.md, PR/checker/reviewer evidence, identifies repeated process failures, records durable lessons, and proposes bounded follow-up tasks with explicit dispositions without editing code.",
       "assertions": [
         "Uses evidence from status, CI, reviews, handoffs, and commits.",
         "Distinguishes builder, checker, spec, reviewer, and coordinator misses.",
         "Avoids full log dumps and extracts only durable lessons.",
+        "States whether each recommendation is lesson-only, issue-created, assigned, declined, or pending-coordinator.",
+        "Flags previous untracked retrospective recommendations instead of rediscovering them silently.",
         "Does not weaken gates or implement fixes while in retrospective role."
       ]
     }

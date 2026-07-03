@@ -1,0 +1,43 @@
+{
+  "skill_name": "codex-dev-team-goal",
+  "evals": [
+    {
+      "id": "run-dev-team-until-merged",
+      "prompt": "Take over this repository with a Codex dev team and keep going until every agent-actionable open issue is handled.",
+      "expected_output": "A coordinated long-running issue-to-merge loop that loads the coordinator and status protocol skills, builds a dependency graph, assigns role agents in parallel-safe worktrees, shepherds PRs through checks and review, compacts status, runs the closure gate, and stops only for merged issues or true external blockers.",
+      "assertions": [
+        "Loads and follows team-coordinator and agent-team-status-protocol before coordinating work.",
+        "Prioritizes open PRs, failing checks, review threads, and repo-local blockers ahead of downstream issue work.",
+        "Starts every independent ready issue or fix stream when local resources allow.",
+        "Requires checker evidence and maintainer-style review before merge readiness.",
+        "Does not mark dependency-blocked downstream issues complete while upstream agent-actionable work remains.",
+        "Records owners, branches, worktrees, PR URLs, gates, blockers, cycle counts, and next actions in STATUS.md.",
+        "Before completion, verifies open issues/PRs, worktree state, repository cleanliness, status compaction, and retrospective recommendation disposition."
+      ]
+    },
+    {
+      "id": "worktree-cleanup-safety",
+      "prompt": "A builder finished and the PR merged. Clean up its local Git worktree as part of the dev-team loop.",
+      "expected_output": "A cleanup decision that validates the exact worktree path and branch before removal, confirms pushed/recorded/clean state, preserves worktrees needed for follow-up, and asks for explicit user approval before discarding dirty, unpushed, or unrecorded state.",
+      "assertions": [
+        "Runs or requires git worktree list --porcelain before choosing the worktree to remove.",
+        "Runs or requires git status --short --branch inside the candidate worktree.",
+        "Checks that the branch is pushed and the PR or commit is recorded in STATUS.md.",
+        "Preserves the worktree when review or CI follow-up is likely.",
+        "Does not force-remove, reset, clean, or discard dirty state without explicit approval for the exact path and branch."
+      ]
+    },
+    {
+      "id": "closure-gate-status-compaction",
+      "prompt": "All target PRs merged and issues are closed. Finish the dev-team goal.",
+      "expected_output": "Runs a closure gate that reconciles GitHub issues/PRs, local worktrees, repository cleanliness, hot/cold status files, and retrospective recommendation dispositions before declaring completion.",
+      "assertions": [
+        "Checks gh issue list and gh pr list for remaining target work.",
+        "Reconciles git worktree list --porcelain with STATUS.md.",
+        "Reconciles git status --short --branch --untracked-files=all with STATUS.md cleanliness notes.",
+        "Moves historical contracts, handoffs, checker logs, old gates, review bodies, and completed retrospectives to STATUS.archive.md.",
+        "Requires every create-process-issue or assign-builder recommendation to have a tracker URL, assignment, completed PR, or explicit declined/downgraded reason."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "skill_name": "gh-issue-worktree-loop",
+  "evals": [
+    {
+      "id": "issue-to-approved-pr-loop",
+      "prompt": "Pick up an unassigned GitHub issue and drive it through implementation, checks, PR, review, and approval using a local Git worktree.",
+      "expected_output": "Claims an eligible issue, creates or reuses a local Git worktree, isolates or records local resource conflicts, maintains local run state, implements and verifies the fix, opens a PR, responds to review, and stops only at approval or a clear blocker.",
+      "assertions": [
+        "Stops when the issue is already assigned, unclear, closed, or blocked.",
+        "Uses default Git worktree commands and records worktree/branch/PR state.",
+        "Checks fixed ports, Docker Compose project names, database names, caches, generated files, and local services before treating streams as parallel-safe.",
+        "Records non-isolatable local resources as throughput blockers.",
+        "Runs required local gates or records why CI must substitute.",
+        "Does not force-delete or reset dirty work without explicit approval."
+      ]
+    }
+  ]
+}

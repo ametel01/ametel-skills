@@ -13,6 +13,18 @@ Use `STATUS.md` at the repository root unless the coordinator names another file
 
 Every role must read `STATUS.md` before acting and update it after a meaningful state change. Keep it short, factual, and durable. Do not paste logs; link to commands, PRs, commits, or concise summaries.
 
+## Hot And Cold State
+
+`STATUS.md` is hot state. Keep only what the next role or coordinator needs now:
+
+- active work, current blockers, current dependency graph, current worktrees, current handoff, current gate result, open review threads, final issue/PR/commit/review links, and durable lessons
+- completed work as a one-line summary with final links, not full contracts or old logs
+- `Active Work: none` when no active streams remain
+
+`STATUS.archive.md` is cold state. Move completed issue contracts, old checker logs, historical builder handoffs, completed retrospectives, stale review bodies, and old gate output there after merge or terminal blocker.
+
+Before a coordinator marks a run complete, the Worktrees and cleanliness notes in `STATUS.md` must match `git worktree list --porcelain` and `git status --short --branch --untracked-files=all`. Do not record files, worktrees, branches, or archive artifacts that do not exist.
+
 Recommended shape:
 
 ```markdown
@@ -56,6 +68,12 @@ Recommended shape:
 - date:
   signal:
   rule:
+
+## Completed
+- issue:
+  pr:
+  merge:
+  final-review:
 ```
 
 ## Handoff Contract
