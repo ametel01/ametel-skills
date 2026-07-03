@@ -1,0 +1,71 @@
+{
+  "skill_name": "postgres",
+  "evals": [
+    {
+      "id": "slow-feed-query-indexing",
+      "prompt": "Our Postgres API endpoint is slow. It runs `SELECT id, title, created_at FROM posts WHERE tenant_id = $1 AND status = 'published' ORDER BY created_at DESC LIMIT 50` against about 40 million rows. Help me optimize it.",
+      "expected_output": "A query tuning response that asks for or reasons from EXPLAIN evidence, recommends an appropriate composite or partial index, flags pagination and selectivity considerations, and explains write/storage tradeoffs.",
+      "assertions": [
+        "Uses the indexing, query pattern, or optimization checklist guidance rather than giving generic performance advice.",
+        "Recommends an index ordered around `tenant_id`, `status`, and `created_at` or explains when a partial index is better.",
+        "Mentions validating with `EXPLAIN (ANALYZE, BUFFERS)` or equivalent plan evidence.",
+        "Calls out at least one tradeoff such as write overhead, index size, low selectivity, or stale statistics."
+      ]
+    },
+    {
+      "id": "planetscale-connection-pooling",
+      "prompt": "My PlanetScale Postgres app is getting `too many clients already` from a serverless worker fleet. What should I check and change?",
+      "expected_output": "A PlanetScale-aware troubleshooting response that distinguishes pooled and direct connections, checks client pool settings and PgBouncer limits, and gives safe tuning and verification steps.",
+      "assertions": [
+        "Uses PlanetScale-specific connection pooling, PgBouncer, or connection troubleshooting guidance.",
+        "Distinguishes pooled connection URLs from direct database connections.",
+        "Checks both application-side pool settings and database or PgBouncer connection limits.",
+        "Avoids recommending broad connection-limit increases without first reducing client-side fan-out or validating current usage."
+      ]
+    },
+    {
+      "id": "self-hosted-pitr-plan",
+      "prompt": "We self-host Postgres and need a backup and point-in-time recovery plan for a 2 TB production database. Please outline the approach and risks.",
+      "expected_output": "A provider-respecting recovery plan that focuses on base backups, WAL archiving, restore drills, retention, monitoring, and operational risks without forcing a hosting migration.",
+      "assertions": [
+        "Respects that the user is self-hosting instead of making PlanetScale migration the main answer.",
+        "Covers both base backups and WAL archiving for PITR.",
+        "Includes restore testing or recovery drills as a required validation step.",
+        "Mentions operational risks such as backup consistency, retention, storage growth, restore time, or monitoring failed archive commands."
+      ]
+    },
+    {
+      "id": "rls-policy-performance",
+      "prompt": "A multi-tenant Postgres API uses RLS on invoices with `tenant_id` and `owner_id`. Queries are slow after enabling policies. What should I inspect and change?",
+      "expected_output": "A security-preserving RLS performance review that checks policy predicates, indexes policy columns, validates with EXPLAIN, and avoids weakening authorization.",
+      "assertions": [
+        "Treats RLS as the authorization boundary instead of recommending application-only filtering.",
+        "Checks whether tenant/user policy columns are indexed and aligned with common query filters.",
+        "Mentions simplifying expensive policy expressions or request-context helper functions while preserving security.",
+        "Requires validation with `EXPLAIN (ANALYZE, BUFFERS)` or equivalent plan evidence."
+      ]
+    },
+    {
+      "id": "queue-workers-skip-locked",
+      "prompt": "We have ten workers polling a Postgres jobs table. They block each other and sometimes process the same queued job twice. Design a safer claim query.",
+      "expected_output": "A queue-worker pattern that atomically claims jobs using row locks and SKIP LOCKED, uses a matching index, and discusses retries or transaction scope.",
+      "assertions": [
+        "Uses `FOR UPDATE SKIP LOCKED` or an equivalent non-blocking row claim pattern.",
+        "Claims and updates the job in one transaction or one data-modifying statement.",
+        "Recommends an index matching queued status and ordering columns.",
+        "Mentions short transactions, retries, or deterministic lock handling."
+      ]
+    },
+    {
+      "id": "pooled-prepared-statement-error",
+      "prompt": "After moving app traffic through PgBouncer transaction pooling, we see intermittent prepared statement errors from our Postgres driver. How should we fix this?",
+      "expected_output": "A pooling-aware diagnosis that explains transaction pooling backend reuse, recommends unnamed statements or disabling driver auto-prepare, and reserves direct connections for session-dependent work.",
+      "assertions": [
+        "Explains why transaction pooling breaks named or session-persistent prepared statements.",
+        "Recommends unnamed prepared statements, parameterized simple queries, or disabling driver auto-prepare when supported.",
+        "Distinguishes pooled OLTP traffic from direct connections for session-dependent workflows.",
+        "Avoids suggesting a broad switch away from pooling without first fixing driver/session assumptions."
+      ]
+    }
+  ]
+}
