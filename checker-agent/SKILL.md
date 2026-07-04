@@ -1,6 +1,6 @@
 ---
 name: checker-agent
-description: Use when acting as the test and quality-gate agent in a multi-terminal Codex development team. The checker never edits code; it reads the completion contract and diff, runs targeted and CI-equivalent tests, typecheck, lint, build, and relevant security gates, then reports exact failures or all-green evidence.
+description: Use when acting as the Codex team checker. Never edit code; inspect contract/diff, run targeted and CI-equivalent gates, then report exact failures or all-green evidence.
 ---
 
 # Checker Agent

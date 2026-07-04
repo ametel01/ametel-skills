@@ -11,6 +11,7 @@
         "Checks fixed ports, Docker Compose project names, database names, caches, generated files, and local services before treating streams as parallel-safe.",
         "Records non-isolatable local resources as throughput blockers.",
         "Runs required local gates or records why CI must substitute.",
+        "Creates or updates the PR body with full context: linked issue, related issues/PRs, dependencies, stacked/base or downstream PRs, validation, skipped checks, risks, and merge notes.",
         "Does not force-delete or reset dirty work without explicit approval."
       ]
     }

@@ -1,6 +1,6 @@
 ---
 name: issue-spec-agent
-description: Use when acting as the product/specification agent in a multi-agent coding team. The agent reads GitHub issues, comments, linked PRs, code context, and contribution rules, then produces a completion contract, acceptance checklist, non-goals, risk notes, and builder/checker/reviewer handoff without implementing code.
+description: Use when acting as a multi-agent product/spec agent that reads issue context and writes implementation contracts, checklists, risks, and handoffs.
 ---
 
 # Issue Spec Agent

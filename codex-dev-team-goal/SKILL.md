@@ -1,6 +1,6 @@
 ---
 name: codex-dev-team-goal
-description: Use when the user wants a long-running Codex development team goal to solve all open agent-actionable GitHub issues end to end, coordinate spec/builder/checker/reviewer/retrospective agents, manage parallel Git worktree streams, shepherd PRs through CI and review, and continue until issues close by merged PRs or a true external blocker remains.
+description: Use when the user wants a long-running Codex dev-team goal. Coordinate agents and worktrees until agent-actionable GitHub issues are closed or externally blocked.
 ---
 
 # Codex Dev Team Goal
@@ -8,6 +8,28 @@ description: Use when the user wants a long-running Codex development team goal 
 Run this as the lead coordinator for a repository's Codex development team. Load and follow `team-coordinator` and `agent-team-status-protocol` first.
 
 The goal is complete only when every target issue is closed by a merged PR and every related PR is merged. Dependency blockers are active work, not completion.
+
+Human approval boundary: treat the user's explicit long-running dev-team goal as approval for scoped repo and GitHub writes needed to close the target issues. Ask for explicit confirmation before production deploys, releases, secret changes, billing changes, or work outside the target issue set.
+
+## Agent Review Acceptance
+
+The `maintainer-reviewer` agent's explicit `Approve` decision is the review acceptance gate for this workflow. After required checks pass and reviewer-requested fixes are addressed, merge the PR.
+
+Do not wait for, request, or mark blocked on a non-author formal GitHub approval solely because the authenticated `gh` identity is also the PR author. If GitHub refuses to record `APPROVE` or `REQUEST_CHANGES` from that identity, same-author review comments and `STATUS.md` reviewer evidence are sufficient review evidence for this workflow.
+
+A missing non-author formal approval is not a terminal blocker unless an actual merge attempt is rejected by GitHub branch protection or permissions. If `gh pr merge` fails, record the exact command and output, then decide whether a real external blocker remains.
+
+## PR Context Gate
+
+Every PR must be reviewable from GitHub without private conversation or local `STATUS.md` context. Before review and before merge, ensure the PR body includes:
+
+- Primary linked issue, using a closing keyword when the PR should close it.
+- Related issue and PR references: upstream dependencies, stacked/base PRs, downstream PRs or issues it unblocks, superseded PRs, and sibling PRs that coordinate with it; write `None` for categories that do not apply.
+- Behavior scope, non-goals, and any user-visible or system-visible change.
+- Validation evidence: commands run, pass/fail status, CI/checker status, skipped checks, and why any skipped check is acceptable.
+- Known risks, follow-up work, migration/rollout notes, and merge/retargeting order for stacked PRs.
+
+If a PR lacks full context, update it with `gh pr edit --body-file <file>` before sending it to the reviewer. The reviewer must treat missing PR context as blocking until the coordinator or builder updates the PR body.
 
 ## Coordinator Loop
 
@@ -18,11 +40,11 @@ The goal is complete only when every target issue is closed by a merged PR and e
 5. For every independent ready issue or fix stream, create or reuse a separate Git worktree and branch, then spawn one `builder-agent` for that stream.
 6. Saturate safe parallelism: no independent ready issue should sit idle while local resources can support another worktree and sub-agent.
 7. When a builder finishes, spawn a `checker-agent`; route exact failures back to that stream's builder and re-check after fixes.
-8. After checker evidence passes, open or update a draft PR.
-9. Preflight PR author, authenticated reviewer identity, draft state, intended formal approver, and whether GitHub can accept `APPROVE` or `REQUEST_CHANGES`.
-10. Spawn `maintainer-reviewer` to review the actual PR and submit a real GitHub review or comment evidence if formal review is permission-blocked.
+8. After checker evidence passes, open or update a draft PR, then run the PR Context Gate and update the PR body until it is complete.
+9. Preflight draft state, required checks, merge method, branch protection, PR author, and authenticated GitHub identity; use identity only to choose review submission mode, not to require a non-author reviewer.
+10. Spawn `maintainer-reviewer` to review the actual PR and submit a real GitHub review when possible; if GitHub blocks a formal same-author review, submit comment evidence and record the reviewer decision in `STATUS.md`.
 11. Route reviewer changes, CI failures, and external PR comments through builder, checker, reviewer, and PR update loops until merge-ready.
-12. Merge only after required checks pass and review requirements are satisfied.
+12. Merge after required checks pass, the PR Context Gate passes, and the `maintainer-reviewer` decision is `Approve`. Do not treat missing non-author formal approval as a blocker unless `gh pr merge` is actually rejected.
 13. After merge, close/update the linked issue, compact completed detail from `STATUS.md` to `STATUS.archive.md`, and spawn `process-retrospective-agent`.
 14. Refresh the dependency graph and immediately start every newly unblocked independent stream.
 15. Before declaring the goal complete, run the Closure Gate below and record the evidence in `STATUS.md`.
@@ -72,7 +94,7 @@ Before spawning role agents, read [sub-agent-prompts.md](references/sub-agent-pr
 - Stop or escalate if the same fix attempt fails twice with no new hypothesis.
 - Stop or escalate after five implementation/review cycles on the same item without progress.
 - Stop or escalate if a fix breaks a previously passing required gate and cannot be isolated.
-- Stop or escalate if credentials, permissions, merge rights, or product decisions are missing.
+- Stop or escalate if credentials, permissions, merge rights, or product decisions are missing after an exact attempted operation fails. Do not treat missing non-author formal approval as missing merge rights unless GitHub rejects the merge.
 - Stop or escalate if two agents are about to edit the same branch, worktree, or conflicting files.
 
 If terminally blocked, leave exact evidence, commands, issue/PR/check URLs, agents used, and the next human decision needed.

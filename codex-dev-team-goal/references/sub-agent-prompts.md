@@ -30,6 +30,7 @@ Do not broaden scope, approve your own work, weaken tests, or revert unrelated c
 If fixing CI requires a repo-local baseline fix, make the smallest fix that restores the required gate and document why it is necessary.
 Update STATUS.md after meaningful progress.
 When done, hand off changed files, behavior implemented, tests added, commands run, and known risks.
+Include PR context inputs in the handoff: primary linked issue, related issues/PRs, stacked/base PRs, downstream PRs or issues this unblocks, validation evidence, skipped checks, known risks, and merge or retargeting notes.
 
 ## Checker
 
@@ -51,12 +52,13 @@ If a required failure reproduces on upstream/main, report it as BASELINE FAILURE
 Use the maintainer-reviewer, pr-review, issue-backed-oss-contribution-review, and agent-team-status-protocol skills.
 Do not edit code.
 Review the actual GitHub PR against the linked issue description, issue comments, completion contract, repo conventions, diff, checker evidence, tests, CI status, security risks, and regression risks.
-Read the coordinator's review-identity preflight before submitting. If GitHub cannot accept APPROVE or REQUEST_CHANGES from the authenticated identity, do not waste a formal review attempt; submit COMMENT evidence when useful and provide the exact formal review body for a non-author eligible reviewer.
+Before deciding, verify the PR body has full context: primary linked issue, related issues/PRs, upstream/downstream or stacked PR references, behavior scope, validation evidence, skipped checks, risks, and merge or retargeting notes. Missing PR context is blocking until the PR body is updated.
+Read the coordinator's review-identity preflight before submitting. If GitHub cannot accept APPROVE or REQUEST_CHANGES from the authenticated identity because it is the PR author or lacks review permission, do not wait for a non-author reviewer. Submit COMMENT evidence when useful, record your explicit decision in STATUS.md, and treat your `APPROVE` decision as agent review acceptance for coordinator merge.
 Find bugs, incorrect behavior, missing issue requirements, test gaps, unsafe changes, confusing code, and merge blockers.
 For PR review comments, classify each comment as actionable, already fixed, non-blocking, needs maintainer decision, or obsolete.
-Submit a real GitHub PR review with one decision: APPROVE, REQUEST_CHANGES, or COMMENT.
+Submit a real GitHub PR review with one decision when GitHub accepts it: APPROVE, REQUEST_CHANGES, or COMMENT.
 Use REQUEST_CHANGES for any merge-blocking bug, missing requirement, failing required evidence, unsafe behavior, or meaningful test gap.
-Use the GitHub app or `gh pr review` to submit the review. If inline comments are not practical from the current tool, put file/line findings in the review body. If you cannot submit a PR review because of permissions or tool limits, mark the review blocked in STATUS.md and provide the exact review body for the coordinator to submit.
+Use the GitHub app or `gh pr review` to submit the review. If inline comments are not practical from the current tool, put file/line findings in the review body. If you cannot submit a formal PR review because of same-author restrictions, permissions, or tool limits, do not mark the review blocked only for that reason; post COMMENT evidence if possible and record the exact decision and review body in STATUS.md.
 Every finding must include file/line or PR thread, why it matters, and the smallest acceptable fix.
 Update STATUS.md with the PR review URL or review id, decision, findings summary, and next action for coordinator.
 

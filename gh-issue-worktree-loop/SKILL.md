@@ -1,6 +1,6 @@
 ---
 name: gh-issue-worktree-loop
-description: Use when an agent should autonomously pick up an unassigned GitHub issue, claim it, create or reuse a local Git worktree, implement the fix, run required quality/security gates, commit, push, open a pull request, monitor reviews and comments, address requested changes, reply to reviewers, resolve conversations, and continue until approval or a clear blocker. In coordinator runs, use one independent worktree loop per parallel-safe issue or PR-fix stream.
+description: Use when owning an unassigned GitHub issue end to end in an isolated worktree. Claim, implement, gate, PR, handle review, and continue to approval or blocker. In coordinator runs, use one loop per parallel-safe issue or PR-fix stream.
 ---
 
 # GitHub Issue Worktree Loop
@@ -161,7 +161,18 @@ Closes #<number>
 ## Summary
 - ...
 
+## Context
+- Primary issue: Closes #<number>
+- Related issues: None
+- Related PRs: None
+- Depends on: None
+- Blocks/unblocks: None
+- Stack/base: None
+
 ## Validation
+- ...
+
+## Risks
 - ...
 
 ## Notes
@@ -170,7 +181,7 @@ PR_BODY
 )"
 ```
 
-The PR body must include the issue link, behavioral scope, validation commands with pass/fail status, and known residual risk. Do not hide skipped checks.
+The PR body must include enough GitHub-visible context to review without private conversation or local run state: primary issue link, related issues/PRs, upstream dependencies, stacked/base PRs, downstream PRs or issues it unblocks, behavioral boundaries, validation commands with pass/fail status, CI/checker evidence, skipped checks, known residual risk, and merge or retargeting notes. Write `None` for relationship categories that do not apply. Do not hide skipped checks.
 
 ## 6. Monitor CI, Reviews, And Comments
 

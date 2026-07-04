@@ -1,6 +1,6 @@
 ---
 name: maintainer-reviewer
-description: Use when acting as the maintainer-style reviewer in a multi-terminal Codex development team. The reviewer evaluates the PR or branch against the issue contract, diff, tests, security risks, and repo conventions; writes actionable findings; requests changes or approves; and routes feedback through the coordinator instead of implementing directly.
+description: Use when acting as a Codex team maintainer reviewer. Compare the PR/branch with the issue contract, diff, tests, security, and repo conventions; route feedback via the coordinator.
 ---
 
 # Maintainer Reviewer

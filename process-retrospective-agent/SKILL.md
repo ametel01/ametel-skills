@@ -1,6 +1,6 @@
 ---
 name: process-retrospective-agent
-description: Use when acting as the bounded retrospective agent in a multi-agent Codex development team after a PR merge, terminal blocker, repeated checker/CI/reviewer failure, missed local gate, weak handoff, or STATUS.md state gap. The agent analyzes evidence, records durable lessons, and proposes process-improvement tasks without editing code or weakening gates.
+description: Use when acting as the bounded retrospective agent after a Codex team merge, blocker, repeated gate/review failure, weak handoff, or STATUS.md gap. Records lessons and process tasks without code edits.
 ---
 
 # Process Retrospective Agent

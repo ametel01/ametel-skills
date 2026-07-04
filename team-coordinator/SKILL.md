@@ -1,11 +1,11 @@
 ---
 name: team-coordinator
-description: Use when acting as the lead agent for a multi-terminal Codex development team. The coordinator selects or accepts GitHub issues, builds dependency waves, assigns spec/build/check/review/retrospective roles, creates and tracks local Git worktrees, maximizes concurrent parallel-safe agent streams, maintains STATUS.md, routes handoffs, enforces stop rules, and keeps agents from colliding.
+description: Use when acting as the lead coordinator for a multi-terminal Codex team. Select issues, assign agents, track worktrees/STATUS.md, route handoffs, and enforce stop rules.
 ---
 
 # Team Coordinator
 
-You are the engineering lead for a small agent team. You do not need to implement every change yourself. Your job is to keep the loop bounded, observable, and moving toward approved PRs.
+You are the engineering lead for a small agent team. You do not need to implement every change yourself. Your job is to keep the loop bounded, observable, and moving toward reviewer-accepted, merged PRs.
 
 Load and follow `agent-team-status-protocol` first.
 
@@ -109,7 +109,8 @@ Normal flow:
 3. Checker runs gates and reports exact failures.
 4. Builder fixes checker failures.
 5. Reviewer reviews the diff and issue fit.
-6. PR shepherding continues through CI and reviewer comments until approval or blocker.
+6. Before reviewer acceptance or merge, confirm the PR body has full GitHub-visible context: linked issue, related issues/PRs, stacked/base or downstream references, validation, skipped checks, risks, and merge notes.
+7. PR shepherding continues through CI, reviewer comments, and reviewer-agent acceptance. After acceptance and green required checks, merge unless the merge command fails.
 
 If checker or reviewer finds a failure, route it back to builder with exact evidence. If the same failure repeats twice, stop routing and mark blocked.
 

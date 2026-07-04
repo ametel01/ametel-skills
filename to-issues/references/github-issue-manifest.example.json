@@ -1,0 +1,67 @@
+{
+  "repo": "OWNER/REPO",
+  "default_labels": ["agent-ready"],
+  "label_definitions": {
+    "agent-ready": {
+      "color": "0E8A16",
+      "description": "Ready for autonomous agent implementation"
+    },
+    "parallel-safe": {
+      "color": "1D76DB",
+      "description": "Can be implemented in parallel with sibling issues"
+    }
+  },
+  "issues": [
+    {
+      "id": "account-settings-baseline",
+      "title": "Add account settings baseline flow",
+      "wave": 0,
+      "labels": ["type:feature", "parallel-safe"],
+      "what_to_build": "Add the smallest end-to-end account settings path that can be verified independently.",
+      "acceptance_criteria": [
+        "A signed-in user can view the account settings route.",
+        "The route loads existing account data from the backend.",
+        "The slice includes regression coverage for the happy path."
+      ],
+      "blocked_by": [],
+      "parallel_safe_with": ["notification-preferences"],
+      "coordinates_with": [],
+      "coordination_risks": ["May touch shared settings navigation; coordinate final merge order."],
+      "user_stories": ["As a signed-in user, I can open account settings and see my current details."]
+    },
+    {
+      "id": "notification-preferences",
+      "title": "Add notification preference editing",
+      "wave": 0,
+      "labels": ["type:feature", "parallel-safe"],
+      "what_to_build": "Add an end-to-end notification preference edit flow that can ship independently of other settings slices.",
+      "acceptance_criteria": [
+        "A signed-in user can update notification preferences.",
+        "Preference changes persist through the backend.",
+        "The slice includes regression coverage for saving preferences."
+      ],
+      "blocked_by": [],
+      "parallel_safe_with": ["account-settings-baseline"],
+      "coordinates_with": ["account-settings-baseline"],
+      "coordination_risks": ["May share settings test fixtures; avoid fixed ports or global mutable fixtures."],
+      "user_stories": ["As a signed-in user, I can choose which notifications I receive."]
+    },
+    {
+      "id": "settings-audit-events",
+      "title": "Record audit events for settings changes",
+      "wave": 1,
+      "labels": ["type:feature"],
+      "what_to_build": "Record a minimal audit event when account or notification settings change.",
+      "acceptance_criteria": [
+        "Account settings changes emit an audit event.",
+        "Notification preference changes emit an audit event.",
+        "Tests verify audit event payload shape for both flows."
+      ],
+      "blocked_by": ["account-settings-baseline", "notification-preferences"],
+      "parallel_safe_with": [],
+      "coordinates_with": [],
+      "coordination_risks": ["Depends on the completed event shapes from both Wave 0 slices."],
+      "user_stories": ["As an operator, I can trace important settings changes."]
+    }
+  ]
+}

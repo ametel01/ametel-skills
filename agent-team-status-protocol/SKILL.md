@@ -101,7 +101,7 @@ Do not hand off raw confusion. If the next action is ambiguous, mark the work `b
 Stop and escalate when:
 
 - The same failure appears twice in a row.
-- Five cycles run without approval.
+- Five cycles run without reviewer-agent acceptance.
 - A fix breaks a previously passing required gate.
 - A role needs credentials, product judgment, or repo permissions it does not have.
 - Two agents are about to edit the same branch or worktree.

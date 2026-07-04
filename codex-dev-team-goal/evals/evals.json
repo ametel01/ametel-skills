@@ -10,6 +10,10 @@
         "Prioritizes open PRs, failing checks, review threads, and repo-local blockers ahead of downstream issue work.",
         "Starts every independent ready issue or fix stream when local resources allow.",
         "Requires checker evidence and maintainer-style review before merge readiness.",
+        "Requires every PR body to include full GitHub-visible context: linked issue, related issues/PRs, stacked/base/downstream references, scope, validation, skipped checks, risks, and merge or retargeting notes.",
+        "Treats missing PR context as blocking until the PR body is updated.",
+        "Treats the maintainer-reviewer agent's Approve decision as review acceptance even when GitHub cannot record a same-author formal approval.",
+        "Does not wait for or request a non-author formal GitHub approver unless an actual merge attempt is rejected by branch protection or permissions.",
         "Does not mark dependency-blocked downstream issues complete while upstream agent-actionable work remains.",
         "Records owners, branches, worktrees, PR URLs, gates, blockers, cycle counts, and next actions in STATUS.md.",
         "Before completion, verifies open issues/PRs, worktree state, repository cleanliness, status compaction, and retrospective recommendation disposition."
