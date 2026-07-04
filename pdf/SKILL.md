@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.
+description: "Use this skill when working with PDFs: reading, extracting text or tables, merging, splitting, rotating, watermarking, creating, filling forms, encryption, images, or OCR."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 
@@ -234,7 +234,7 @@ pdftk input.pdf rotate 1east output rotated.pdf
 
 ### Extract Text from Scanned PDFs
 ```python
-# Requires: pip install pytesseract pdf2image
+# Requires pinned OCR extras such as pytesseract==0.3.13 and pdf2image==1.17.0.
 import pytesseract
 from pdf2image import convert_from_path
 

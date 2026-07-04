@@ -9,6 +9,12 @@ description: Use this skill when changing CI, dependencies, release workflows, i
 
 Preserve the account's security and CI posture while changing code, workflows, dependency management, or deployment paths. Security checks are implemented differently per repo.
 
+## Safety boundaries
+
+- Do not publish releases, rotate secrets, change production deployment targets, or remove security gates without explicit user confirmation.
+- Do not print or copy secret values; report variable names, check names, and file paths only.
+- Keep edits scoped to the requested repository and preserve existing approval, environment, provenance, and audit gates unless the user approves a specific change.
+
 ## When to use
 
 Use when editing `.github/workflows`, dependency manifests, install/update paths, deploy config, environment handling, secret-bearing code paths, or release automation.

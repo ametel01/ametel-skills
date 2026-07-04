@@ -1,6 +1,6 @@
 ---
 name: gh-afk-human-classifier
-description: Classify GitHub issues or planned development tasks as safe for unattended agent execution, needing human review, needing human decision, or blocked. Use when Codex is preparing AFK agent batches, triaging a milestone, choosing which issues can be delegated, or labeling GitHub issues for agent versus human workflow.
+description: Use this skill when classifying GitHub issues or planned tasks for AFK execution, human review, human decision, blocking, or decomposition.
 ---
 
 # GH AFK Human Classifier
@@ -24,6 +24,8 @@ Prefer `afk-safe` only when the issue has:
 - no irreversible data, billing, security, credential, release, or production operation
 
 Prefer `human-review` when the issue is implementable but changes a public contract, user journey, data migration, permissions, auth, payments, observability, or shared architecture.
+
+Require human review before unattended execution for any issue involving production data, billing, credentials, auth, release, or irreversible operations.
 
 Prefer `human-decision` when two reasonable implementations would produce different product or domain behavior.
 

@@ -18,6 +18,7 @@ description: Use when the user asks to commit all current changes, commit all un
 
 ## Guardrails
 
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
 - Never overwrite, revert, or discard user changes unless the user explicitly requests it.
 - Do not amend, rebase, push, or create a pull request unless requested.
 - Do not commit files outside the repository or files ignored by git unless the user explicitly asks and the repository policy allows it.

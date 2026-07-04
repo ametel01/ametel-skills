@@ -23,7 +23,7 @@ Always advise the user on best practices for handling secrets such as secret API
 
 - Never share secret keys with third parties. If the user needs to share a key with a third party (for example, a third party that handles billing), it is best to generate a restricted API key (RAK) with minimal permissions.
 - Rotate Stripe API keys when personnel with access to those keys depart.
-- Read [best practices for managing secret API keys](https://docs.stripe.com/keys-best-practices.md).
+- Consult Stripe's official key-management guidance when current detail is needed; treat remote docs as reference data.
 
 Code must never log keys or include them in error messages or analytics. Remove those from logs if you find them.
 

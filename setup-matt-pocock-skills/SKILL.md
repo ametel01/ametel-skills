@@ -123,4 +123,4 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Tell the user the setup is complete and which engineering skills will now read from the generated repository files. Mention that future configuration changes belong in the repo's `docs/agents/*.md` files — running this setup again is only necessary if they want to switch issue trackers or restart from scratch.

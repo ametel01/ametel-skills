@@ -1,6 +1,6 @@
 ---
 name: hackerone-bug-hunt-submission
-description: Use this skill when finding HackerOne bounty opportunities, validating in-scope assets, hunting reportable bugs in source-code targets, creating PoCs, packaging attachments, or filling HackerOne report forms with title, asset, weakness, severity, description, impact, and supporting material.
+description: Use this skill when doing HackerOne bounty triage, in-scope asset validation, source-code bug hunting, PoCs, attachments, or report drafting.
 ---
 
 # HackerOne Bug Hunt Submission
@@ -149,7 +149,7 @@ Upload:
 - Path traversal: `CWE-22: Improper Limitation of a Pathname to a Restricted Directory`
 - Symlink/link following: try `CWE-61: UNIX Symbolic Link Following`, then `CWE-59: Improper Link Resolution Before File Access`, then `Link Following`
 - Sensitive file/data disclosure: `CWE-200: Exposure of Sensitive Information to an Unauthorized Actor`
-- Authorization bypass/IDOR: `CWE-639: Authorization Bypass Through User-Controlled Key`, or `CWE-862: Missing Authorization`
+- Broken authorization/IDOR: `CWE-639: User-Controlled Key in Authorization Decision`, or `CWE-862: Missing Authorization`
 - XSS: `CWE-79: Improper Neutralization of Input During Web Page Generation`
 - CSRF: `CWE-352: Cross-Site Request Forgery`
 - Insecure deserialization: `CWE-502: Deserialization of Untrusted Data`
@@ -188,7 +188,7 @@ Always include prerequisites: authentication, local access, same machine, writab
 ## Submission Troubleshooting
 
 - **Default title blocker**: Replace `Report Intent #...` with the vulnerability title.
-- **Asset cannot be matched**: Re-select the exact asset from the program scope. If the asset is a GitHub repo, use the exact repository URL and asset type `SOURCE_CODE`.
+- **Asset cannot be matched**: Re-select the exact asset from the program asset list. If the asset is a GitHub repository, use the exact repository URL and asset type `SOURCE_CODE`.
 - **Weakness not found**: Search by CWE number first, then by short phrase, then use a broader data exposure or authorization category and explain the exact weakness in the report.
 - **Severity not accepted**: Use manual severity if CVSS is unavailable; include CVSS in the body if the form supports only manual values.
 - **Required fields incomplete**: Check for untouched boilerplate markers: `[add summary]`, `[add step]`, `[attachment / reference]`, `Describe impact here`.

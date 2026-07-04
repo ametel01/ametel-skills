@@ -1,6 +1,6 @@
 ---
 name: bun-typescript-quality
-description: Use this skill when editing ametel01 TypeScript repos and packages that use Bun, Biome, Prettier, strict tsconfig, Vitest or Bun test, Next.js, Hono, Apibara, or workspace scripts. It guides installs, lint/format/typecheck/build commands, TypeScript invariants, and known formatting variants.
+description: Use this skill when editing ametel01 Bun/TypeScript repos with Biome, Prettier, Vitest, Next.js, Hono, Apibara, or workspace scripts.
 ---
 
 # Bun TypeScript Quality

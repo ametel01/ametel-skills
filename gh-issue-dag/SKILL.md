@@ -1,9 +1,11 @@
 ---
 name: gh-issue-dag
-description: Build or review a dependency graph for GitHub issues in a software milestone, release, refactor, or implementation plan. Use when Codex needs to order issues, identify blockers, find parallel work, assign milestone sequencing, detect cycles, or convert a flat issue list into executable waves.
+description: Use this skill when building or reviewing a dependency graph for GitHub issues, milestones, releases, refactors, or task plans.
 ---
 
 # GH Issue DAG
+
+Read-only by default: produce ordering guidance and label suggestions, but ask the user for confirmation before editing GitHub issues, labels, milestones, or project fields.
 
 ## Workflow
 

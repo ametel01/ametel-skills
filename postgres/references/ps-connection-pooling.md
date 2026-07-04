@@ -70,14 +70,15 @@ Use one of these patterns:
 ## Connecting
 
 ```bash
-# Local PgBouncer (same credentials, port 6432)
-psql 'host=xxx.horizon.psdb.cloud port=6432 user=postgres.xxx password=pscale_pw_xxx dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
+# Local PgBouncer (same credentials, port 6432). Supply credentials through
+# an already-set environment variable or interactive prompt; do not print them.
+psql 'host=example.horizon.psdb.cloud port=6432 user=postgres.example dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
 
 # Dedicated primary PgBouncer (append |pgbouncer-name to user)
-psql 'host=xxx.horizon.psdb.cloud port=6432 user=postgres.xxx|write-pool password=pscale_pw_xxx dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
+psql 'host=example.horizon.psdb.cloud port=6432 user=postgres.example|write-pool dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
 
 # Dedicated replica PgBouncer (append |pgbouncer-name to user)
-psql 'host=xxx.horizon.psdb.cloud port=6432 user=postgres.xxx|read-bouncer password=pscale_pw_xxx dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
+psql 'host=example.horizon.psdb.cloud port=6432 user=postgres.example|read-bouncer dbname=mydb sslnegotiation=direct sslmode=verify-full sslrootcert=system'
 ```
 
 Docs: https://planetscale.com/docs/postgres/connecting/pgbouncer

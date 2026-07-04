@@ -85,7 +85,7 @@ bun run test:e2e
 ## Common pitfalls
 
 - Do not add ESLint or Prettier configs to solve Biome failures.
-- Do not run `npm install` or `pnpm install` in Bun repos.
+- Do not invoke npm or pnpm installer commands in Bun repos.
 - Do not edit generated outputs such as `dashboard/app.js`, `.next`, `dist`, coverage, or imported data unless the task explicitly targets generated assets.
 - In `horizon-starknet`, rerun codegen scripts when contract or event ABI changes affect frontend or indexer types.
 

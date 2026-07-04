@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Use when reviewing a pull request, merge request, GitHub diff, local branch diff, or patch as an independent reviewer. The agent inspects changed code, runs relevant tests and security/quality gates, writes actionable review comments, and approves or requests changes based on evidence. Use after implementation work, in PR review automation, or when asked to review diffs before merge.
+description: Use when reviewing a pull request, merge request, GitHub diff, local branch diff, or patch as an independent reviewer.
 ---
 
 # PR Review

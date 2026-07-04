@@ -1,9 +1,11 @@
 ---
 name: gh-issue-readiness-checklist
-description: Evaluate whether a GitHub issue is ready for implementation by an agent or developer. Use when Codex is reviewing issue quality, preparing issues for AFK execution, checking acceptance criteria, rewriting an issue body, or deciding whether a task needs clarification, decomposition, or dependency resolution before coding begins.
+description: Evaluate GitHub issue readiness. Use when reviewing acceptance criteria, AFK suitability, decomposition, dependencies, or issue-body edits.
 ---
 
 # GH Issue Readiness Checklist
+
+Read-only by default: report readiness and suggested edits, but ask the user for confirmation before editing GitHub issues, labels, milestones, or project fields.
 
 ## Readiness States
 

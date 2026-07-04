@@ -1,6 +1,6 @@
 ---
 name: agent-coding-workflow
-description: Use this skill when an AI coding agent edits ametel01 repos, especially with dirty worktrees, generated skills, CLI harness code, or multi-file changes. It encodes read-before-edit, scoped diffs, command verification, validation-before-completion, and user-change preservation habits observed across the org.
+description: Use when an AI coding agent edits ametel01 repos, especially dirty worktrees, generated skills, CLI harnesses, or multi-file changes.
 ---
 
 # Agent Coding Workflow

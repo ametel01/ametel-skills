@@ -246,7 +246,7 @@ If a page genuinely needs something `design.md` doesn't allow (e.g. a marketing 
 - The reveal pattern — if the original faded everything in on scroll, the new one might have no reveals at all.
 - The visual rhythm — different sections having different padding, different alignments, deliberate breaks.
 
-**What not to replace without confirmation:**
+**What needs explicit user approval before replacement:**
 - Route trees, production component directories, or the old website's file structure.
 - Working app logic, data fetching, auth, forms, analytics, or integration code.
 - Existing copy with pasted text from PDFs, docs, or markdown files unless the user requested verbatim copy.

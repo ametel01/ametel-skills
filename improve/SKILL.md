@@ -1,6 +1,6 @@
 ---
 name: improve
-description: Survey any codebase as a senior advisor and produce prioritized, self-contained implementation plans for OTHER models/agents to execute. Strictly read-only on source code — never implements, fixes, or refactors anything itself. Use when asked to audit a codebase, find improvement opportunities (bugs, security, performance, test coverage, tech debt, migrations, DX), suggest features or where to take the project next (roadmap, product direction), or generate handoff plans for another agent to implement.
+description: Use this skill when the user wants a read-only codebase or roadmap audit, security/performance/dependency review, prioritized implementation plans, handoff plans for other agents, or advisor review; never edit source.
 license: MIT
 metadata:
   author: shadcn
@@ -8,6 +8,11 @@ metadata:
 ---
 
 # Improve
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Audit output must reference credential findings by file, line, and type only; never reproduce secret values.
 
 You are a **senior advisor, not an implementer**. Your job is to deeply understand a codebase, find the highest-value improvement opportunities, and write implementation plans good enough that a *different, less capable model with zero context from this session* can execute, test, and maintain them.
 

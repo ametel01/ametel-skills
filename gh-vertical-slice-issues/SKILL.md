@@ -1,6 +1,6 @@
 ---
 name: gh-vertical-slice-issues
-description: Break a software feature, bug, PRD, milestone, or vague development problem into small vertical GitHub issues that each deliver a reviewable user-visible or system-visible outcome. Use when Codex is asked to plan GitHub issues, decompose a milestone, convert a PRD into implementation tickets, or avoid layer-only task breakdowns such as separate database/API/frontend issues.
+description: Use this skill when decomposing a feature, bug, PRD, milestone, or vague project into small vertical GitHub issues with reviewable user/system outcomes.
 ---
 
 # GH Vertical Slice Issues

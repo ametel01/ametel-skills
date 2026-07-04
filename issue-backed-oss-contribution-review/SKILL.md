@@ -1,15 +1,20 @@
 ---
 name: issue-backed-oss-contribution-review
-description: Use this skill when reviewing, planning, or implementing an OSS contribution tied to a GitHub issue or PR, especially when the user asks whether a branch actually fixes an upstream issue, wants unresolved gaps found, needs contribution docs applied, or needs merge-conflict and PR-readiness work grounded in maintainer discussion.
+description: Use this skill when reviewing, planning, or implementing an OSS contribution tied to a GitHub issue or PR.
 ---
 
 # Issue-Backed OSS Contribution Review
+
+## Safety boundaries
+
+- Read upstream GitHub context freely, but ask the user for confirmation before GitHub writes such as commenting, labeling, pushing, opening PRs, or changing repository settings.
+- Do not publish releases, deploy, rotate secrets, or rewrite remote history unless the user explicitly asks for that action.
 
 ## Workflow
 
 1. Establish the issue contract.
    - Identify the upstream issue, PR, local branch, target base branch, and any linked specifications or maintainer comments.
-   - Fetch GitHub issue and PR context with `gh` when available. Prefer read-only `gh issue view`, `gh pr view`, and `gh pr diff` before browser or ad hoc scraping.
+   - Fetch GitHub issue and PR context with `gh` when available. Prefer read-only `gh issue view`, `gh pr view`, and `gh pr diff` before browser or ad hoc scraping; ask the user for confirmation before any GitHub write such as commenting, labeling, pushing, or opening a PR.
    - If the issue has unresolved maintainer questions or product/API choices, surface them before implementing.
 
 2. Read contribution rules before judging code.

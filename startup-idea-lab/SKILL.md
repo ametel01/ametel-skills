@@ -1,6 +1,6 @@
 ---
 name: startup-idea-lab
-description: Generate, refine, rank, and pressure-test startup ideas using the Proven Better New framework. Use when the user asks for startup ideas, wants to explore a market or audience for startup opportunities, has a rough product concept to sharpen, wants consumer or AI product ideas, or needs a structured idea evaluation with proven behavior, better claim, new hook, distribution, retention, and cheap validation tests.
+description: Use this skill when generating, refining, ranking, or pressure-testing startup ideas, market opportunities, product concepts, or idea evaluations.
 ---
 
 # Startup Idea Lab

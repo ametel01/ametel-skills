@@ -9,6 +9,13 @@ The latest Stripe API version is 2026-04-22.dahlia - use this version when upgra
 
 This guide covers upgrading Stripe API versions, server-side SDKs, Stripe.js, and mobile SDKs.
 
+## Safety Boundaries
+
+- Do not change live Stripe account defaults, production webhook endpoints, billing behavior, Connect settings, or customer-impacting payment flows without explicit user confirmation.
+- Keep changes in code, tests, and documentation unless the user asks for an external Stripe account change.
+- Use test mode, per-request API version headers, preview deployments, or staging webhooks before any production rollout.
+- Pin SDK and package versions in manifests or lockfiles; document the exact version chosen and why.
+
 ## Understanding Stripe API Versioning
 
 Stripe uses date-based API versions (e.g., `2026-04-22.dahlia`, `2025-08-27.basil`, `2024-12-18.acacia`). Your account’s API version determines request/response behavior.
@@ -100,7 +107,7 @@ Stripe.js uses an evergreen model with major releases (Acacia, Basil, Clover, Da
 **Via npm:**
 
 ```bash
-npm install @stripe/stripe-js
+npm install @stripe/stripe-js@9.9.0
 ```
 
 Major npm versions correspond to specific Stripe.js versions.
@@ -150,7 +157,7 @@ All mobile SDKs work with any Stripe API version you use on your backend unless 
 
 1. Review the [API Changelog](https://docs.stripe.com/changelog.md) for changes between your current and target versions
 1. Check [Upgrades Guide](https://docs.stripe.com/upgrades.md) for migration guidance
-1. Update server-side SDK package version (e.g., `npm update stripe`, `pip install --upgrade stripe`)
+1. Update server-side SDK package version with an exact pin, such as `stripe@18.5.0` for npm or `stripe==12.5.1` for Python, after checking the target SDK changelog.
 1. Update the `apiVersion` parameter in your Stripe client initialization
 1. Test your integration against the new API version using the `Stripe-Version` header
 1. Update webhook handlers to handle new event structures

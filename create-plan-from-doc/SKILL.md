@@ -1,6 +1,6 @@
 ---
 name: create-plan-from-doc
-description: Create a /goal-ready implementation plan from one or more supplied source document paths, writing the result to PLAN.md. Use when the user asks Codex to turn PRDs, specifications, design docs, issue briefs, RFCs, markdown files, text files, or other local docs into one bounded incremental implementation plan with a definition of done, quality gates, and per-step commits.
+description: Use this skill when turning supplied local docs, such as a PRD, spec, design doc, issue brief, RFC, or markdown/text file, into a bounded `/goal`-ready `PLAN.md` with quality gates.
 ---
 
 # Create Plan From Docs

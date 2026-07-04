@@ -99,7 +99,7 @@ FROM pg_stat_user_tables WHERE n_tup_upd > 0 ORDER BY n_tup_upd DESC;
 
 ## Write Amplification
 
-Each additional index adds write-path overhead because every INSERT/UPDATE/DELETE must maintain more index entries. In a [Percona PG 17.4 over-indexing benchmark](https://www.percona.com/blog/benchmarking-postgresql-the-hidden-cost-of-over-indexing/), moving from 7 to 39 indexes showed a **58% throughput drop**.
+Each additional index adds write-path overhead because every INSERT/UPDATE/DELETE must maintain more index entries. A published PostgreSQL 17.4 over-indexing benchmark found that moving from 7 to 39 indexes caused a **58% throughput drop**.
 
 To reduce WAL volume from this extra write activity, enable `wal_compression` (available before PG 15; `lz4` and `zstd` options are PG 15+). Tune `max_wal_size` separately to reduce checkpoint frequency under sustained write load.
 

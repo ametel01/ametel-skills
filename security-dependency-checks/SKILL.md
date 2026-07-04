@@ -1,6 +1,6 @@
 ---
 name: security-dependency-checks
-description: Use this skill when changing dependencies, install/update scripts, secret handling, GitHub Actions security, vulnerability scanning, checksums, provenance, Dependabot, TruffleHog, govulncheck, or frontend script-safety rules in ametel01 repos. Guidance is conditional where evidence is repo-specific.
+description: Use this skill when changing dependency, installer, secret-handling, GitHub Actions, vulnerability, provenance, or script-safety paths.
 ---
 
 # Security Dependency Checks

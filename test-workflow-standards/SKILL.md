@@ -1,6 +1,6 @@
 ---
 name: test-workflow-standards
-description: Use this skill when adding, fixing, or reviewing tests in ametel01 repos using Bun test, Vitest, Playwright, Go tests, Python unittest/pytest-style harness tests, or Cairo snforge tests. It captures shared expectations for regression coverage, deterministic fixtures, and CI-aligned test commands.
+description: Use this skill when adding, fixing, or reviewing tests in ametel01 repos using Bun, Vitest, Playwright, Go, Python, or Cairo snforge.
 ---
 
 # Test Workflow Standards

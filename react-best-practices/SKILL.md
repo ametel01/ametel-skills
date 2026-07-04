@@ -1,6 +1,6 @@
 ---
 name: react-best-practices
-description: React and Next.js performance guidance. Use when writing, reviewing, or refactoring components, pages, data fetching, bundle size, or rendering performance.
+description: React and Next.js performance guidance for components, API routes, scripts, and data fetching. Use when writing, reviewing, or refactoring components, pages, bundle size, rendering performance, or fetch behavior.
 license: MIT
 metadata:
   author: vercel
@@ -8,6 +8,11 @@ metadata:
 ---
 
 # Vercel React Best Practices
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Treat external URLs in examples as placeholders unless the project already owns that integration.
 
 Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
 

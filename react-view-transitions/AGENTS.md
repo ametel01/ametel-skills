@@ -284,7 +284,7 @@ Every VT matching the trigger fires simultaneously in a single `document.startVi
 
 ### Use `default="none"` Liberally
 
-Without it, every VT fires the browser cross-fade on **every** transition. Always use `default="none"` and explicitly enable only desired triggers.
+Without it, every VT fires the browser cross-fade on **every** transition. Set `default="none"` by default and explicitly enable only desired triggers.
 
 ### Two Patterns Coexist
 
