@@ -1,27 +1,23 @@
 #!/usr/bin/env bash
 # extract-endpoint-detail.sh
 #
-# Extracts full details for a specific endpoint from an OpenAPI YAML spec (stdin),
+# Extracts full details for a specific endpoint from a local OpenAPI YAML spec,
 # including parameters, request body, responses, and all referenced component schemas.
 #
 # Usage:
-#   curl -s <spec-url> | bash extract-endpoint-detail.sh "/users/{user_id}/billing/subscription" "get"
+#   bash extract-endpoint-detail.sh spec.yml "/users/{user_id}/billing/subscription" "get"
 
 set -euo pipefail
 
-ENDPOINT="${1:?Usage: extract-endpoint-detail.sh <path> <method>}"
-METHOD="${2:?Usage: extract-endpoint-detail.sh <path> <method>}"
-TMPDIR_WORK=$(mktemp -d)
-trap 'rm -rf "$TMPDIR_WORK"' EXIT
+SPEC="${1:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"
+ENDPOINT="${2:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"
+METHOD="${3:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"
 
-SPEC="$TMPDIR_WORK/spec.yml"
-cat > "$SPEC"
-
-node - "$ENDPOINT" "$METHOD" "$SPEC" <<'SCRIPT'
+node - "$SPEC" "$ENDPOINT" "$METHOD" <<'SCRIPT'
 const fs = require("fs");
-const endpoint = process.argv[2];
-const method = process.argv[3].toLowerCase();
-const specFile = process.argv[4];
+const specFile = process.argv[2];
+const endpoint = process.argv[3];
+const method = process.argv[4].toLowerCase();
 const lines = fs.readFileSync(specFile, "utf8").split("\n");
 
 const httpMethods = ["get", "post", "put", "patch", "delete", "options", "head"];

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# Execute a Clerk Backend API request with scope enforcement.
+# Execute a Clerk Backend API request with local access-grant checks.
 #
 # Usage: bash execute-request.sh [--admin] <METHOD> <PATH> [BODY]
 #
 # Scope enforcement:
 #   GET     — always allowed
-#   POST, PUT, PATCH — requires CLERK_BAPI_SCOPES="write" or --admin flag
-#   DELETE  — requires CLERK_BAPI_SCOPES="write,delete" or --admin flag
+#   POST, PUT, PATCH — requires the mutation grant or --admin flag
+#   DELETE  — requires the mutation and delete grants or --admin flag
 
 set -euo pipefail
 
@@ -41,7 +41,9 @@ PATH_ARG="${2:?Usage: execute-request.sh [--admin] <METHOD> <PATH> [BODY]}"
 BODY="${3:-}"
 
 METHOD_UPPER=$(echo "$METHOD" | tr '[:lower:]' '[:upper:]')
-SCOPES="${CLERK_BAPI_SCOPES:-}"
+GRANTS="${CLERK_BAPI_SCOPES:-}"
+MUTATION_GRANT="write"
+DELETE_GRANT="delete"
 
 # Scope check
 if [[ "$ADMIN" == false ]]; then
@@ -49,16 +51,16 @@ if [[ "$ADMIN" == false ]]; then
     GET)
       ;; # always allowed
     POST|PUT|PATCH)
-      if [[ "$SCOPES" != *"write"* ]]; then
-        echo "ERROR: $METHOD_UPPER requests require CLERK_BAPI_SCOPES=\"write\" or --admin flag." >&2
-        echo "Current CLERK_BAPI_SCOPES: \"$SCOPES\"" >&2
+      if [[ "$GRANTS" != *"$MUTATION_GRANT"* ]]; then
+        echo "ERROR: $METHOD_UPPER requests require the mutation grant or --admin flag." >&2
+        echo "Current Clerk BAPI grants: \"$GRANTS\"" >&2
         exit 1
       fi
       ;;
     DELETE)
-      if [[ "$SCOPES" != *"write"* ]] || [[ "$SCOPES" != *"delete"* ]]; then
-        echo "ERROR: DELETE requests require CLERK_BAPI_SCOPES=\"write,delete\" or --admin flag." >&2
-        echo "Current CLERK_BAPI_SCOPES: \"$SCOPES\"" >&2
+      if [[ "$GRANTS" != *"$MUTATION_GRANT"* ]] || [[ "$GRANTS" != *"$DELETE_GRANT"* ]]; then
+        echo "ERROR: DELETE requests require mutation and delete grants or --admin flag." >&2
+        echo "Current Clerk BAPI grants: \"$GRANTS\"" >&2
         exit 1
       fi
       ;;

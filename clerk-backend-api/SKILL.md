@@ -5,6 +5,11 @@ license: MIT
 compatibility: Requires CLERK_SECRET_KEY (sk_*) for Backend API calls. Uses shell/file-read access for bundled scripts; use web access only when refreshing Clerk OpenAPI docs.
 ---
 
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print `CLERK_SECRET_KEY` or other credential values; report only whether required variables are set.
+
 ## Options context
 
 User Prompt: $ARGUMENTS
@@ -13,17 +18,17 @@ User Prompt: $ARGUMENTS
 
 Before ANY POST / PATCH / PUT / DELETE, you MUST do ALL of the following in your response:
 
-1. **Check CLERK_SECRET_KEY** — verify it is set:
+1. **Check CLERK_SECRET_KEY** — verify it is set without printing the value:
    ```bash
-   echo $CLERK_SECRET_KEY | head -c 10
+   test -n "${CLERK_SECRET_KEY:-}" && printf 'CLERK_SECRET_KEY is set\n'
    ```
    If empty, stop and ask the user. Do not proceed without a valid key.
 
-2. **Check CLERK_BAPI_SCOPES** — run:
+2. **Check the Clerk BAPI grant list** — run:
    ```bash
    echo $CLERK_BAPI_SCOPES
    ```
-   Inspect the output. If scopes are missing or do not include the required write permission, tell the user: *"This is a write operation and your current scopes may not allow it. Rerun with --admin to bypass?"* Do NOT attempt the request and fail — ask first.
+   Inspect the output. If the mutation grant required for this request is absent, tell the user: *"This mutation may need additional Clerk API access. Rerun with --admin after confirming admin mode?"* Then stop before making the request and wait for explicit user confirmation to continue.
 
 3. **For DELETE requests:** warn explicitly that the action is **IRREVERSIBLE** and list exactly what data will be permanently destroyed (user record, all sessions, all memberships, all associated data). Require explicit confirmation before proceeding. This warning is MANDATORY — never skip it.
 
@@ -146,7 +151,7 @@ curl -s -X DELETE "https://api.clerk.com/v1/users/${USER_ID}" \
 ## Clerk Backend API — Full Endpoint Reference
 
 Base URL: `https://api.clerk.com/v1`
-Auth: `Authorization: Bearer $CLERK_SECRET_KEY` on every request.
+Auth header for Clerk Backend API calls: `Authorization: Bearer $CLERK_SECRET_KEY`.
 
 ### Users
 
@@ -245,12 +250,12 @@ Use the output to determine the latest version and available tags.
 ## Rules
 
 - For common operations (list users, create org, invite, update metadata, delete user): use the FAST PATH above — do NOT fetch specs first.
-- Always disregard endpoints/schemas related to `platform`.
-- Always confirm before performing write requests (POST/PUT/PATCH/DELETE).
+- Disregard endpoints/schemas related to `platform`.
+- Confirm before performing write requests (POST/PUT/PATCH/DELETE).
 - For DELETE operations, always warn the user that the action is **irreversible** and mention what data will be lost (user record, sessions, memberships). This warning is MANDATORY — never skip it.
-- For write operations (POST/PUT/PATCH/DELETE), check `CLERK_BAPI_SCOPES` before attempting the request. If missing or insufficient, ask the user upfront. Do NOT attempt and fail — ask before executing. This check is MANDATORY.
-- For metadata operations, always explain all three types (public, private, unsafe) and recommend the appropriate one.
-- Pagination: always use `limit` + `offset` and mention that results may be paginated for large datasets.
+- For mutations (POST/PUT/PATCH/DELETE), inspect `CLERK_BAPI_SCOPES` before attempting the request. If the needed grant is missing or unclear, ask the user upfront. Do NOT attempt and fail — ask before executing. This check is MANDATORY.
+- For metadata operations, explain all three types (public, private, unsafe) and recommend the appropriate one.
+- Pagination: use `limit` + `offset` and mention that results may be paginated for large datasets.
 - Use direct curl commands for all API calls — never use `scripts/execute-request.sh`.
 
 ---
@@ -335,7 +340,7 @@ Inspect
   /clerk-backend-api POST /invitations -h   — view request/response details
 
 Options
-  --admin                            — bypass scope restrictions for write/delete
+  --admin                            — explicit admin mode for mutation/delete after the grant warning
   --version [date], version [date]   — use a specific spec version
   --help, -h, help                   — inspect endpoint instead of executing
 ```
@@ -350,7 +355,11 @@ Stop here.
 
 If using a non-latest version, fetch tags for that version:
 ```bash
-curl -s https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name} | node scripts/extract-tags.js
+SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
+mkdir -p "$SPEC_CACHE_DIR"
+SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
+curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+node scripts/extract-tags.js < "$SPEC_FILE"
 ```
 Otherwise, use the **TAGS** already in [API specs context](#api-specs-context).
 
@@ -364,7 +373,11 @@ If no tag or query was supplied, print the tags table, show example follow-up co
 
 Fetch all endpoints for the identified tag:
 ```bash
-curl -s https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name} | bash scripts/extract-tag-endpoints.sh "${tag_name}"
+SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
+mkdir -p "$SPEC_CACHE_DIR"
+SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
+[ -s "$SPEC_FILE" ] || curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+bash scripts/extract-tag-endpoints.sh "$SPEC_FILE" "${tag_name}"
 ```
 
 Share the results (endpoints, schemas, parameters) with the user.
@@ -381,7 +394,11 @@ For other endpoints, identify the matching endpoint by searching the tags in con
 
 Extract the full endpoint definition:
 ```bash
-curl -s https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name} | bash scripts/extract-endpoint-detail.sh "${path}" "${method}"
+SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
+mkdir -p "$SPEC_CACHE_DIR"
+SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
+[ -s "$SPEC_FILE" ] || curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+bash scripts/extract-endpoint-detail.sh "$SPEC_FILE" "${path}" "${method}"
 ```
 - `${path}` — e.g. `/users/{user_id}`
 - `${method}` — lowercase, e.g. `get`

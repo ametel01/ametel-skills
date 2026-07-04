@@ -165,14 +165,14 @@ detect_framework() {
 INPUT_PATH="${1:-.}"
 
 # Create temp directory for packaging
-TEMP_DIR=$(mktemp -d)
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/vercel-deploy.XXXXXXXXXX")
 TARBALL="$TEMP_DIR/project.tgz"
 STAGING_DIR="$TEMP_DIR/staging"
 CLEANUP_TEMP=true
 
 cleanup() {
-    if [ "$CLEANUP_TEMP" = true ]; then
-        rm -rf "$TEMP_DIR"
+    if [ "$CLEANUP_TEMP" = true ] && [ -n "${TEMP_DIR:-}" ]; then
+        echo "Temporary deployment package left at: $TEMP_DIR" >&2
     fi
 }
 trap cleanup EXIT

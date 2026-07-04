@@ -1,17 +1,15 @@
 ---
 name: clerk-cli
-description: >-
-  Operate the Clerk CLI (`clerk` binary) for authentication, user/org/session management,
-  deploy verification, instance config, env keys, and any Clerk Backend or Platform API
-  call. Use when the user mentions Clerk management tasks, "list clerk users", "create a
-  clerk user", "update organization", "pull clerk config", "clerk env pull",
-  "clerk doctor", "clerk deploy", "clerk deploy status", "clerk api", or any ad-hoc
-  Clerk API request. Prefer the CLI over raw HTTP: it handles auth, key resolution,
-  app/instance targeting, and formatting automatically.
+description: Use this skill when managing Clerk auth, users, orgs, sessions, deploy/status, env/config, instance management, or ad-hoc Backend/Platform API requests with the `clerk` CLI. Prefer CLI over raw HTTP.
 license: MIT
 ---
 
 # Clerk CLI
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Keep Clerk secret values, OAuth tokens, and pulled environment-file contents out of logs and chat; report only variable names or whether authentication is present.
 
 The `clerk` binary is a pre-authenticated gateway to Clerk's Backend API and Platform API, plus project-level tooling (auth, linking, env pulls, instance config). When the user asks anything that touches a Clerk resource, reach for `clerk` first instead of hand-rolling `curl`.
 
@@ -82,7 +80,7 @@ Otherwise fall back to a package runner for the pinned `clerk` npm package versi
 
 Yarn Classic (v1) has no `dlx`; treat those projects as "no preferred runner" and fall back to the first runner from the list above that's on PATH.
 
-The published npm package is **`clerk`**, not `@clerk/cli`. Never teach `npm install -g clerk` as the primary path. If the global CLI is stale or behaves differently from this skill, either upgrade the global install or fall back to the pinned runner form above.
+The published npm package is **`clerk`**, not `@clerk/cli`. Never teach a global install of `clerk` as the primary path. If the global CLI is stale or behaves differently from this skill, either upgrade the global install or fall back to the pinned runner form above.
 
 ## Prerequisites (run at session start)
 

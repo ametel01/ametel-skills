@@ -1,12 +1,17 @@
 ---
 name: deploy-to-vercel
-description: Use this skill when deploying apps or sites to Vercel previews, pushing live, linking projects, inspecting deployments, or managing deployment environment tasks.
+description: Use this skill when deploy tasks involve Vercel previews, production releases, project linking, deployment inspection, deployment scripts, or deployment environment management.
 metadata:
   author: vercel
   version: "3.0.0"
 ---
 
 # Deploy to Vercel
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Do not upload `.env`, secret files, credential stores, or home-directory state in fallback deployment archives.
 
 Deploy any project to Vercel. **Always deploy as preview** (not production) unless the user explicitly asks for production.
 
@@ -34,7 +39,7 @@ vercel teams list --format json 2>/dev/null
 
 If the user belongs to multiple teams, present all available team slugs as a bulleted list and ask which one to deploy to. Once the user picks a team, proceed immediately to the next step — do not ask for additional confirmation.
 
-Pass the team slug via `--scope` on all subsequent CLI commands (`vercel deploy`, `vercel link`, `vercel inspect`, etc.):
+Pass the selected team slug on all subsequent CLI commands (`vercel deploy`, `vercel link`, `vercel inspect`, etc.):
 
 ```bash
 vercel deploy [path] -y --no-wait --scope <team-slug>
@@ -114,9 +119,12 @@ The CLI is working but the project isn't linked yet. This is the opportunity to 
    project to deploy to and enable automatic deployments on future git pushes.
    ```
 
-3. **If a git remote exists**, use repo-based linking with the selected team scope:
+3. **If a git remote exists**, use repo-based linking with the selected team slug:
    ```bash
-   vercel link --repo --scope <team-slug> -y
+   vercel link \
+     --repo \
+     --scope <team-slug> \
+     -y
    ```
    This reads the git remote URL and matches it to existing Vercel projects that deploy from that repo. It creates `.vercel/repo.json`. This is much more reliable than `vercel link` (without `--repo`), which tries to match by directory name and often fails when the local folder and Vercel project are named differently.
 
@@ -128,7 +136,7 @@ The CLI is working but the project isn't linked yet. This is the opportunity to 
 
 4. **Then deploy using the best available method:**
    - If a git remote exists → commit and push (see git push method above)
-   - If no git remote → `vercel deploy [path] -y --no-wait --scope <team-slug>`, then `vercel inspect <url>` to check status
+   - If no git remote → run `vercel deploy [path] -y --no-wait` with the selected team slug, then `vercel inspect <url>` to check status
 
 ---
 
@@ -138,7 +146,7 @@ The Vercel CLI isn't set up at all.
 
 1. **Install the CLI (if not already installed):**
    ```bash
-   npm install -g vercel
+   npm install -g vercel@54.20.1
    ```
 
 2. **Authenticate:**
@@ -149,9 +157,12 @@ The Vercel CLI isn't set up at all.
 
 3. **Ask which team to deploy to** — present team slugs from `vercel teams list --format json` as a bulleted list. If only one team / personal account, skip. Once selected, proceed immediately.
 
-4. **Link the project** with the selected team scope (use `--repo` if a git remote exists, plain `vercel link` otherwise):
+4. **Link the project** with the selected team slug (use repo-based linking if a git remote exists, plain `vercel link` otherwise):
    ```bash
-   vercel link --repo --scope <team-slug> -y   # if git remote exists
+   vercel link \
+     --repo \
+     --scope <team-slug> \
+     -y   # if git remote exists
    vercel link --scope <team-slug> -y          # if no git remote
    ```
 

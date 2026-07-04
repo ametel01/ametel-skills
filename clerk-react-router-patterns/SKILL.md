@@ -26,7 +26,7 @@ SDK: `@clerk/react-router` v3+. Requires React Router v7.9+.
 
 React Router v7 uses a middleware + loader pipeline. Clerk plugs into both layers:
 
-- **Middleware** (`clerkMiddleware()`) — runs on every request, attaches auth to context
+- **Middleware** (`clerkMiddleware()`) — runs through React Router's request pipeline and attaches auth to context
 - **`rootAuthLoader`** — required in `root.tsx` to pass Clerk state to the client
 - **`getAuth(args)`** — called inside any loader/action to get the current user
 

@@ -2,7 +2,7 @@
 name: clerk-orgs
 description: Use this skill when adding Clerk Organizations to B2B SaaS apps,
   including team workspaces, org switching, RBAC, org-based routing, member
-  management, verified domains, enterprise SSO, or B2C plus B2B coexistence.
+  management, verified domains, enterprise SSO, Clerk API org CRUD, or B2C plus B2B coexistence.
 license: MIT
 compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY. Organizations must be enabled in Clerk Dashboard → Organizations. Membership mode (required vs optional) must match the B2B vs B2C + B2B coexistence story of your app. Use web access for official Clerk Organizations docs when API behavior is uncertain.
 metadata:
@@ -11,6 +11,11 @@ metadata:
 ---
 
 # Organizations (B2B SaaS)
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print Clerk secret values; dry-run and confirm before org, membership, invitation, role, or SSO mutations.
 
 > **STOP — prerequisite.** Organizations must be enabled before any org-related API, hook, or component works. Two paths: (1) [Dashboard → Organizations settings](https://dashboard.clerk.com/last-active?path=organizations-settings), or (2) `clerk enable orgs` (see "Agent-first: Programmatic org management" below). Pick the Membership mode deliberately: `Membership required` (default since 2025-08-22) routes signed-in users through the `choose-organization` task and disables personal accounts, while `Membership optional` keeps personal accounts available for B2C + B2B coexistence. Pick `optional` if you need personal subscriptions alongside org subscriptions.
 >
@@ -128,7 +133,8 @@ clerk api -X POST /v1/organizations/<org_id>/invitations/<inv_id>/revoke \
 ### Notes
 
 - This handles **org config + CRUD**. Subscription / billing for orgs (org plans, seat-limit pricing) flows through `clerk-billing` skill.
-- Roles + permissions catalog is editable in `references/roles-permissions.md`. Custom role creation goes through `clerk config patch` (instance-level role definitions) — see Dashboard's role editor for the UX equivalent.
+- Roles + permissions catalog lives in `references/roles-permissions.md`.
+- Custom role creation goes through `clerk config patch` (instance-level role definitions) — see Dashboard's role editor for the UX equivalent.
 - For SSO / verified domain provisioning, see `references/enterprise-sso.md`.
 
 ## Documentation

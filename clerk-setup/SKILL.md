@@ -261,7 +261,7 @@ Requires **Node.js 20.9.0** or higher.
 Themes are installed from `@clerk/ui`:
 
 ```bash
-npm install @clerk/ui
+npm install @clerk/ui@1.24.1
 ```
 
 > **Core 2 ONLY (skip if current SDK):** Themes are from `@clerk/themes` instead of `@clerk/ui`.
@@ -271,7 +271,7 @@ npm install @clerk/ui
 If the project uses shadcn/ui (check for `components.json` in the project root), apply the shadcn theme so Clerk components match the app's design system:
 
 ```bash
-npm install @clerk/ui
+npm install @clerk/ui@1.24.1
 ```
 
 ```tsx

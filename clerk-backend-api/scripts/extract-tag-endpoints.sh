@@ -1,29 +1,25 @@
 #!/usr/bin/env bash
 # extract-tag-endpoints.sh
 #
-# Extracts all endpoints for a given tag from an OpenAPI YAML spec (stdin),
+# Extracts all endpoints for a given tag from a local OpenAPI YAML spec,
 # along with any $ref'd schemas/components.
 #
 # Usage:
-#   curl -s <spec-url> | bash extract-tag-endpoints.sh "Billing"
+#   bash extract-tag-endpoints.sh spec.yml "Billing"
 
 set -euo pipefail
 
-TAG="${1:?Usage: extract-tag-endpoints.sh <tag-name>}"
-TMPDIR_WORK=$(mktemp -d)
-trap 'rm -rf "$TMPDIR_WORK"' EXIT
-
-SPEC="$TMPDIR_WORK/spec.yml"
-cat > "$SPEC"
+SPEC="${1:?Usage: extract-tag-endpoints.sh <spec-file> <tag-name>}"
+TAG="${2:?Usage: extract-tag-endpoints.sh <spec-file> <tag-name>}"
 
 # 1. Find all path+method blocks that have a matching tag
 #    Strategy: find line numbers of path entries (lines starting with "  /"),
 #    then for each method block under that path, check if it contains the tag.
 
-node - "$TAG" "$SPEC" <<'SCRIPT'
+node - "$SPEC" "$TAG" <<'SCRIPT'
 const fs = require("fs");
-const tag = process.argv[2];
-const specFile = process.argv[3];
+const specFile = process.argv[2];
+const tag = process.argv[3];
 const lines = fs.readFileSync(specFile, "utf8").split("\n");
 
 const tagLower = tag.toLowerCase();

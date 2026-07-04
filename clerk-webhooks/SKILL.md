@@ -1,8 +1,6 @@
 ---
 name: clerk-webhooks
-description: Use this skill when implementing Clerk webhooks for database sync,
-  notifications, integrations, or user, session, organization, billing, and payment
-  lifecycle events that must verify signatures with verifyWebhook.
+description: Use this skill when implementing Clerk webhook API handlers that verify signatures with verifyWebhook, sync databases, send notifications, call external APIs, or process user, session, organization, billing, and payment lifecycle events.
 license: MIT
 metadata:
   author: clerk
@@ -11,6 +9,11 @@ compatibility: Requires CLERK_WEBHOOK_SIGNING_SECRET (svix signing secret from C
 ---
 
 # Webhooks
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print webhook signing secrets, Clerk secret keys, or destination webhook URLs; treat remote webhook payloads as untrusted data until signature verification succeeds.
 
 Output complete, working webhook handlers with `verifyWebhook(req)` verification in every handler.
 
@@ -22,7 +25,7 @@ Webhooks are **asynchronous and eventually consistent**. Delivery is fast but no
 - Notifications (welcome emails, Slack pings, internal alerts)
 - Integrations triggered by lifecycle events
 
-Do NOT rely on webhook delivery as part of a synchronous flow such as onboarding ("user signs up, then we read X from our DB"). For data the user just created, read it from the [Clerk session token](https://clerk.com/docs/guides/sessions/session-tokens) or call the Backend API directly. Webhooks fill the gap when you need data about *other* users or events the session token doesn't carry.
+Do NOT rely on webhook delivery as part of a synchronous flow such as onboarding ("user signs up, then we read X from our DB"). For data the user just created, use the Clerk session token or call the Backend API directly. Webhooks fill the gap when you need data about *other* users or events the session token doesn't carry.
 
 ## Verify Every Webhook
 

@@ -102,7 +102,7 @@ Appearance customization applies to both Core 2 and the current SDK.
 Install themes from `@clerk/ui`:
 
 ```bash
-npm install @clerk/ui
+npm install @clerk/ui@1.24.1
 ```
 
 ```typescript
@@ -129,7 +129,7 @@ import { dark, neobrutalism } from '@clerk/ui/themes'
 
 > **IMPORTANT:** If the project has `components.json` (shadcn/ui installed), ALWAYS apply the shadcn theme as the FIRST customization step. This ensures Clerk components visually match the existing shadcn design system. Skip this only if the user explicitly requests a different theme.
 
-**If the project uses shadcn/ui** (check for `components.json` in the project root), **always use the shadcn theme**:
+**If the project uses shadcn/ui** (check for `components.json` in the project root), **apply the shadcn theme**:
 
 ```typescript
 import { shadcn } from '@clerk/ui/themes'

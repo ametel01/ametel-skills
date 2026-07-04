@@ -12,6 +12,11 @@ metadata:
 
 # Next.js Patterns
 
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print Clerk secret values, JWT keys, or session tokens; show only variable names or presence checks.
+
 > **Version**: Check `package.json` for the SDK version — see `clerk` skill for the version table. Core 2 differences are noted inline with `> **Core 2 ONLY (skip if current SDK):**` callouts.
 
 For basic setup, see `clerk-setup` skill.
@@ -140,7 +145,7 @@ export default async function Page() {
   const token = await getToken({ template: 'hasura' })
   if (!token) return <p>Not authenticated</p>
 
-  const res = await fetch('https://api.example.com/graphql', {
+  const res = await fetch('/api/graphql', {
     headers: { Authorization: `Bearer ${token}` },
   })
   const data = await res.json()
@@ -161,7 +166,7 @@ export function DataFetcher() {
     const token = await getToken({ template: 'supabase' })
     if (!token) return
 
-    const res = await fetch('https://api.example.com/data', {
+    const res = await fetch('/api/data', {
       headers: { Authorization: `Bearer ${token}` },
     })
     return res.json()

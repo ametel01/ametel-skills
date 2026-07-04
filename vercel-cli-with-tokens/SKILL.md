@@ -10,47 +10,33 @@ metadata:
 
 Deploy and manage projects on Vercel using the CLI with token-based authentication, without relying on `vercel login`.
 
-## Step 1: Locate the Vercel Token
+## Safety boundaries
 
-Before running any Vercel CLI commands, identify where the token is coming from. Work through these scenarios in order:
+- Do not deploy to production, change environment variables, link to a different team/project, or remove deployment protection without explicit user confirmation.
+- Do not print, search for, or pass token values on command lines; use `VERCEL_TOKEN` from the environment.
+- Default to preview deployments and read-only inspection unless the user explicitly requests a production or configuration-changing action.
+
+## Step 1: Confirm the Vercel Token
+
+Before running any Vercel CLI commands, confirm the token is already available without printing or scraping secret-bearing files.
 
 ### A) `VERCEL_TOKEN` is already set in the environment
 
 ```bash
-printenv VERCEL_TOKEN
+test -n "${VERCEL_TOKEN:-}" && printf 'VERCEL_TOKEN is set\n'
 ```
 
 If this returns a value, you're ready. Skip to Step 2.
 
-### B) Token is in a `.env` file under `VERCEL_TOKEN`
+### B) Token is not set
+
+Ask the user to provide or set `VERCEL_TOKEN`. Do not search local files or token stores for it. Once the user provides the token source, export it without echoing it:
 
 ```bash
-grep '^VERCEL_TOKEN=' .env 2>/dev/null
+export VERCEL_TOKEN="<vercel-token>"
 ```
 
-If found, export it:
-
-```bash
-export VERCEL_TOKEN=$(grep '^VERCEL_TOKEN=' .env | cut -d= -f2-)
-```
-
-### C) Token is in a `.env` file under a different name
-
-Look for any variable that looks like a Vercel token (Vercel tokens typically start with `vca_`):
-
-```bash
-grep -i 'vercel' .env 2>/dev/null
-```
-
-Inspect the output to identify which variable holds the token, then export it as `VERCEL_TOKEN`:
-
-```bash
-export VERCEL_TOKEN=$(grep '^<VARIABLE_NAME>=' .env | cut -d= -f2-)
-```
-
-### D) No token found — ask the user
-
-If none of the above yield a token, ask the user to provide one. They can create a Vercel access token at vercel.com/account/tokens.
+They can create a Vercel access token at vercel.com/account/tokens.
 
 ---
 
@@ -58,10 +44,10 @@ If none of the above yield a token, ask the user to provide one. They can create
 
 ```bash
 # Bad — token visible in shell history and process listings
-vercel deploy --token "vca_abc123"
+vercel deploy --token "<vercel-token>"
 
 # Good — CLI reads VERCEL_TOKEN from the environment
-export VERCEL_TOKEN="vca_abc123"
+export VERCEL_TOKEN="<vercel-token>"
 vercel deploy
 ```
 
@@ -73,9 +59,6 @@ Similarly, check for the project ID and team scope. These let the CLI target the
 # Check environment
 printenv VERCEL_PROJECT_ID
 printenv VERCEL_ORG_ID
-
-# Or check .env
-grep -i 'vercel' .env 2>/dev/null
 ```
 
 **If you have a project URL** (e.g. `https://vercel.com/my-team/my-project`), extract the team slug:
@@ -99,7 +82,7 @@ Note: `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` must be set together — setting o
 Ensure the Vercel CLI is installed and up to date:
 
 ```bash
-npm install -g vercel
+npm install -g vercel@54.20.1
 vercel --version
 ```
 
@@ -299,7 +282,7 @@ Full details: https://vercel.com/docs/plans/pro-plan
 ## Working Agreement
 
 - **Never pass `VERCEL_TOKEN` as a `--token` flag.** Export it as an environment variable and let the CLI read it natively.
-- **Check the environment for tokens before asking the user.** Look in the current env and `.env` files first.
+- **Check only the current environment for tokens before asking the user.** Do not inspect local files or token stores for tokens.
 - **Default to preview deployments.** Only deploy to production when explicitly asked.
 - **Ask before pushing to git.** Never push commits without the user's approval.
 - **Do not modify `.vercel/` files directly.** The CLI manages this directory. Reading them (e.g. to verify `orgId`) is fine.
@@ -311,11 +294,12 @@ Full details: https://vercel.com/docs/plans/pro-plan
 
 ### Token not found
 
-Check the environment and any `.env` files present:
+Check the environment:
 
 ```bash
-printenv | grep -i vercel
-grep -i vercel .env 2>/dev/null
+test -n "${VERCEL_TOKEN:-}" && printf 'VERCEL_TOKEN is set\n'
+printenv VERCEL_PROJECT_ID
+printenv VERCEL_ORG_ID
 ```
 
 ### Authentication error
@@ -349,5 +333,5 @@ Common causes:
 ### CLI not installed
 
 ```bash
-npm install -g vercel
+npm install -g vercel@54.20.1
 ```

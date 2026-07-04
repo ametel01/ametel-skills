@@ -12,6 +12,11 @@ metadata:
 
 # React SPA Patterns
 
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print Clerk keys or session token values; show only variable names or presence checks.
+
 > This skill covers `@clerk/react` for Vite/CRA SPAs. For Next.js use `clerk-nextjs-patterns`. For TanStack Start use `clerk-tanstack-patterns`.
 
 ## What Do You Need?
@@ -35,7 +40,7 @@ metadata:
 ## Setup
 
 ```
-npm install @clerk/react
+npm install @clerk/react@6.11.3
 ```
 
 `.env`:

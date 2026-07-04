@@ -3,7 +3,7 @@ name: clerk-billing
 description: Use this skill when implementing Clerk Billing for SaaS monetization,
   plan gating, checkout flows, trials, invoicing, subscription lifecycle management,
   PricingTable, in-app checkout, B2B seat-limit plans, or feature entitlements
-  with has().
+  with has(), including Clerk API billing config and webhook handling.
 license: MIT
 compatibility: Requires NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, and CLERK_WEBHOOK_SIGNING_SECRET. Billing must be enabled in Clerk Dashboard → Billing. Development instances can use the shared Clerk development gateway; production instances require a Stripe account for payment processing. Use web access for official Clerk Billing docs when API behavior is uncertain.
 metadata:
@@ -12,6 +12,11 @@ metadata:
 ---
 
 # Billing
+
+## Safety boundaries
+
+- `permissions.deny` should forbid `.env`, secrets, credentials, tokens, home directory reads (`~/`), and network transfer tools such as `curl` or `wget` when they target secret-bearing paths.
+- Never print Clerk or Stripe secret values; report only whether required environment variables are set.
 
 > **STOP, prerequisite.** Billing must be enabled before any `<PricingTable />`, `<CheckoutButton />`, `has({ plan })`, or `has({ feature })` usage works. Two paths: (1) [Dashboard → Billing → Settings](https://dashboard.clerk.com/last-active?path=billing/settings), or (2) `clerk enable billing` (see "Agent-first: Programmatic billing config" below). Enabling auto-creates default `free_user` / `free_org` plans. Dev instances can use the shared Clerk development gateway (no Stripe account needed); production requires a Stripe account for payment processing only.
 >
@@ -125,7 +130,7 @@ clerk api --platform PATCH /v1/platform/applications/<app_id>/instances/<ins_id>
 | Check if org has team subscription | `has({ plan: 'org:team' })` |
 | Gate SSO configuration | `has({ feature: 'sso' })` |
 
-When a user says "gate the export feature" or "gate analytics", always use `has({ feature })`. Only use `has({ plan })` when the gate is the plan tier itself, not a specific capability within it.
+When a user says "gate the export feature" or "gate analytics", use `has({ feature })`. Use `has({ plan })` only when the gate is the plan tier itself, not a specific capability within it.
 
 ## Key Patterns
 
@@ -297,7 +302,7 @@ export function SubscriptionDetails() {
 }
 ```
 
-> `useSubscription()` is for display only. For authorization checks (gating content or routes), always use `has({ plan })` or `has({ feature })`.
+> `useSubscription()` is for display only. For authorization checks (gating content or routes), use `has({ plan })` or `has({ feature })`.
 
 ### 8. Protect API Routes by Plan
 
@@ -343,7 +348,7 @@ export async function GET() {
 > | Payment attempt created | (none) | `paymentAttempt.created` |
 > | Payment attempt updated | (none) | `paymentAttempt.updated` |
 >
-> Always use Clerk's event names, never Stripe's, in `evt.type` checks.
+> Use Clerk's event names, never Stripe's, in `evt.type` checks.
 
 > **Payload shape.** Clerk billing webhook payloads are nested. The subscribing entity lives under `evt.data.payer` (fields: `user_id?`, `organization_id?`). The plan info is on each item under `evt.data.items[i].plan.slug`. The subscription id is simply `evt.data.id`. Subscription items do not carry a `subscription_id` field back-reference, so in `subscriptionItem.*` handlers you identify the record by the item id (`evt.data.id`) or look up by payer plus plan.
 
