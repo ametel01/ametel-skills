@@ -1,0 +1,27 @@
+{
+  "skill_name": "stow",
+  "evals": [
+    {
+      "id": "local-first-session-memory",
+      "prompt": "/stow. During this session I said the project uses Bun for tests, that agent notes should stay out of commits, and that the next step is to add retry coverage.",
+      "expected_output": "The agent sweeps the conversation, routes each durable fact to an existing local convention or the private .stow-notes.md fallback, and reports exactly what was captured and where.",
+      "assertions": [
+        "Classifies user preferences, project facts, operational gotchas, and undone next steps separately.",
+        "Discovers existing local conventions before choosing a destination.",
+        "Uses .stow-notes.md only when no existing convention fits.",
+        "Reports a safe-to-end verdict and resume pointer for files it wrote."
+      ]
+    },
+    {
+      "id": "external-tracker-requires-explicit-instruction",
+      "prompt": "Save what we learned. This repo has a GitHub remote and a .github folder, and we found a bug that should be tracked later.",
+      "expected_output": "The agent records durable knowledge locally unless the user explicitly instructed it to use an external tracker, and it does not infer tracker use from repository metadata.",
+      "assertions": [
+        "Does not file to GitHub, Linear, Jira, or another external system based only on inferred availability.",
+        "Routes the bug note through an existing local backlog convention or the private fallback.",
+        "Asks only when two discovered local conventions plausibly fit.",
+        "States any uncaptured item plainly if no safe destination is writable."
+      ]
+    }
+  ]
+}
