@@ -208,7 +208,9 @@ Returns: OrganizationInvitation object
 
 ## How to execute requests
 
-**ALWAYS execute requests with direct `curl` commands.** Use the spec-extraction scripts (`api-specs-context.sh`, `extract-tags.js`, `extract-endpoint-detail.sh`) to discover endpoints, but make actual API calls with `curl`. Do NOT use `scripts/execute-request.sh` — it's a local dev helper, not for agent use.
+**ALWAYS execute requests with direct `curl` commands.** Use the spec-extraction scripts documented below to discover endpoints, but make actual API calls with `curl`. Do NOT use `scripts/execute-request.sh` — it's a local dev helper, not for agent use.
+
+If you inspect `scripts/execute-request.sh`, its output contract is raw Clerk API JSON on stdout with shell/curl diagnostics on stderr; callers must use Clerk pagination such as `limit` and `offset` and summarize large responses.
 
 Template for GET requests:
 ```bash
@@ -240,6 +242,8 @@ Before doing anything outside the FAST PATH, fetch the available spec versions a
 ```bash
 bash scripts/api-specs-context.sh
 ```
+
+Output contract: `scripts/api-specs-context.sh` writes a bounded human-readable summary to stdout: available version names, the latest version, and tag names only. Network/tool diagnostics go to stderr.
 
 Use the output to determine the latest version and available tags.
 
@@ -359,6 +363,7 @@ SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
 mkdir -p "$SPEC_CACHE_DIR"
 SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
 curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+# Output: one tag name per stdout line; diagnostics stay on stderr.
 node scripts/extract-tags.js < "$SPEC_FILE"
 ```
 Otherwise, use the **TAGS** already in [API specs context](#api-specs-context).
@@ -377,6 +382,7 @@ SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
 mkdir -p "$SPEC_CACHE_DIR"
 SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
 [ -s "$SPEC_FILE" ] || curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+# Output: bounded Markdown summary for one tag on stdout; errors stay on stderr.
 bash scripts/extract-tag-endpoints.sh "$SPEC_FILE" "${tag_name}"
 ```
 
@@ -398,6 +404,7 @@ SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
 mkdir -p "$SPEC_CACHE_DIR"
 SPEC_FILE="$SPEC_CACHE_DIR/${version_name}"
 [ -s "$SPEC_FILE" ] || curl -fsSL "https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi/${version_name}" -o "$SPEC_FILE"
+# Output: Markdown for one endpoint and referenced schemas on stdout; errors stay on stderr.
 bash scripts/extract-endpoint-detail.sh "$SPEC_FILE" "${path}" "${method}"
 ```
 - `${path}` — e.g. `/users/{user_id}`

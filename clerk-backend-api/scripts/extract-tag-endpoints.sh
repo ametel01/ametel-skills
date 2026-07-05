@@ -9,6 +9,16 @@
 
 set -euo pipefail
 
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  cat <<'USAGE'
+usage: extract-tag-endpoints.sh <spec-file> <tag-name>
+
+Writes a bounded Markdown summary of endpoints for one tag to stdout. Progress
+and errors go to stderr.
+USAGE
+  exit 0
+fi
+
 SPEC="${1:?Usage: extract-tag-endpoints.sh <spec-file> <tag-name>}"
 TAG="${2:?Usage: extract-tag-endpoints.sh <spec-file> <tag-name>}"
 

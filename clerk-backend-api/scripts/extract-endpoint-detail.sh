@@ -9,6 +9,16 @@
 
 set -euo pipefail
 
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  cat <<'USAGE'
+usage: extract-endpoint-detail.sh <spec-file> <path> <method>
+
+Writes Markdown containing one endpoint definition and referenced component
+schemas to stdout. Progress and errors go to stderr.
+USAGE
+  exit 0
+fi
+
 SPEC="${1:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"
 ENDPOINT="${2:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"
 METHOD="${3:?Usage: extract-endpoint-detail.sh <spec-file> <path> <method>}"

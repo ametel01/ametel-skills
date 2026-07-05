@@ -5,6 +5,17 @@
 
 set -euo pipefail
 
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  cat <<'USAGE'
+usage: api-specs-context.sh
+
+Writes a bounded human-readable summary of available Clerk BAPI spec versions,
+the latest version, and tag names to stdout. Network/tool diagnostics go to
+stderr.
+USAGE
+  exit 0
+fi
+
 API_URL="https://api.github.com/repos/clerk/openapi-specs/contents/bapi"
 RAW_BASE="https://raw.githubusercontent.com/clerk/openapi-specs/main/bapi"
 SPEC_CACHE_DIR="${TMPDIR:-/tmp}/clerk-openapi-specs"
