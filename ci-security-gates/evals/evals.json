@@ -1,5 +1,6 @@
 {
   "skill_name": "ci-security-gates",
+  "baseline_guidance": "Run each eval with this skill and compare against a no-skill baseline or the previous skill version; pass only when the skilled run better satisfies the assertions without losing required safety or precision.",
   "evals": [
     {
       "id": "dependency-security-change",

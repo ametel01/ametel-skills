@@ -1,5 +1,6 @@
 {
   "skill_name": "release-versioning-changelog",
+  "baseline_guidance": "Run each eval with this skill and compare it against a no-skill baseline or previous-version snapshot using the same prompt and inputs.",
   "evals": [
     {
       "id": "version-bump-and-notes",

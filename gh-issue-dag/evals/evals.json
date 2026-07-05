@@ -1,5 +1,6 @@
 {
   "skill_name": "gh-issue-dag",
+  "baseline_guidance": "Run each eval with this skill and compare it against a no-skill baseline or previous-version snapshot using the same prompt and inputs.",
   "evals": [
     {
       "id": "milestone-dependency-graph",
