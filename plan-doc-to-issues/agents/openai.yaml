@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Docs to Issues"
+  short_description: "Create a plan and publish issues"
+  default_prompt: "Use $plan-doc-to-issues to turn a source doc section into a PLAN.md and GitHub issues."

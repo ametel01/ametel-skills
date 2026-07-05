@@ -1,0 +1,32 @@
+{
+  "skill_name": "plan-doc-to-issues",
+  "baseline_guidance": "Run each eval with this skill and compare against a no-skill baseline or the previous skill version; pass only when the skilled run better satisfies the assertions without losing required safety or precision.",
+  "evals": [
+    {
+      "id": "plan-and-publish-from-doc",
+      "prompt": "Read docs/feature-brief.md, write a /goal-ready PLAN.md for this repo, then publish the implementation issues to GitHub.",
+      "expected_output": "The agent reads the source document and sibling skill contracts, writes PLAN.md with the required sections and incremental steps, creates an issue manifest, publishes GitHub issues in dependency-safe waves, and reports PLAN.md plus created issue URLs.",
+      "assertions": [
+        "Requires at least one source document path and verifies it exists before planning.",
+        "Writes or replaces PLAN.md with the required sections from create-plan-from-doc.",
+        "Includes Step 0 for progress and changelog tracking setup.",
+        "Breaks work into vertical tracer-bullet issues with waves, blockers, edge types, parallel-safe siblings, coordination risks, and acceptance criteria.",
+        "Runs gh auth status and detects the destination repository before publishing.",
+        "Uses scripts/publish_github_issues.py or equivalent deterministic gh issue create commands.",
+        "Reports created issue URLs grouped by execution wave and identifies same-wave work that can run in parallel."
+      ]
+    },
+    {
+      "id": "dry-run-when-publishing-unsafe",
+      "prompt": "Use docs/migration-plan.md to create PLAN.md and issues, but do not publish anything yet.",
+      "expected_output": "The agent creates the complete PLAN.md and issue manifest, runs only a dry-run publishing preview, and reports the manifest path plus the exact reason publishing was skipped.",
+      "assertions": [
+        "Does not publish GitHub issues when the user asks not to publish.",
+        "Still completes PLAN.md instead of stopping after analysis.",
+        "Creates a structured issue manifest suitable for later publishing.",
+        "Uses the helper's --dry-run mode or clearly equivalent non-writing gh command preview.",
+        "Reports assumptions, skipped gates, missing sibling contracts, or GitHub publishing blockers."
+      ]
+    }
+  ]
+}
